@@ -161,6 +161,15 @@ class SocialSharing_Projects_Project
     }
 
     /**
+     * This project should be shown only on mobile devices?
+     * @return bool
+     */
+    public function isShowOnlyOnMobile()
+    {
+        return 'on' === $this->get('show_only_on_mobile');
+    }
+
+    /**
      * This project should be shown somewhere?
      * @param string $where Where to show
      * @return bool
@@ -186,6 +195,15 @@ class SocialSharing_Projects_Project
     public function isShowAtContent()
     {
         return $this->isShowAt('content');
+    }
+
+    /**
+     * Get buttons align type in the content
+     * @return string
+     */
+    public function getAlignTypeInContent()
+    {
+        return $this->get('align_in_content');
     }
 
     /**
@@ -229,6 +247,11 @@ class SocialSharing_Projects_Project
         return in_array((int)$id, $this->get('show_on_posts'), false);
     }
 
+    public function showOnSpecificPostType($postType)
+    {
+        return in_array($postType, $this->get('show_on_posts'), false);
+    }
+
     public function isShowOnAllPosts()
     {
         return $this->isShowOnSpecificPost(-1);
@@ -237,6 +260,11 @@ class SocialSharing_Projects_Project
     public function isShowOnAllPages()
     {
         return $this->isShowOnSpecificPost(-2);
+    }
+
+    public function isShowOnAllPostTypes()
+    {
+        return $this->isShowOnSpecificPost(-3);
     }
 
     public function isShowEverywhere()
@@ -262,6 +290,11 @@ class SocialSharing_Projects_Project
     public function getExtra($default = null)
     {
         return $this->get('where_to_show_extra', $default);
+    }
+
+    public function isSharePostLinkInList()
+    {
+        return ($this->get('share_post_link_in_list') === 'on' && ($this->get('where_to_show') === 'content' || $this->get('where_to_show') === 'code')) ? true : false;
     }
 
     /**

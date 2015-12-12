@@ -159,7 +159,8 @@ class SocialSharing_Projects_Builder_Network
     {
         $pairs = array(
             '{url}'   => $post ? urlencode(get_the_permalink($post)) : urlencode(get_bloginfo('wpurl')),
-            '{title}' => $post ? get_the_title($post) : get_bloginfo('name')
+            '{title}' => $post ? urlencode(get_the_title($post)) : urlencode(get_bloginfo('name')),
+            '{description}' => $post ? urlencode( wp_trim_words($post->post_content)) : urlencode(get_bloginfo('description '))
         );
 
         return strtr($this->url, $pairs);
@@ -351,6 +352,12 @@ class SocialSharing_Projects_Builder_Network
 
             case 'evernote':
                 return 'bd-evernote';
+
+            case 'whatsapp':
+                return 'fa-whatsapp';
+
+            case 'tumblr':
+                return 'fa-tumblr';
         }
 
         return 'fa-share-alt';
@@ -430,5 +437,22 @@ class SocialSharing_Projects_Builder_Network
         $this->buttonText = (string)$buttonText;
 
         return $this;
+    }
+
+    /**
+     * Get parameter 'data-action' value.
+     *
+     * @return string
+     */
+    public function getDataAction()
+    {
+        switch ($this->class) {
+            case 'whatsapp':
+                $dataActionValue = 'share/whatsapp/share';
+                break;
+            default:
+                $dataActionValue = null;
+        }
+        return $dataActionValue;
     }
 }

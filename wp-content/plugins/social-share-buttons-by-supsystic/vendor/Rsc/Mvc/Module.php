@@ -151,11 +151,23 @@ class Rsc_Mvc_Module
     public function handle()
     {
         $action = $this->request->query->get('action', 'index') . 'Action';
+        $welcomePageShowed = $this->environment->getConfig()->get('welcome_page_was_showed');
+        $promoController = $this->environment->getConfig()->get('promo_controller');
 
-        if (method_exists($this->getController(), $action)) {
-            return call_user_func_array(array($this->getController(), $action), array(
-                $this->request
-            ));
+        if ($promoController && class_exists($promoController) && !$welcomePageShowed) {
+            $promoController = new $promoController($this->environment, $this->request);
+            if (method_exists($promoController, 'indexAction')) {
+                return call_user_func_array(
+                    array($promoController, 'indexAction'),
+                    array($this->request)
+                );
+            }
+        } else {
+            if (method_exists($this->getController(), $action)) {
+                return call_user_func_array(array($this->getController(), $action), array(
+                    $this->request
+                ));
+            }
         }
 
         $twig = $this->environment->getTwig();

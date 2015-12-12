@@ -43,11 +43,13 @@ class SocialSharing_Projects_Handler
             array($this->project)
         );
 
-        if ((!array_key_exists(
-                    'action',
-                    $_GET
-                ) || $_GET['action'] !== 'getPreviewHtml') && $this->project->isShowOnPosts(
-            ) && !$this->project->isShowAt('popup')
+        if (
+            (
+                !array_key_exists('action', $_GET)
+                    || $_GET['action'] !== 'getPreviewHtml'
+            )
+                && $this->project->isShowOnPosts()
+                    && !$this->project->isShowAt('popup')
         ) {
             $current = get_post();
 
@@ -59,6 +61,8 @@ class SocialSharing_Projects_Handler
                 && $current->post_type === 'post'
                     && (!$this->project->isShowOnAllPosts()
                         && !$this->project->isShowOnSpecificPost($current->ID))
+                            && !$this->project->showOnSpecificPostType($current->post_type)
+                                && !$this->project->isShowOnAllPostTypes()
             ) {
                 return '';
             }
@@ -66,16 +70,17 @@ class SocialSharing_Projects_Handler
             if ($current->post_type === 'page'
                 && (!$this->project->isShowOnAllPages()
                     && !$this->project->isShowOnSpecificPost($current->ID))
+                        && !$this->project->showOnSpecificPostType($current->post_type)
+                            && !$this->project->isShowOnAllPostTypes()
             ) {
                 return '';
             }
 
-            if ((!$this->project->isShowOnAllPosts(
-                    ) && !$this->project->isShowOnAllPages()) && !in_array(
-                    $current->post_type,
-                    array('post', 'page'),
-                    false
-                )
+            if ((!$this->project->isShowOnAllPosts()
+                    && !$this->project->isShowOnAllPages())
+                        && !in_array($current->post_type, array('post', 'page'), false)
+                            && !$this->project->showOnSpecificPostType($current->post_type)
+                                && !$this->project->isShowOnAllPostTypes()
             ) {
                 return '';
             }
@@ -249,6 +254,11 @@ class SocialSharing_Projects_Handler
             );
         } elseif (class_exists('SocialSharingPro_Projects_Builder_Livejournal') && 'livejournal' === substr($this->project->get('design'), 0, 11)) {
             $builder = new SocialSharingPro_Projects_Builder_Livejournal(
+                $this->project,
+                $this->environment
+            );
+        } elseif (class_exists('SocialSharingPro_Projects_Builder_Various') && 'various' === substr($this->project->get('design'), 0, 7)) {
+            $builder = new SocialSharingPro_Projects_Builder_Various(
                 $this->project,
                 $this->environment
             );

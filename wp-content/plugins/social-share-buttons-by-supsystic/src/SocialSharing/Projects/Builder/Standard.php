@@ -46,7 +46,7 @@ abstract class SocialSharing_Projects_Builder_Standard extends SocialSharing_Pro
         $builder = $this->getBuilder();
         $project = $this->getProject();
         $classes = $this->getButtonClasses();
-        $current = $this->getCurrentPost();
+        $current = $this->getCurrentPost($project->isSharePostLinkInList());
 
         if ((int)$project->get('show_counter_after', 0) > $network->getShares()) {
             $classes[] = 'without-counter';
@@ -92,6 +92,10 @@ abstract class SocialSharing_Projects_Builder_Standard extends SocialSharing_Pro
                 $builder->createAttribute(
                     'data-url',
                     admin_url('admin-ajax.php')
+                ),
+                $builder->createAttribute(
+                    'data-action',
+                    $network->getDataAction()
                 )
             )
         );

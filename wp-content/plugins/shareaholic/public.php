@@ -34,7 +34,12 @@ class ShareaholicPublic {
     if(!current_theme_supports('post-thumbnails')){
       add_theme_support('post-thumbnails');
     }
-    
+		
+    // Adds support for shortcodes in sidebar text widgets
+    if (!has_filter('widget_text', 'do_shortcode')){
+      add_filter('widget_text', 'do_shortcode', 11);
+    }
+		
     add_image_size('shareaholic-thumbnail', 300); // 300 pixels wide (and unlimited height)
   }
 	
@@ -379,6 +384,7 @@ class ShareaholicPublic {
     }
     if (trim($summary) == NULL && (!$is_list_page || $in_loop)) {
       $summary = htmlspecialchars(strip_tags(strip_shortcodes($post->post_excerpt)), ENT_QUOTES);
+      $summary = ShareaholicUtilities::truncate_text($summary, 500);
     }
     
     $canvas = "<div class='shareaholic-canvas'
@@ -450,6 +456,7 @@ class ShareaholicPublic {
       }
     }
 
+    header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
     header('Cache-Control: max-age=180'); // 3 minutes
     echo json_encode($result);

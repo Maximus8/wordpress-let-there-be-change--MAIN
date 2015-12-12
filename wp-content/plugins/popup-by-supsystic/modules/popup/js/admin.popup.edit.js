@@ -62,7 +62,7 @@ jQuery(document).ready(function(){
 					if(!ppsSaveWithoutPreviewUpdate)
 						ppsRefreshPreview();
 				}
-				ppsSaveWithoutPreviewUpdate = false
+				ppsSaveWithoutPreviewUpdate = false;
 			}
 		});
 		return false;
@@ -146,11 +146,16 @@ jQuery(document).ready(function(){
 		}
 	}).change();
 	jQuery('.chosen').chosen();
+	jQuery('.chosen.chosen-responsive').each(function(){
+		jQuery(this).next('.chosen-container').addClass('chosen-responsive');
+	});
 	// Animation effect change
 	jQuery('.ppsPopupAnimEffLabel').each(function(){
 		var key = jQuery(this).data('key');
 		if(key != 'none') {
-			jQuery(this).addClass('magictime');
+			// magictime was old animation lib
+			//jQuery(this).addClass('magictime');
+			jQuery(this).addClass('animated');
 			jQuery(this).mouseover(function(){
 				if(!jQuery(this).data('anim-started')) {
 					jQuery(this).data('anim-started', 1);
@@ -239,12 +244,13 @@ jQuery(document).ready(function(){
 	ppsPopupInitHideIpDlg();
 	// Auto update bind, timeout - to make sure that all options is already setup and triggered required load changes
 	setTimeout(function(){
-		var autoUpdateBoxes = ['#ppsPopupTpl', '#ppsPopupTexts', '#ppsPopupSubscribe', '#ppsPopupSm'];
+		var autoUpdateBoxes = ['#ppsPopupTpl', '#ppsPopupTexts', '#ppsPopupSubscribe', '#ppsPopupSm']
+		,	ignoreInputs = ['#toeSliderInput_paramstplbg_overlay_opacity'].join(',');
 		for(var i = 0; i < autoUpdateBoxes.length; i++) {
-			jQuery( autoUpdateBoxes[i] ).find('input[type=checkbox],input[type=radio],input[type=hidden],select').change(function(){
+			jQuery( autoUpdateBoxes[i] ).find('input[type=checkbox],input[type=radio],input[type=hidden],select').not( ignoreInputs ).change(function(){
 				ppsSavePopupChanges();
 			});
-			jQuery( autoUpdateBoxes[i] ).find('input[type=text],textarea').keyup(function(){
+			jQuery( autoUpdateBoxes[i] ).find('input[type=text],textarea').not( ignoreInputs ).keyup(function(){
 				ppsMakeAutoUpdate();
 			});
 		}

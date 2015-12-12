@@ -331,7 +331,7 @@ input[type="color"] {
 .supsystic-item p {
     padding: 0;
     margin: 0;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
     overflow: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
@@ -590,8 +590,11 @@ input[type="color"] {
 .supsystic-plugin .chosen-container-active .chosen-choices {
 	border-color: #4ae8ea;
 }
-.supsystic-plugin .chosen-container.chosen-container-multi {
+.supsystic-plugin .chosen-container.chosen-container-multi:not(.chosen-responsive) {
 	min-width: 300px;	/*As if select is hidden on chosen init action - it will be with width: 0 - and this is really bad*/
+}
+.supsystic-plugin .chosen-responsive {
+	width: 100% !important;
 }
 /*back to top*/
 #ppsPopupGoToTop {
@@ -625,10 +628,10 @@ input[type="color"] {
 	white-space: nowrap;
 }
 .supsystic-plugin .ppsCopyTextCode {
-	background-color: #F5F5F5  !important;
-    border: 1px solid #CCCCCC !important;
-    border-radius: 4px !important;
-    color: #333333 !important;
+	background-color: #fff  !important;
+    border: 1px solid #000 !important;
+    border-radius: 0px !important;
+    color: #000 !important;
     font-size: 13px !important;
     margin: 0 0 10px !important;
     padding: 9.5px !important;
@@ -641,6 +644,9 @@ input[type="color"] {
 	font-weight: bold;
 	display: block;
 	clear: both;
+}
+.supsystic-border-right {
+	border-right: 1px solid rgba(164, 170, 172, 0.28);
 }
 .supsistic-half-side-box {
 	float: left;
@@ -754,4 +760,41 @@ input[type="color"] {
 }
 .supsystic-plugin .wp-color-result {
 	height: auto;
+}
+@media screen and (max-width: 1024px) {
+	.supsystic-plugin .supsystic-content .supsystic-navigation {
+		width: 35px;
+	}
+	.supsystic-plugin .supsystic-content .supsystic-container,
+	.supsystic-breadcrumbs {
+		margin-left: 35px;
+	}
+	.supsystic-navigation .sup-tab-label {
+		display: none;
+	}
+	.supsystic-breadcrumb-el,
+	.breadcrumbs-separator {
+		display: none;
+	}
+	.supsystic-plugin .chosen-container.chosen-container-multi {
+		min-width: 50px;
+		max-width: 100px;
+	}
+	#ppsPopupMainControllsShell {
+		padding-right: 45px !important;
+	}
+}
+@media screen and (max-width: 800px) {
+	.supsystic-item .ppsPopupMainOptSect {
+		float: none;
+		max-width: 100%;
+		width: 100%;
+		padding-right: 0;
+	}
+}
+/*tables - jqgrid - responsivness*/
+@media (max-width: 1280px) {
+	.supsystic-tbl-pagination-shell .ui-pg-table .ui-paging-info {
+		display: none !important;
+	}
 }

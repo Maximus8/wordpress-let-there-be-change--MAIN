@@ -2,12 +2,15 @@
 class popupPps extends modulePps {
 	private $_renderedIds = array();
 	private $_addToFooterIds = array();
-	private $_assetsUrl = 'https://supsystic.com/_assets/popup/';
+
+	private $_assetsUrl = '';
+	private $_oldAssetsUrl = 'https://supsystic.com/_assets/popup/';
+
 	public function init() {
 		dispatcherPps::addFilter('mainAdminTabs', array($this, 'addAdminTab'));
 		add_action('template_redirect', array($this, 'checkPopupShow'));
 		add_shortcode(PPS_SHORTCODE_CLICK, array($this, 'showPopupOnClick'));
-		add_action('wp_footer', array($this, 'collectFooterRender'));
+		add_action('wp_footer', array($this, 'collectFooterRender'), 0);
 		add_filter('wp_nav_menu_objects', array($this, 'checkMenuItemsForPopUps'));
 	}
 	public function addAdminTab($tabs) {
@@ -81,9 +84,9 @@ class popupPps extends modulePps {
 		}
 		$condition .= ")";
 		$condition = dispatcherPps::applyFilters('popupCheckCondition', $condition);
-		if($this->getModel()->abDeactivated()) {
+		/*if($this->getModel()->abDeactivated()) {
 			$condition .= ' AND ab_id = 0';
-		}
+		}*/
 		$popups = $this->_beforeRender( $this->getModel()->addWhere( $condition )->getFromTbl() );
  		if(!empty($popups)) {
 			$popups = dispatcherPps::applyFilters('popupListBeforeRender', $popups);
@@ -219,7 +222,10 @@ class popupPps extends modulePps {
 			if(!isset($p['params']['tpl']['anim_duration']) || $p['params']['tpl']['anim_duration'] <= 0) {
 				$popups[ $i ]['params']['tpl']['anim_duration'] = 1000;	// 1 second by default
 			}
-			$popups[ $i ]['rendered_html'] = $this->getView()->generateHtml( $p );
+			$popups[ $i ]['rendered_html'] = $this->getView()->generateHtml( $p, array('replace_style_tag' => true) );
+			// Unset those parameters - make data lighter
+			unset($popups[ $i ]['css']);
+			unset($popups[ $i ]['html']);
 			$popups[ $i ]['connect_hash'] = md5(date('m-d-Y'). $popups[ $i ]['id']. NONCE_KEY);
 			$this->_renderedIds[] = $p['id'];
 		}
@@ -228,7 +234,24 @@ class popupPps extends modulePps {
 			framePps::_()->addScript('frontend.popup', $this->getModPath(). 'js/frontend.popup.js');
 			framePps::_()->addJSVar('frontend.popup', $jsListVarName, $popups);
 			framePps::_()->addStyle('frontend.popup', $this->getModPath(). 'css/frontend.popup.css');
-			framePps::_()->addStyle('magic.min', PPS_CSS_PATH. 'magic.min.css');
+			// Detect what animation library should be loaded. Be advised that they can be used both in same time.
+			$loadOldAnims = $loadNewAnims = false;
+			foreach($popups as $p) {
+				if($loadOldAnims && $loadNewAnims) break;
+				if(isset($p['params'], $p['params']['tpl'], $p['params']['tpl']['anim']) && !empty($p['params']['tpl']['anim'])) {
+					if(isset($p['params']['tpl']['anim']['old']) && $p['params']['tpl']['anim']['old']) {
+						$loadOldAnims = true;
+					} else {
+						$loadNewAnims = true;
+					}
+				}
+			}
+			if($loadOldAnims) {
+				framePps::_()->getModule('templates')->loadMagicAnims();
+			}
+			if($loadNewAnims) {
+				framePps::_()->getModule('templates')->loadCssAnims();
+			}
 			$renderedBefore = true;
 		} else {
 			// We use such "un-professional" method - because in comon - we don't want to collect data for wp_footer output - because unfortunatelly not all themes has it, 
@@ -275,7 +298,13 @@ class popupPps extends modulePps {
 		return $sxGeo->getCountry($ip);
 	}
 	public function getAssetsUrl() {
+		if(empty($this->_assetsUrl)) {
+			$this->_assetsUrl = framePps::_()->getModule('templates')->getCdnUrl(). '_assets/popup/';
+		}
 		return $this->_assetsUrl;
+	}
+	public function getOldAssetsUrl() {
+		return $this->_oldAssetsUrl;
 	}
 	public function checkMenuItemsForPopUps($menuItems) {
 		if(!empty($menuItems)) {

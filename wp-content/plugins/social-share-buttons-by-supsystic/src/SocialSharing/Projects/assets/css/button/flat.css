@@ -281,6 +281,32 @@
   color: #6ba92f;
   background-color: #fff;
 }
+.supsystic-social-sharing .sharer-flat.whatsapp {
+  background-color: #43C353;
+}
+.supsystic-social-sharing a.social-sharing-button.sharer-flat.whatsapp:hover {
+  background-color: #3CAD4A !important;
+}
+.supsystic-social-sharing .sharer-flat.whatsapp.sharer-flat-4 {
+  border-color: #43C353;
+}
+.supsystic-social-sharing .sharer-flat.whatsapp.sharer-flat-4:hover {
+  color: #43C353;
+  background-color: #fff;
+}
+.supsystic-social-sharing .sharer-flat.tumblr {
+    background-color: #000000;
+}
+.supsystic-social-sharing a.social-sharing-button.sharer-flat.tumblr:hover {
+    background-color: #1a1a1a !important;
+}
+.supsystic-social-sharing .sharer-flat.tumblr.sharer-flat-4 {
+    border-color: #000000;
+}
+.supsystic-social-sharing .sharer-flat.tumblr.sharer-flat-4:hover {
+    color: #000000;
+    background-color: #fff;
+}
 .supsystic-social-sharing[data-change-size="on"] .sharer-flat-6:hover,
 .supsystic-social-sharing[data-change-size="on"] .sharer-flat-7:hover,
 .supsystic-social-sharing[data-change-size="on"] .sharer-flat-8:hover,
@@ -505,6 +531,32 @@
   border-color: #6ba92f;
 }
 .supsystic-social-sharing[data-overlay="on"] .evernote.sharer-flat-4:hover {
-  color: #6ba92f;
+  color: #43C353;
   background-color: #fff;
+}
+.supsystic-social-sharing[data-overlay="on"] .whatsapp {
+  background-color: #43C353;
+}
+.supsystic-social-sharing[data-overlay="on"] a.sharer-flat.whatsapp:hover {
+  background-color: #286E31 !important;
+}
+.supsystic-social-sharing[data-overlay="on"] .whatsapp.sharer-flat-4 {
+  border-color: #43C353;
+}
+.supsystic-social-sharing[data-overlay="on"] .whatsapp.sharer-flat-4:hover {
+  color: #43C353;
+  background-color: #fff;
+}
+.supsystic-social-sharing[data-overlay="on"] .tumblr {
+    background-color: #000000;
+}
+.supsystic-social-sharing[data-overlay="on"] a.sharer-flat.tumblr:hover {
+    background-color: #4d4d4d !important;
+}
+.supsystic-social-sharing[data-overlay="on"] .tumblr.sharer-flat-4 {
+    border-color: #000000;
+}
+.supsystic-social-sharing[data-overlay="on"] .tumblr.sharer-flat-4:hover {
+    color: #000000;
+    background-color: #fff;
 }

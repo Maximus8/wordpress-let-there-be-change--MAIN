@@ -229,7 +229,7 @@ function onetone_native_pagenavi($echo,$wp_query){
 function onetone_options_page_title() { ?>
 
 		          <ul class="options-links">
-                  <li><a href="<?php echo esc_url( 'http://www.mageewp.com/onetone-theme.html' ); ?>" target="_blank"><?php _e( 'Upgrade to Pro', 'onetone' ); ?></a></li>
+                  <li><a href="<?php echo esc_url( 'http://www.mageewp.com/onetone-one-page-wordpress-themes/' ); ?>" target="_blank"><?php _e( 'Upgrade to Pro', 'onetone' ); ?></a></li>
                   <li><a href="<?php echo esc_url( 'http://www.mageewp.com/wordpress-themes' ); ?>" target="_blank"><?php _e( 'MageeWP Themes', 'onetone' ); ?></a></li>
                   <li><a href="<?php echo esc_url( 'http://www.mageewp.com/manuals/theme-guide-onetone.html' ); ?>" target="_blank"><?php _e( 'Manual', 'onetone' ); ?></a></li>
                   <li><a href="<?php echo esc_url( 'http://www.mageewp.com/documents/faq/' ); ?>" target="_blank"><?php _e( 'FAQ', 'onetone' ); ?></a></li>
@@ -572,4 +572,235 @@ function onetone_html_tags_code() {
     $allowedposttags["style"] = array("type" => array());
 	$allowedposttags["link"] = array("rel" => array(),"href" => array(),"id" => array(),"type" => array(),"media" => array());
 
+}
+
+
+// ################################## fonts family
+   /**
+ * Returns an array of system fonts
+ */
+ 
+function onetone_options_typography_get_os_fonts() {
+    // OS Font Defaults
+    $os_faces = array(
+            'Arial, sans-serif' => 'Arial',
+	     //   '"Avant Garde", sans-serif' => 'Avant Garde',
+	        'Cambria, Georgia, serif' => 'Cambria',
+			'Calibri,sans-serif' => 'Calibri' ,
+	        'Copse, sans-serif' => 'Copse',
+	        'Garamond, "Hoefler Text", Times New Roman, Times, serif' => 'Garamond',
+	        'Georgia, serif' => 'Georgia',
+	        '"Helvetica Neue", Helvetica, sans-serif' => 'Helvetica Neue',
+	        'Tahoma, Geneva, sans-serif' => 'Tahoma'
+	    );
+	    return $os_faces;
+	}
+	
+ function onetone_get_typography( $option= array() ){
+	
+	 $return = "";
+	 if( $option && is_array($option) ){
+	 if($option['face']){
+	 $return .= 'font-family:'.$option['face'].';' ;
+	
+	 }
+	 if(isset($option['size']))
+	 $return .= 'font-size:'.$option['size'].';' ;
+	 if($option['style'])
+	 $return .= 'font-weight:'.$option['style'].';' ;
+	 if($option['color'])
+	 $return .= 'color:'.$option['color'].';' ;
+		 }
+		 
+	return $return ;
+	 
+	 }
+	 
+
+function onetone_is_plugin_active( $plugin ) {
+    return in_array( $plugin, (array) get_option( 'active_plugins', array() ) );
+}
+
+
+ 
+/****
+ onetone admin page
+****/
+
+function onetone_admin_tabs( $current = 'onetone' ) {
+	
+	echo '<style>.theme-support,.onetone-wrap {
+    padding: 0 20px;
+    font-size: 1.2em;
+    line-height: 2;
+}
+.theme-support,
+.onetone-wrap p {
+    font-size: 14px;
+    line-height: 1.7;
+}
+.theme-support p {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.theme-support h4 {
+    font-size: 1.1em;
+}
+
+.onetone-wrap .nav-tab {
+    line-height: 1.8;
+}
+
+.col-1-3 {
+    width: 30%;
+    float: left;
+    margin-right: 5%;
+}
+
+.col-1-3.last {
+    margin-right: 0;
+}</style>';
+	echo '<div class="onetone-wrap">
+  <div class="onetone-desc">';
+	echo '<h2>'.__('About Onetone','onetone').'</h2>';
+	echo '<div class="">';
+	_e('Based on Bootstrap and coded with HTML5 and CSS3 language, Onetone is fully responsive in desktops and mobile devices. With enriched settings in theme options , you can not only change header and footer patterns, but also customize background colors, page layouts and social links, etc. Read below for additional information about Onetone.','onetone');
+	echo '</div>';
+	echo '</div></div>';
+	
+    $tabs = array( 'onetone' => __('Theme Support', 'onetone' ), 'import-demos' => __('Import Demos', 'onetone' ) );
+    echo '<div id="icon-themes" class=""><br></div>';
+    echo '<h2 class="nav-tab-wrapper">';
+	if( isset($_GET['page']) && $_GET['page'] !=''  )
+	$current = $_GET['page'];
+	
+    foreach( $tabs as $tab => $name ){
+        $class = ( $tab == $current ) ? ' nav-tab-active' : '';
+        echo "<a class='nav-tab$class' href='?page=$tab'>$name</a>";
+
+    }
+    echo '</h2>';
+}
+
+
+function onetone_register_admin_menu_page(){
+	add_theme_page('About Onetone', 'About Onetone', 'edit_theme_options', 'onetone', 'onetone_menu_page');
+	
+}
+add_action( 'admin_menu', 'onetone_register_admin_menu_page' );
+
+function onetone_menu_page(){
+	onetone_admin_tabs();
+	
+	_e('<div class="theme-support"><div class="col-1-3">
+  <h4>Documentation</h4>
+  <p>The online documentaiton for Onetone is an incredible resource for learning how to use Onetone. You could follow this manual step by step to build your site.</p>
+  <a class="button button-primary" href="http://www.mageewp.com/manuals/theme-guide-onetone.html" target="_blank">Documentation</a>
+</div>
+<div class="col-1-3">
+  <h4>Support Forum</h4><p>We also have a support forum for users to communicate. If you have any problem while using this theme, feel free to post in the forum. Our support team would reply you asap.</p>
+<a class="button button-primary" href="http://www.mageewp.com/forums/onetone/" target="_blank">Support Forum</a>  
+</div>
+<div class="col-1-3 last">
+  <h4>Theme Center</h4><p>Like our themes? Come here to get more.</p>
+<a class="button button-primary" href="http://www.mageewp.com/wordpress-themes" target="_blank">Theme Center</a>
+</div></div>', "onetone" );
+}
+
+
+function onetone_register_admin_submenu_page(){
+	 add_theme_page(__('Import Onetone Demos', 'onetone' ),__('Import Onetone Demos', 'onetone' ), 'edit_theme_options', 'import-demos', 'onetone_import_demos');
+ 
+}
+
+add_action('admin_menu', 'onetone_register_admin_submenu_page');
+
+
+function onetone_import_demos(){
+	onetone_admin_tabs();
+	?>
+	<div class="updated error importer-notice importer-notice-3" style=" display:none; margin-bottom:15px;">
+		<div style="width:66%;box-sizing:border-box;float: left;padding: 10px 0;"><?php _e('Check out the pro version to import these demos.','onetone');?></div>
+	<div style="width:33%;box-sizing:border-box;float: left;padding: 10px 0;"><a class="button-primary" target="_blank" href="<?php echo esc_url('http://www.mageewp.com/onetone-one-page-wordpress-themes/');?>"><?php _e('Upgrade to Pro','onetone');?></a></div>
+	<div style="clear:both;"></div>
+	</div>
+   
+<?php
+	echo '<div class="onetone-import-demos">
+	<style> .theme-browser .theme .theme-actions{opacity: 1 !important; }.demo-import-loader {
+	background: rgba(255,255,255,0.7);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	text-align: center;
+	display:none;
+}
+.demo-import-loader i {
+	text-align: center;
+	display: inline-block;
+	margin: 0 auto;
+	height: 32px;
+	width: 32px;
+	top: 110px;
+	position: relative;
+	font-size: 32px;
+	line-height: 32px;
+}
+</style>
+
+	<div class="feature-section theme-browser rendered">
+	
+  <div class="theme">
+    <div class="theme-screenshot"> <img src="'.get_template_directory_uri().'/lib/importer/images/classic.jpg"> </div>
+    <h3 class="theme-name" id="classic">Onetone - Classic</h3>
+    <div class="theme-actions"> <a class="button button-primary button-import-demo" data-notice="'.__('Check out the pro version to import this demo.','onetone').'" data-demo-id="classic" href="javascript:;">'.__('Import', 'onetone' ).'</a> <a class="button" target="_blank" href="'.esc_url('http://demo.mageewp.com/onetone-pro/').'">'.__('Preview', 'onetone' ).'</a> </div>
+<div class="demo-import-loader preview-all"></div>
+<div class="demo-import-loader preview-classic "><i class="fa fa-cog dashicons-admin-generic fa-spin"></i></div>
+  </div>
+
+
+ <div class="theme">
+    <div class="theme-screenshot"> <img src="'.get_template_directory_uri().'/lib/importer/images/app.jpg"> </div>
+    <h3 class="theme-name" id="classic">Onetone - App</h3>
+    <div class="theme-actions"> <a class="button button-primary button-import-demo" data-notice="'.__('Check out the pro version to import this demo.','onetone').'" data-demo-id="resume" href="javascript:;">'.__('Import', 'onetone' ).'</a> <a class="button" target="_blank" href="'.esc_url('http://demo.mageewp.com/onetone-pro-demo-app/').'">'.__('Preview', 'onetone' ).'</a></div>
+<div class="demo-import-loader preview-all"></div>
+<div class="demo-import-loader preview-app "><i class="fa fa-cog dashicons-admin-generic fa-spin"></i></div>
+  </div>
+  
+
+ <div class="theme">
+    <div class="theme-screenshot"> <img src="'.get_template_directory_uri().'/lib/importer/images/resume.jpg"> </div>
+    <h3 class="theme-name" id="classic">Onetone - Resume</h3>
+    <div class="theme-actions"> <a class="button button-primary button-import-demo" data-notice="'.__('Check out the pro version to import this demo.','onetone').'" data-demo-id="resume" href="javascript:;">'.__('Import', 'onetone' ).'</a> <a class="button" target="_blank" href="'.esc_url('http://demo.mageewp.com/onetone-pro-demo-resume/').'">'.__('Preview', 'onetone' ).'</a> </div>
+<div class="demo-import-loader preview-all"></div>
+<div class="demo-import-loader preview-resume "><i class="fa fa-cog dashicons-admin-generic fa-spin"></i></div>
+  </div>
+  
+   
+  
+  <div class="theme">
+    <div class="theme-screenshot"> <img src="'.get_template_directory_uri().'/lib/importer/images/coming-soon.jpg"> </div>
+    <h3 class="theme-name" id="classic">Onetone - Foo</h3>
+<div class="demo-import-loader preview-all"></div>
+<div class="demo-import-loader preview-foo "><i class="fa fa-cog dashicons-admin-generic fa-spin"></i></div>
+  </div>
+
+
+</div>
+';
+	}
+	
+// Onetone guide tips
+global $options_saved;
+if( (!isset($_GET['page']) || ($_GET['page'] !='onetone-options' && $_GET['page'] !='import-demos' && $_GET['page'] !='onetone' ) ) && $options_saved == false )
+add_action('admin_menu', 'onetone_guide_submenu_page');
+
+function onetone_guide_submenu_page() {
+	
+	// add_theme_page(__('Import Onetone Demos', 'onetone' ),__('Import Onetone Demos', 'onetone' ), 'edit_theme_options', 'import-demos', 'onetone_import_demos');
+	 
+	add_theme_page( __('Onetone step 2', 'onetone' ),  '<div class="onetone-step-2-text"><h2>'.__('Customize Content for Homepage', 'onetone' ).'</h2>
+<p>'.__('Open this page to edit content for homepage and customize styles of the site.', 'onetone' ).'</p><div id="onetone-step-1-text" style=" display:none;"><div class="onetone-step-1"><div class="onetone-step-1-text"><h2>'.__('Customize Content for Homepage', 'onetone' ).'</h2><p>'.__('Open this page to edit content for homepage and customize styles of the site.', 'onetone' ).'</p></div></div></div></div>', 'edit_theme_options', 'themes.php?page=onetone-options', '' );
 }

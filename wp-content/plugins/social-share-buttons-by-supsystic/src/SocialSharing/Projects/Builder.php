@@ -140,11 +140,12 @@ abstract class SocialSharing_Projects_Builder
 
     /**
      * Returns current post or page or NULL if there is homepage.
+     * @param bool $sharePostLinkInList
      * @return null|\WP_Post
      */
-    protected function getCurrentPost()
+    protected function getCurrentPost($sharePostLinkInList = false)
     {
-        return $this->isHomepage() ? null : get_post();
+        return ($this->isHomepage() && !$sharePostLinkInList) ? null : get_post();
     }
 
     /**
@@ -193,7 +194,11 @@ abstract class SocialSharing_Projects_Builder
         );
 
         if ($this->project->isHiddenOnMobile()) {
-            $classes[] = 'supsystic-social-sharing-mobile';
+            $classes[] = 'supsystic-social-sharing-hide-on-mobile';
+        }
+
+        if ($this->project->isShowOnlyOnMobile()) {
+            $classes[] = 'supsystic-social-sharing-show-only-on-mobile';
         }
 
         if (!$this->project->isPopupShow() && $this->project->isShowOnClick()) {
@@ -215,6 +220,17 @@ abstract class SocialSharing_Projects_Builder
             }
         } else {
             $classes[] = 'supsystic-social-sharing-content';
+            $alignInContent = $this->project->getAlignTypeInContent();
+            switch($alignInContent){
+                case 'left':
+                    $classes[] = 'supsystic-social-sharing-content-align-left';
+                    break;
+                case 'right':
+                    $classes[] = 'supsystic-social-sharing-content-align-right';
+                    break;
+                default:
+                    $classes[] = 'supsystic-social-sharing-content-align-center';
+            }
         }
 
         return $classes;

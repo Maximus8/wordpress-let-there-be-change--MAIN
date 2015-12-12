@@ -75,9 +75,12 @@ jQuery.fn.sendFormPps = function(params) {
         jQuery(form).find('*').removeClass('ppsInputError');
     }
 	if(msgEl && !params.btn) {
-		jQuery(msgEl).removeClass('ppsSuccessMsg')
-			.removeClass('ppsErrorMsg')
-			.showLoaderPps();
+		jQuery(msgEl)
+			.removeClass('ppsSuccessMsg')
+			.removeClass('ppsErrorMsg');
+		if(!params.btn) {
+			jQuery(msgEl).showLoaderPps();
+		}
 	} 
 	if(params.btn) {
 		jQuery(params.btn).attr('disabled', 'disabled');
@@ -164,7 +167,8 @@ function toeProcessAjaxResponsePps(res, msgEl, form, sentFromForm, params) {
     if(typeof(res) == 'object') {
         if(res.error) {
             if(msgEl) {
-                jQuery(msgEl).removeClass('ppsSuccessMsg')
+                jQuery(msgEl)
+					.removeClass('ppsSuccessMsg')
 					.addClass('ppsErrorMsg');
             }
 			var errorsArr = [];
@@ -188,17 +192,18 @@ function toeProcessAjaxResponsePps(res, msgEl, form, sentFromForm, params) {
 				else
 					errorsArr.push( res.errors[name] );
             }
-			if(errorsArr.length && params.btn) {
-				jQuery('<div />').html( errorsArr.join('<br />') ).appendTo('body').dialog({
+			if(errorsArr.length && params.btn && jQuery.fn.dialog && !msgEl) {
+				jQuery('<div title="'+ toeLangPps("Really small warning :)")+ '" />').html( errorsArr.join('<br />') ).appendTo('body').dialog({
 					modal: true
 				,	width: '500px'
 				});
 			}
         } else if(res.messages.length) {
             if(msgEl) {
-                jQuery(msgEl).removeClass('ppsErrorMsg')
+                jQuery(msgEl)
+					.removeClass('ppsErrorMsg')
 					.addClass('ppsSuccessMsg');
-                for(var i in res.messages) {
+                for(var i = 0; i < res.messages.length; i++) {
                     jQuery(msgEl).append(res.messages[i]).append('<br />');
                 }
             }
@@ -214,8 +219,8 @@ function getDialogElementPps() {
 }
 
 function toeOptionPps(key) {
-	if(PPS_DATA.options && PPS_DATA.options[ key ] && PPS_DATA.options[ key ].value)
-		return PPS_DATA.options[ key ].value;
+	if(PPS_DATA.options && PPS_DATA.options[ key ])
+		return PPS_DATA.options[ key ];
 	return false;
 }
 function toeLangPps(key) {
@@ -337,4 +342,27 @@ function toeSliderMove(event, ui) {
     var id = jQuery(event.target).attr('id');
     jQuery('#toeSliderDisplay_'+ id).html( ui.value );
     jQuery('#toeSliderInput_'+ id).val( ui.value ).change();
+}
+function ppsCorrectJqueryUsed() {
+	return (typeof(jQuery.fn.sendFormPps) === 'function');
+}
+function ppsReloadCoreJs(clb, params) {
+	var scriptsHtml = ''
+	,	coreScripts = ['common.js', 'core.js'];
+	for(var i = 0; i < coreScripts.length; i++) {
+		scriptsHtml += '<script type="text/javascript" class="ppsReloadedScript" src="'+ PPS_DATA.jsPath+ coreScripts[ i ]+ '"></script>';
+	}
+	jQuery('head').append( scriptsHtml );
+	if(clb) {
+		_ppsRunClbAfterCoreReload( clb, params );
+	}
+}
+function _ppsRunClbAfterCoreReload(clb, params) {
+	if(ppsCorrectJqueryUsed()) {
+		callUserFuncArray(clb, params);
+		return;
+	}
+	setTimeout(function(){
+		ppsCorrectJqueryUsed(clb, params);
+	}, 500);
 }

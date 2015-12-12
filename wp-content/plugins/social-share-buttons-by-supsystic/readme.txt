@@ -2,7 +2,7 @@
 Contributors: supsystic.com
 Tags: share counter, social media share, social network share, social share, social share buttons, social sharing, facebook like, facebook share, like, share buttons, share links, sharebar, social buttons, facebook
 Tested up to: 4.3.1
-Stable tag: 1.5.0
+Stable tag: 1.5.4
 
 Social share buttons to increase social traffic and popularity. Social sharing to Facebook, Twitter and other social networks
 
@@ -160,6 +160,28 @@ Here you can set when to show social share buttons:
 
 
 == Changelog ==
+= 1.5.4 / 26.11.2015 =
+* Fix conflict with other our plugins(Data Tables, Slider Plugin, Photo Gallery Plugin, Pricing Table)
+
+= 1.5.3 / 25.11.2015 =
+* Add first time Welcome page and Step-by-Step tutorial
+* Fix facebook share button issue
+* Add option to select social networks, when social buttons project creating
+* Minor bugs fix
+
+= 1.5.2 / 20.11.2015 =
+* Added ‘Tumblr’ share button
+
+= 1.5.1 / 17.11.2015 =
+* Improved button preview example on project setting page
+* Added new option “Share only post link”
+* Added ability to select post type, where will be showed buttons.
+* Added new option ‘Show Only on Mobile Devices’
+* Added ‘WhatsApp’ share button
+* Added ability to select buttons position(left, center, right) in content place
+* Added column “Total Views” on 'Projects' tab
+* Code improvements
+* Minor Issues fix
 
 = 1.5.0 / 03.11.2015 =
 * Sharing Buttons placement in footer fix

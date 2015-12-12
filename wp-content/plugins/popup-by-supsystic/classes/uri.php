@@ -21,14 +21,14 @@ class uriPps {
             }
             $link = get_page_link($params['page_id']);
             unset($params['page_id']);
-        } elseif(isset($params['baseUrl'])) {
+        } elseif(is_array($params) && isset($params['baseUrl'])) {
             $link = $params['baseUrl'];
             unset($params['baseUrl']);
         } else {
             $link = PPS_URL;
         }
         if(!empty($params)) {
-            $query = is_array($params) ? http_build_query($params) : $params;
+            $query = is_array($params) ? http_build_query($params, '', '&') : $params;
             $link .= (strpos($link, '?') === false ? '?' : '&'). $query;
         }
 		if(self::$_oneHtmlEnc) {

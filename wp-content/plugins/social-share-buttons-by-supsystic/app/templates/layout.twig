@@ -6,21 +6,21 @@
             <nav class="supsystic-navigation supsystic-sticky supsystic-sticky-active">
                 <ul>
                     {% block navigation %}
-                        <li class="{% if request.query.module == 'overview' %}active{% endif %}">
+                        <li class="{% if request.query.module == 'overview' %}active{% endif %}" data-menu-item-title="Overview">
                             <a href="{{ environment.generateUrl('overview') }}">
                                 <i class="fa fa-fw fa-info"></i>
                                 <!-- /.fa fa-fw fa-plus -->
                                 {{ environment.translate('Overview') }}
                             </a>
                         </li>
-                        <li class="{% if request.query.module == 'projects' and request.query.action == 'add'  %}active{% endif %}">
+                        <li class="{% if request.query.module == 'projects' and request.query.action == 'add'  %}active{% endif %}" data-menu-item-title="Add new">
                             <a href="{{ environment.generateUrl('projects', 'add') }}">
                                 <i class="fa fa-fw fa-plus"></i>
                                 <!-- /.fa fa-fw fa-plus -->
                                 {{ environment.translate('Add new project') }}
                             </a>
                         </li>
-                        <li class="{% if (request.query.module == 'projects' or request.query.module is not defined) and request.query.action != 'add'  %}active{% endif %}">
+                        <li class="{% if (request.query.module == 'projects' or request.query.module is not defined) and request.query.action != 'add'  %}active{% endif %}" data-menu-item-title="Projects">
                             <a href="{{ environment.generateUrl('projects') }}">
                                 <i class="fa fa-fw fa-archive"></i>
                                 <!-- /.fa fa-fw fa-archive -->
@@ -28,7 +28,7 @@
                             </a>
                         </li>
                         {% if environment.getModule('license') %}
-                            <li class="{% if request.query.module == 'license' %}active{% endif %}">
+                            <li class="{% if request.query.module == 'license' %}active{% endif %}" data-menu-item-title="License">
                                 <a href="{{ environment.generateUrl('license') }}">
                                     <i class="fa fa-fw fa-hand-o-right"></i>
                                     <!-- /.fa fa-fw fa-plus -->

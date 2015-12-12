@@ -9,6 +9,8 @@ define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/admin/' 
 require_once dirname( __FILE__ ) . '/admin/options-framework.php';
 require_once get_template_directory() . '/includes/admin-options.php';
 
+
+
 /**
  * Required: include options framework.
  **/
@@ -82,11 +84,14 @@ function onetone_theme_register_required_plugins() {
 			'name'     				=> __('Magee Shortcodes','onetone'), // The plugin name
 			'slug'     				=> 'magee-shortcodes', // The plugin slug (typically the folder name)
 			'source'   				=> esc_url('https://downloads.wordpress.org/plugin/magee-shortcodes.zip'), // The plugin source
-			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '1.2.1', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'required' 				=> true, // If false, the plugin is only 'recommended' instead of required
+			'version' 				=> '1.2.4', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
 			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
+			'id'           => 'magee-shortcodes', 
+			
+		
 		),
 		
 	);
@@ -103,7 +108,7 @@ function onetone_theme_register_required_plugins() {
         'default_path' => '',                      // Default absolute path to pre-packaged plugins.
         'menu'         => 'onetone-install-plugins', // Menu slug.
         'has_notices'  => true,                    // Show admin notices or not.
-        'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
+        'dismissable'  => false,                    // If false, a user cannot dismiss the nag message.
         'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
         'is_automatic' => false,                   // Automatically activate plugins after installation or not.
         'message'      => '',                      // Message to output right before the plugins table.
@@ -112,10 +117,10 @@ function onetone_theme_register_required_plugins() {
             'menu_title'                      => __( 'Install Plugins', 'onetone' ),
             'installing'                      => __( 'Installing Plugin: %s', 'onetone' ), // %s = plugin name.
             'oops'                            => __( 'Something went wrong with the plugin API.', 'onetone' ),
-            'notice_can_install_required'     => _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.', 'onetone' ), // %1$s = plugin name(s).
+            'notice_can_install_required'     => _n_noop( 'This theme requires the following plugin: %1$s.<br/><span style="color:red;">NOTICE:</span> Onetone includes all shortcodes inside the Magee Shortcodes plugin. As to best user experience, please activate it now.', 'This theme requires the following plugins: %1$s.<br/><span style="color:red;">NOTICE:</span> Onetone includes all shortcodes inside the Magee Shortcodes plugin. As to best user experience, please activate it now.', 'onetone' ), // %1$s = plugin name(s).
             'notice_can_install_recommended'  => _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.', 'onetone' ), // %1$s = plugin name(s).
             'notice_cannot_install'           => _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.', 'onetone' ), // %1$s = plugin name(s).
-            'notice_can_activate_required'    => _n_noop( 'The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.', 'onetone' ), // %1$s = plugin name(s).
+            'notice_can_activate_required'    => _n_noop( 'The following required plugin is currently inactive: %1$s.<br/><span style="color:red;">NOTICE:</span> Onetone includes all shortcodes inside the Magee Shortcodes plugin. As to best user experience, please activate it now.', 'The following required plugins are currently inactive: %1$s.<br/><span style="color:red;">NOTICE:</span> Onetone includes all shortcodes inside the Magee Shortcodes plugin. As to best user experience, please activate it now.', 'onetone' ), // %1$s = plugin name(s).
             'notice_can_activate_recommended' => _n_noop( 'The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.', 'onetone' ), // %1$s = plugin name(s).
             'notice_cannot_activate'          => _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.', 'onetone' ), // %1$s = plugin name(s).
             'notice_ask_to_update'            => _n_noop( 'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.', 'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.', 'onetone' ), // %1$s = plugin name(s).

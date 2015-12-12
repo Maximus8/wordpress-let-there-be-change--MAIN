@@ -23,7 +23,6 @@ class SocialSharing_Projects_Model_Projects extends SocialSharing_Core_BaseModel
             ->insertInto($this->getTable())
             ->fields('title', 'created_at', 'settings')
             ->values($title, date('Y-m-d'), 'a:5:{s:13:"where_to_show";s:7:"sidebar";s:19:"where_to_show_extra";s:4:"left";s:7:"show_at";s:10:"everywhere";s:9:"when_show";s:4:"load";' . $design . '}');
-//            ->values($title, date('Y-m-d'), 'a:4:{s:13:"where_to_show";s:7:"sidebar";s:19:"where_to_show_extra";s:4:"left";s:7:"show_at";s:10:"everywhere";s:9:"when_show";s:4:"load";}');
 
         $this->db->query($query->build());
 
@@ -300,6 +299,12 @@ class SocialSharing_Projects_Model_Projects extends SocialSharing_Core_BaseModel
                 'design' => 'livejournal',
                 'free' => false,
             ),
+//            array(
+//                'title' => $e->translate('Various'),
+//                'img_url' => $url . 'various_icons.png',
+//                'design' => 'various',
+//                'free' => false,
+//            ),
         );
 
         return $dispatcher->apply(

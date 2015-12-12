@@ -101,17 +101,6 @@
 }
 
 /* 2.0 Fonts */
-h1.section-title {
-    font-family: 'Raleway', sans-serif;
-    font-size: 60px;
-    color: #666;
-    font-style: normal;
-    font-weight: 300;
-    text-align: center;
-    line-height: 82px;
-    margin-bottom: 50px;    
-}
-
 .fa-2 {
     font-size: 2em;
 }
@@ -228,14 +217,12 @@ h1.section-title {
 }
 .contact-form input:-moz-placeholder,.contact-form textarea:-moz-placeholder {
     color:#666;
-
 }
 .noticefailed {
-    color:#FF0000 !important;
-
+    color:#FF0000;
 }
 .noticesuccess {
-    color:#009F00 !important;
+    color:#009F00;
 }
 
 /* 5.0 Homepage Gallery */
@@ -311,10 +298,4 @@ li.info-email:before {
 
 li.info-website:before {
     content: "\f109";
-}
-
-.onetone-parallax{
- background-attachment:fixed !important;
- background-position:50% 0;
- background-repeat:repeat;
 }

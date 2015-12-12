@@ -57,7 +57,7 @@
 
             var tableRow = $(this).parents('tr');
 
-            if (confirm('Are you sure?')) {
+            if (confirm('Are you sure want to remove this Project?')) {
                 $(this).html($('<i/>', { class: 'fa fa-fw fa-circle-o-notch fa-spin' }));
                 $.post(this.href).done(function () {
                     tableRow.remove();

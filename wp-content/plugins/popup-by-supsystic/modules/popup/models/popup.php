@@ -4,6 +4,7 @@ class popupModelPps extends modelPps {
 	private $_showPagesList = array();
 	private $_showOnList = array();
 	private $_types = array();
+	private $_linksReplacement = array();
 	public function __construct() {
 		$this->_setTbl('popup');
 	}
@@ -30,40 +31,61 @@ class popupModelPps extends modelPps {
 			$params = stripslashes ($params);
 		return $params;
 	}
+	private function _getLinksReplacement() {
+		if(empty($this->_linksReplacement)) {
+			$this->_linksReplacement = array(
+				'modUrl' => array('url' => $this->getModule()->getModPath(), 'key' => 'PPS_MOD_URL'),
+				'siteUrl' => array('url' => PPS_SITE_URL, 'key' => 'PPS_SITE_URL'),
+				'assetsUrl' => array('url' => $this->getModule()->getAssetsUrl(), 'key' => 'PPS_ASSETS_URL'),
+				'oldAssets' => array('url' => $this->getModule()->getOldAssetsUrl(), 'key' => 'PPS_OLD_ASSETS_URL'),
+			);
+		}
+		return $this->_linksReplacement;
+	}
 	protected function _beforeDbReplace($data) {
-		static $modUrl, $siteUrl, $assetsUrl;
+		static $replaceFrom, $replaceTo;
 		if(is_array($data)) {
 			foreach($data as $k => $v) {
 				$data[ $k ] = $this->_beforeDbReplace($v);
 			}
 		} else {
-			if(!$modUrl)
-				$modUrl = $this->getModule()->getModPath();
-			if(!$siteUrl)
-				$siteUrl = PPS_SITE_URL;
-			if(!$assetsUrl)
-				$assetsUrl = $this->getModule()->getAssetsUrl();
-			$data = str_replace(array($siteUrl, $modUrl), array('[PPS_SITE_URL]', '[PPS_MOD_URL]'), $data);
+			if(!$replaceFrom) {
+				$this->_getLinksReplacement();
+				foreach($this->_linksReplacement as $k => $rData) {
+					if($k == 'oldAssets') {	// Replace old assets urls - to new one
+						$replaceFrom[] = $rData['url'];
+						$replaceTo[] = '['. $this->_linksReplacement['assetsUrl']['key']. ']';
+					} else {
+						$replaceFrom[] = $rData['url'];
+						$replaceTo[] = '['. $rData['key']. ']';
+					}
+				}
+			}
+			$data = str_replace($replaceFrom, $replaceTo, $data);
 		}
 		return $data;
 	}
 	protected function _afterDbReplace($data) {
-		static $modUrl, $siteUrl, $assetsUrl;
+		static $replaceFrom, $replaceTo;
 		if(is_array($data)) {
 			foreach($data as $k => $v) {
 				$data[ $k ] = $this->_afterDbReplace($v);
 			}
 		} else {
-			if(!$modUrl)
-				$modUrl = $this->getModule()->getModPath();
-			if(!$siteUrl)
-				$siteUrl = PPS_SITE_URL;
-			if(!$assetsUrl)
-				$assetsUrl = $this->getModule()->getAssetsUrl();
-			/*Tmp fix - for quick replace all mode URL to assets URL*/
-			$data = str_replace('[PPS_MOD_URL]', '[PPS_ASSETS_URL]', $data);
-			/*****/
-			$data = str_replace(array('[PPS_SITE_URL]', '[PPS_MOD_URL]', '[PPS_ASSETS_URL]'), array($siteUrl, $modUrl, $assetsUrl), $data);
+			if(!$replaceFrom) {
+				$this->_getLinksReplacement();
+				/*Tmp fix - for quick replace all mode URL to assets URL*/
+				$replaceFrom[] = '['. $this->_linksReplacement['modUrl']['key']. ']';
+				$replaceTo[] = '['. $this->_linksReplacement['assetsUrl']['key']. ']';
+				$replaceFrom[] = $this->_linksReplacement['oldAssets']['url'];
+				$replaceTo[] = $this->_linksReplacement['assetsUrl']['url'];
+				/*****/
+				foreach($this->_linksReplacement as $k => $rData) {
+					$replaceFrom[] = '['. $rData['key']. ']';
+					$replaceTo[] = $rData['url'];
+				}
+			}
+			$data = str_replace($replaceFrom, $replaceTo, $data);
 		}
 		return $data;
 	}
@@ -73,15 +95,15 @@ class popupModelPps extends modelPps {
 		if(empty($row['img_preview'])) {
 			$row['img_preview'] = str_replace(' ', '-', strtolower( trim($row['label']) )). '.jpg';
 		}
-		$row['img_preview_url'] = uriPps::_($this->getModule()->getAssetsUrl()/*$this->getModule()->getModPath()*/. 'img/preview/'. $row['img_preview']);
+		$row['img_preview_url'] = uriPps::_($this->getModule()->getAssetsUrl(). 'img/preview/'. $row['img_preview']);
 		$row['view_id'] = $row['id']. '_'. mt_rand(1, 999999);
 		$row = $this->_afterDbReplace($row);
 		$this->getTypes();
 		$row['type'] = isset($row['type_id']) && isset($this->_types[ $row['type_id'] ]) ? $this->_types[ $row['type_id'] ]['code'] : 'common';
 		if(!isset($row['params']['tpl']['sub_fields'])) {
 			$row['params']['tpl']['sub_fields'] = array(
-				'email' => array('label' => __('E-Mail'), 'html' => 'text', 'enb' => true, 'mandatory' => true, 'name' => 'email'),
-				'name' => array('label' => __('Name'), 'html' => 'text', 'enb' => (isset($row['params']['tpl']['enb_sub_name']) && $row['params']['tpl']['enb_sub_name']), 'name' => 'name'),
+				'email' => array('label' => __('E-Mail', PPS_LANG_CODE), 'html' => 'text', 'enb' => true, 'mandatory' => true, 'name' => 'email'),
+				'name' => array('label' => __('Name', PPS_LANG_CODE), 'html' => 'text', 'enb' => (isset($row['params']['tpl']['enb_sub_name']) && $row['params']['tpl']['enb_sub_name']), 'name' => 'name'),
 			);
 		} else {
 			// Saving Enabling name field for old field database sctructure - to not lose this field for old popups
@@ -113,13 +135,13 @@ class popupModelPps extends modelPps {
 		if(!empty($d['label'])) {
 			if(!empty($d['original_id'])) {
 				$original = $this->getById($d['original_id']);
+				framePps::_()->getModule('supsystic_promo')->getModel()->saveUsageStat('create_from_tpl.'. strtolower(str_replace(' ', '-', $original['label'])));
 				unset($original['id']);
 				$original['label'] = $d['label'];
 				$original['original_id'] = $d['original_id'];
-				framePps::_()->getModule('supsystic_promo')->getModel()->saveUsageStat('create_from_tpl.'. strtolower(str_replace(' ', '-', $original['label'])));
 				return $this->insertFromOriginal( $original );
 			} else
-				$this->pushError (__('Please select PopUp template from list below', PPS_LANG_CODE), 'label');
+				$this->pushError (__('Please select PopUp template from list below', PPS_LANG_CODE));
 		} else
 			$this->pushError (__('Please enter Name', PPS_LANG_CODE), 'label');
 		return false;
@@ -192,13 +214,13 @@ class popupModelPps extends modelPps {
 		
 		$res = $this->updateById($d);
 		if($res) {
-			$currentPopup = $this->getById($d['id']);
+			/*$currentPopup = $this->getById($d['id']);
 			$difs = $this->getDifferences($popup, $currentPopup);
 			if(!empty($difs)) {
 				foreach($difs as $dif) {
 					framePps::_()->getModule('supsystic_promo')->getModel()->saveUsageStat('save_popup.'. $dif);
 				}
-			}
+			}*/
 			$this->_bindShowToPages( $d );
 			dispatcherPps::doAction('afterPopUpUpdate', $d);
 		}
@@ -286,6 +308,7 @@ class popupModelPps extends modelPps {
 				'after_inactive' => array('id' => 7),
 				'after_comment' => array('id' => 8),
 				'after_checkout' => array('id' => 9),
+				'link_follow' => array('id' => 10),
 			));
 		}
 		return $this->_showPagesList;
@@ -338,12 +361,12 @@ class popupModelPps extends modelPps {
 					}
 				}
 			}
+			framePps::_()->getModule('supsystic_promo')->getModel()->saveUsageStat('change_to_tpl.'. strtolower(str_replace(' ', '-', $newTpl['label'])));
 			$newTpl['original_id'] = $newTpl['id'];	// It will be our new original
 			$newTpl['id'] = $currentPopup['id'];
 			$newTpl['label'] = $currentPopup['label'];
 			$newTpl = dispatcherPps::applyFilters('popupChangeTpl', $newTpl, $currentPopup);
 			$newTpl = $this->_escTplData( $newTpl );
-			framePps::_()->getModule('supsystic_promo')->getModel()->saveUsageStat('change_to_tpl.'. strtolower(str_replace(' ', '-', $newTpl['label'])));
 			return $this->update( $newTpl, array('id' => $newTpl['id']) );
 		} else
 			$this->pushError (__('Provided data was corrupted', PPS_LANG_CODE));
@@ -480,7 +503,7 @@ class popupModelPps extends modelPps {
 				unset($original['date_created']);
 				$original['label'] = $d['copy_label'];
 				$original['views'] = $original['unique_views'] = $original['actions'] = 0;
-				framePps::_()->getModule('supsystic_promo')->getModel()->saveUsageStat('save_as_copy');
+				//framePps::_()->getModule('supsystic_promo')->getModel()->saveUsageStat('save_as_copy');
 				return $this->insertFromOriginal( $original );
 			} else
 				$this->pushError (__('Invalid ID', PPS_LANG_CODE));
@@ -515,5 +538,9 @@ class popupModelPps extends modelPps {
 		} else
 			$this->pushError (__('Invalid ID', PPS_LANG_CODE));
 		return false;
+	}
+	public function setSimpleGetFields() {
+		$this->setSelectFields('id, label, active, views, unique_views, actions, date_created, sort_order');
+		return parent::setSimpleGetFields();
 	}
 }

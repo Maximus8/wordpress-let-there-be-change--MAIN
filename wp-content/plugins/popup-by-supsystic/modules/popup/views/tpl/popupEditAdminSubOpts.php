@@ -23,7 +23,7 @@
 		<tr class="ppsPopupSubDestOpts ppsPopupSubDestOpts_wordpress">
 			<th scope="row">
 				<?php _e('Create user after subscribe with role', PPS_LANG_CODE)?>
-				<i class="fa fa-question supsystic-tooltip" title="<?php echo _e('Use this only if you are really need it. Remember! After you change this option - your new subscriber will have more privileges than usual subscribers, so be careful with this option!', PPS_LANG_CODE)?>"></i>
+				<i class="fa fa-question supsystic-tooltip" title="<?php _e('Use this only if you are really need it. Remember! After you change this option - your new subscriber will have more privileges than usual subscribers, so be careful with this option!', PPS_LANG_CODE)?>"></i>
 			</th>
 			<td>
 				<?php echo htmlPps::selectbox('params[tpl][sub_wp_create_user_role]', array(
@@ -34,11 +34,20 @@
 		<tr class="ppsPopupSubDestOpts ppsPopupSubDestOpts_wordpress">
 			<th scope="row">
 				<?php _e('Create Subscriber without confirmation', PPS_LANG_CODE)?>
-				<i class="fa fa-question supsystic-tooltip" title="<?php echo _e('Usually, after user subscribe, we send email with confirmation link - to confirm email addres, and only after usee will click on link from this email - we will create new subscriber. This option allow you to create subscriber - right after subscription, without email confirmation process.', PPS_LANG_CODE)?>"></i>
+				<i class="fa fa-question supsystic-tooltip" title="<?php _e('Usually, after user subscribe, we send email with confirmation link - to confirm email addres, and only after usee will click on link from this email - we will create new subscriber. This option allow you to create subscriber - right after subscription, without email confirmation process.', PPS_LANG_CODE)?>"></i>
 			</th>
 			<td>
 				<?php echo htmlPps::checkbox('params[tpl][sub_ignore_confirm]', array(
 					'checked' => htmlPps::checkedOpt($this->popup['params']['tpl'], 'sub_ignore_confirm')))?>
+			</td>
+		</tr>
+		<tr class="ppsPopupSubDestOpts ppsPopupSubDestOpts_wordpress">
+			<th scope="row">
+				<?php _e('Export Subscribers', PPS_LANG_CODE)?>
+				<i class="fa fa-question supsystic-tooltip" title="<?php _e('Export all subscribers, who subscribed using WordPress "Subscribe to" method, as CSV file.', PPS_LANG_CODE)?>"></i>
+			</th>
+			<td>
+				<a href="<?php echo $this->wpCsvExportUrl;?>" class="button"><?php _e('Get CSV List', PPS_LANG_CODE)?></a>
 			</td>
 		</tr>
 		<tr class="ppsPopupSubDestOpts ppsPopupSubDestOpts_aweber">
@@ -64,7 +73,7 @@
 		<tr class="ppsPopupSubDestOpts ppsPopupSubDestOpts_mailchimp">
 			<th scope="row">
 				<?php _e('MailChimp API key', PPS_LANG_CODE)?>
-				<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(sprintf(__('To find your MailChimp API Key login to your mailchimp account at <a href="%s" target="_blank">%s</a> then from the left main menu, click on your Username, then select "Account" in the flyout menu. From the account page select "Extras", "API Keys". Your API Key will be listed in the table labeled "Your API Keys". Copy / Paste your API key into "MailChimp API key" field here.', PPS_LANG_CODE), 'http://mailchimp.com', 'http://mailchimp.com'))?>"></i>
+				<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(sprintf(__('To find your MailChimp API Key login to your mailchimp account at <a href="%s" target="_blank">%s</a> then from the left main menu, click on your Username, then select "Account" in the flyout menu. From the account page select "Extras", "API Keys". Your API Key will be listed in the table labeled "Your API Keys". Copy / Paste your API key into "MailChimp API key" field here. For more detailed instruction - check article <a href="%s" target="_blank">here</a>.', PPS_LANG_CODE), 'http://mailchimp.com', 'http://mailchimp.com', 'https://supsystic.com/mailchimp-integration/'))?>"></i>
 			</th>
 			<td>
 				<?php echo htmlPps::text('params[tpl][sub_mailchimp_api_key]', array(
@@ -120,12 +129,36 @@
 				</th>
 			<?php }?>
 		</tr>
+		<?php /*?><tr class="ppsPopupSubDestOpts ppsPopupSubDestOpts_newsletter">
+			<?php if($this->newsletterAvailable) { ?>
+				<th scope="row">
+					<?php _e('Newsletter Subscribe Lists', PPS_LANG_CODE)?>
+				</th>
+				<td>
+					<?php if(!empty($this->newsletterListsSelect)) { ?>
+						<?php echo htmlPps::selectbox('params[tpl][sub_newsletter_list]', array(
+							'value' => (isset($this->popup['params']['tpl']['sub_newsletter_list']) ? $this->popup['params']['tpl']['sub_newsletter_list'] : ''),
+							'options' => $this->newsletterListsSelect))?>
+					<?php } else { ?>
+						<div class="description"><?php printf(__('You have no subscribe lists, <a target="_blank" href="%s">create lists</a> at first, then - select them here.', PPS_LANG_CODE), admin_url('admin.php?page=wysija_subscribers&action=addlist'))?></div>
+					<?php }?>
+				</td>
+			<?php } else { ?>
+				<th scope="row" colspan="2">
+					<div class="description"><?php printf(__('To use this subscribe engine - you must have <a target="_blank" href="%s">Newsletter plugin</a> installed on your site', PPS_LANG_CODE), admin_url('plugin-install.php?tab=search&s=Newsletter'))?></div>
+				</th>
+			<?php }?>
+		</tr><?php */?>
 		<?php
 			$proSubModules = array(
 				'constantcontact' => array('label' => __('Constant Contact', PPS_LANG_CODE)), 
 				'campaignmonitor' => array('label' => __('Campaign Monitor', PPS_LANG_CODE)), 
 				'sendgrid' => array('label' => __('SendGrid', PPS_LANG_CODE)),
+				'get_response' => array('label' => __('GetResponse', PPS_LANG_CODE)),
 				'verticalresponse' => array('label' => __('Vertical Response', PPS_LANG_CODE)),
+				'activecampaign' => array('label' => __('Active Campaign', PPS_LANG_CODE)),
+				//'infusionsoft' => array('label' => __('Infusion Soft', PPS_LANG_CODE)),	// Not ready for production - too much questions about their API service
+				'mailrelay'=> array('label' => __('Mailrelay', PPS_LANG_CODE)),
 				'arpreach' => array('label' => __('arpReach', PPS_LANG_CODE)),
 				'sgautorepondeur' => array('label' => __('SG Autorepondeur', PPS_LANG_CODE)),
 			);
@@ -203,7 +236,7 @@
 				<?php
 					$labelClass = 'ppsSubFieldShell';
 					if($k == 'email')
-						$labelClass .= ' supsystic-tooltip ppsSubFieldEmailShell';
+						$labelClass .= ' supsystic-tooltip-bottom ppsSubFieldEmailShell';
 				?>
 				<div
 					class="<?php echo $labelClass?>"
@@ -227,6 +260,7 @@
 					<?php echo htmlPps::hidden('params[tpl][sub_fields]['. $k. '][name]', array('value' => isset($f['name']) ? $f['name'] : $k))?>
 					<?php echo htmlPps::hidden('params[tpl][sub_fields]['. $k. '][html]', array('value' => $f['html']))?>
 					<?php echo htmlPps::hidden('params[tpl][sub_fields]['. $k. '][label]', array('value' => $f['label']))?>
+					<?php echo htmlPps::hidden('params[tpl][sub_fields]['. $k. '][value]', array('value' => isset($f['value']) ? $f['value'] : ''))?>
 					<?php echo htmlPps::hidden('params[tpl][sub_fields]['. $k. '][custom]', array('value' => isset($f['custom']) ? $f['custom'] : 0))?>
 					<?php echo htmlPps::hidden('params[tpl][sub_fields]['. $k. '][mandatory]', array('value' => isset($f['mandatory']) ? $f['mandatory'] : 0))?>
 					<?php if(isset($f['options']) && !empty($f['options'])) {
@@ -242,15 +276,6 @@
 					?>
 				</div>
 			<?php }?>
-			<?php /*?><label class="supsystic-tooltip" title="Email field is mandatory for most of subscribe engines - so it should be always enabled">
-				<?php echo htmlPps::checkbox('enabled_email_subscribe', array('checked' => 1, 'attrs' => 'disabled'))?>
-				<?php _e('Email', PPS_LANG_CODE)?>
-			</label>
-			<label>
-				<?php echo htmlPps::checkbox('params[tpl][enb_sub_name]', array('checked' => htmlPps::checkedOpt($this->popup['params']['tpl'], 'enb_sub_name')))?>
-				<?php _e('Name', PPS_LANG_CODE)?>
-			</label>
-			<?php */?>
 			<label id="ppsSubAddFieldShell">
 				<a id="ppsSubAddFieldBtn" href="#" class="button button-primary">
 					<i class="fa fa-plus"></i>
@@ -308,6 +333,11 @@
 					'value' => (isset($this->popup['params']['tpl']['sub_redirect_url']) ? esc_url( $this->popup['params']['tpl']['sub_redirect_url'] ) : ''),
 					'attrs' => 'placeholder="http://example.com"',
 				))?>
+				<label>
+					<?php echo htmlPps::checkbox('params[tpl][sub_redirect_new_wnd]', array(
+						'checked' => htmlPps::checkedOpt($this->popup['params']['tpl'], 'sub_redirect_new_wnd')))?>
+					<?php _e('Open in a new window (tab)', PPS_LANG_CODE)?>
+				</label>
 			</td>
 		</tr>
 		<tr class="ppsPopupSubEmailTxt" style="display: none;">
@@ -414,6 +444,35 @@
 				<?php echo htmlPps::text('params[tpl][sub_btn_label]', array('value' => $this->popup['params']['tpl']['sub_btn_label']))?>
 			</td>
 		</tr>
+		<tr>
+			<th scope="row">
+				<?php _e('New Subscriber Notification', PPS_LANG_CODE)?>
+				<i class="fa fa-question supsystic-tooltip" title="<?php _e('Enter the email addresses that should receive notifications (separate by comma). Leave it blank - and you will not get any notifications.', PPS_LANG_CODE)?>"></i>
+			</th>
+			<td>
+				<?php echo htmlPps::text('params[tpl][sub_new_email]', array(
+					'value' => isset($this->popup['params']['tpl']['sub_new_email']) 
+						? $this->popup['params']['tpl']['sub_new_email'] 
+						: $this->adminEmail,
+				))?>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
+				<?php _e('New Subscriber Notification email text', PPS_LANG_CODE)?>
+				<i class="fa fa-question supsystic-tooltip" title="<?php _e('Message that you will receive about new subscribers on your site.', PPS_LANG_CODE)?>"></i>
+				<?php $allowVarsInMail = array('sitename', 'siteurl', 'subscriber_data');?>
+				<div class="description" style=""><?php printf(__('You can use next variables here: %s', PPS_LANG_CODE), '['. implode('], [', $allowVarsInMail).']')?></div>
+			</th>
+			<td>
+				
+				<?php echo htmlPps::textarea('params[tpl][sub_new_message]', array(
+					'value' => isset($this->popup['params']['tpl']['sub_new_message']) 
+						? $this->popup['params']['tpl']['sub_new_message'] 
+						: __('You have new subscriber on your site <a href="[siteurl]">[sitename]</a>, here us subscriber information:<br />[subscriber_data]', PPS_LANG_CODE),
+				))?>
+			</td>
+		</tr>
 	</table>
 </span>
 <!--Add Field promo Wnd-->
@@ -421,4 +480,36 @@
 	<a target="_blank" href="<?php echo framePps::_()->getModule('supsystic_promo')->generateMainLink('utm_source=plugin&utm_medium=sub_fields&utm_campaign=popup');?>" class="ppsPromoImgUrl">
 		<img src="<?php echo $this->promoModPath?>img/sub-fields-edit.jpg" />
 	</a>
+</div>
+<!--Standard fields toolbar-->
+<div id="ppsSfFieldToolbarStandardExl" class="ppsSfFieldToolbar">
+	<a class="ppsSfFieldSettingsBtn" href="#" title="<?php _e('Settings', PPS_LANG_CODE)?>">
+		<i class="fa fa-gear"></i>
+	</a>
+</div>
+<!--Add/edit standard subscribe fields popup-->
+<div id="ppsSfEditFieldsStandardWnd" title="<?php _e('Subscribe Field Settings', PPS_LANG_CODE)?>" style="display: none;">
+	<table class="form-table">
+		<tr class="ppsSfLabelShell">
+			<th scope="row">
+				<?php _e('Label', PPS_LANG_CODE)?>
+				<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Label that will be visible for your subscribers.', PPS_LANG_CODE))?>"></i>
+			</th>
+			<td>
+				<?php echo htmlPps::text('label')?>
+			</td>
+		</tr>
+		<tr class="ppsSfMandatoryStandardRow">
+			<th scope="row">
+				<?php _e('Mandatory', PPS_LANG_CODE)?>
+				<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Is this field mandatory to fill-in. If yes - then users will not be able to continue without filling-in this field.', PPS_LANG_CODE))?>"></i>
+			</th>
+			<td>
+				<?php echo htmlPps::checkbox('mandatory', array(
+					'value' => 1,
+				))?>
+			</td>
+		</tr>
+	</table>
+	<?php echo htmlPps::hidden('name')?>
 </div>

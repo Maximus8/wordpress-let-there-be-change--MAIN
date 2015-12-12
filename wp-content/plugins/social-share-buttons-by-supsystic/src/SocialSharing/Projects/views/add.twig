@@ -138,21 +138,7 @@
                             <!-- /.form-table form -->
                             <div class="half-page-right" style="display: inline-block; width: 50%;">
                                 <h2 style="margin-bottom: 20px;">{{ environment.translate('Preview') }}</h2>
-                                <div class="supsystic-social-sharing supsystic-social-sharing-preview" data-overlay="{{ project.settings.overlay_with_shadow }}" style="text-align: center; padding: 40px 0; border-bottom: 1px solid rgb(200, 200, 200); display: inline-block; width: 100%;">
-                                    <a data-animation="{{ project.settings.animation | default('no-animation') }}" class="social-sharing-button sharer-flat sharer-{{ project.settings.design | default('flat-1') }} counter-{{ project.settings.shares_style | default('standard') }} twitter {{ project.settings.animation | default('no-animation') }} animation-preview pricon" href="javascript:void(0);">
-                                        <i class="fa fa-fw fa-twitter icon-animation-preview" data-animation="no-animation">
-                                            {% if project.settings.design in ['sharer-flat-8', 'sharer-flat-9'] %}
-                                                <span>{{ environment.translate('Share') }}</span>
-                                            {% endif %}
-                                        </i>
-                                        <!-- /.fa fa-fw fa-twitter -->
-                                        <div class="counter-wrap {{ project.settings.shares_style | default('standard') }}" {% if project.settings.display_total_shares is not defined or project.settings.display_total_shares == 'false' %}hidden{% endif %}>
-                                            <span class="counter">5731</span>
-                                            <!-- /.counter -->
-                                        </div>
-                                        <!-- /.counter-wrap -->
-                                    </a>
-                                    <!-- /.sharer-flat sharer-flat-1 -->
+                                <div id="button-preview-example-wrapper" class="supsystic-social-sharing supsystic-social-sharing-preview" data-overlay="{{ project.settings.overlay_with_shadow }}" style="text-align: center; padding: 40px 0; border-bottom: 1px solid rgb(200, 200, 200); display: inline-block; width: 100%;">
                                 </div>
                                 <table class="form-table form" style="display: inline-block; width: 100%;">
                                     <tbody>
@@ -464,6 +450,40 @@
                                             </label>
                                         </li>
                                     </ul>
+
+                                    <ul class="wts-extra not-select-first" {% if project.settings.where_to_show != 'content' %}style="display: none;"{% endif %}>
+                                        <lh>
+                                            {{ environment.translate('Align buttons on content page:') }}
+                                        </lh>
+                                        <li>
+                                            <label for="wts-content-align-left">
+                                                <input type="radio"
+                                                       name="settings[align_in_content]"
+                                                       value="left"
+                                                       id="wts-content-align-left" {% if project.settings.align_in_content == 'left' or project.settings.align_in_content == false %}checked="checked"{% endif %}/>
+                                                {{ environment.translate('Left') }}
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="wts-content-align-center">
+                                                <input type="radio"
+                                                       name="settings[align_in_content]"
+                                                       value="center"
+                                                       id="wts-content-align-center" {% if project.settings.align_in_content == 'center' %}checked="checked"{% endif %}/>
+                                                {{ environment.translate('Center') }}
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="wts-content-align-right">
+                                                <input type="radio"
+                                                       name="settings[align_in_content]"
+                                                       value="right"
+                                                       id="wts-content-align-right" {% if project.settings.align_in_content == 'right' %}checked="checked"{% endif %}/>
+                                                {{ environment.translate('Right') }}
+                                            </label>
+                                        </li>
+                                    </ul>
+
                                 </li>
                                 <li>
                                     <label for="wts-popup" data-toggle="tooltip">
@@ -514,6 +534,14 @@
                                        {% if project.settings.sidebar_navigation == 'on' %}checked{% endif %}/>
                                 {{ environment.translate('Show navigation button') }}
                                 <i class="fa fa-question location-tooltip" title="{{ tooltips['nav-button'] }}"></i>
+                            </label>
+                            <label for="wts-share-post-link-in-list" {% if project.settings.where_to_show != 'content' and project.settings.where_to_show != 'code' %}hidden{% endif %}>
+                                <input type="checkbox"
+                                       id="wts-share-post-link-in-list"
+                                       name="settings[share_post_link_in_list]"
+                                       {% if project.settings.share_post_link_in_list == 'on' %}checked{% endif %}/>
+                                {{ environment.translate('Share only post link') }}
+                                <i class="fa fa-question location-tooltip" title="{{ tooltips['share-post-link'] }}"></i>
                             </label>
                             <div title="Show all networks" style="margin-top: 10px;">
                                 <input type="checkbox"
@@ -572,7 +600,7 @@
                                 <tr>
                                     <th scope="row">
                                         <label for="ws-posts">
-                                            {{ environment.translate('Show on next posts / pages') }}
+                                            {{ environment.translate('Show on next posts / pages / post types') }}
                                 <i class="fa fa-question location-tooltip" title="{{ tooltips['show-on-pages'] }}"></i>
                                         </label>
                                     </th>
@@ -593,6 +621,12 @@
                                                     <option value="{{ page.ID }}" {% if page.ID in project.settings.show_on_posts %}selected="selected"{% endif %}>{{ page.post_title|slice(0, 50) }}</option>
                                                 {% endfor %}
                                             </optgroup>
+                                            <optgroup label="{{ environment.translate('Post type') }}">
+                                                <option value="-3" {% if '-3' in project.settings.show_on_posts %}selected="selected"{% endif %}>{{ environment.translate('All post type') }}</option>
+                                                {% for post_type in post_types %}
+                                                    <option value="{{ post_type }}" {% if post_type in project.settings.show_on_posts %}selected="selected"{% endif %}>'{{ post_type|slice(0, 50) }}'</option>
+                                                {% endfor %}
+                                            </optgroup>
                                         </select>
                                         <!-- /#ws-posts.chosen -->
                                     </td>
@@ -609,6 +643,19 @@
                                                name="settings[hide_on_mobile]"
                                                id="ws-hide-mobile" {% if project.settings.hide_on_mobile == 'on' %}checked="checked"{% endif %}/>
                                         <!-- /#ws-hide-mobile -->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="font-size: 0.98em;">
+                                        <label for="ws-show-only-on-mobile">
+                                            {{ environment.translate('Show Only on Mobile Devices') }}
+                                <i class="fa fa-question location-tooltip" title="{{ tooltips['show-only-on-mobile'] }}"></i>
+                                        </label>
+                                    </th>
+                                    <td>
+                                        <input type="checkbox"
+                                               name="settings[show_only_on_mobile]"
+                                               id="ws-show-only-on-mobile" {% if project.settings.show_only_on_mobile == 'on' %}checked="checked"{% endif %}/>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -695,29 +742,38 @@
              title="{{ environment.translate('Select design') }}"
              style="padding: 10px; display: none; margin-top: 0;">
 
-            <div class="button-design-preview-wrapper">
+            <div class="button-design-preview-wrapper" style="height: auto">
                 {% for preview in buttons_preview %}
-                    <div class="button-design-preview-block {% if preview.free == false %}not-pro{% endif %}" data-design="{{ preview.design }}" style="position: relative;">
-                        <h3 style="display: inline-block; margin:0;">{{ preview.title }}</h3>
-                        <br/>
-                        <img src="{{ preview.img_url }}" height="200px" style="cursor: pointer;"/>
+                    <div class="button-design-preset {% if preview.free == false %}not-pro{% endif %}" data-design="{{ preview.design }}" style="float: left;">
+                        {#<h3 style="display: inline-block;">{{ preview.title }}</h3>#}
+                        {% if preview.free == false %}
 
-                        <div style="position: absolute; top: 50%; left: 50%; transform:translate(-50%, -50%); display:table;">
-                            {% if preview.free == false %}
-                                <a class="button button-primary" href="//supsystic.com/plugins/social-share-plugin/" style="background-color: #ffffff;">
-                                    Available in PRO
-                                </a>
-                            {% else %}
-                                <button class="button button-primary button-select" style="background-color: #ffffff;">
-                                    Select
-                                </button>
-                                <span class="selected-button-design-preset">{{ environment.translate('Selected') }}</span>
-                            {% endif %}
+                        {% endif %}
+                        <br/>
+                        <div style="height: 350px; width: 420px; position: relative;">
+                            <img src="{{ preview.img_url }}"/>
+                            <div style="position: absolute; top: 50%; left: 50%; transform:translate(-50%, -50%); display:table;">
+                                {% if preview.free == false %}
+                                    <button class="button button-primary" style="background-color: #ffffff;">
+                                        {{ environment.translate('Available in PRO') }}
+                                    </button>
+                                {% else %}
+                                    <button class="button button-primary button-select" style="background-color: #ffffff;">
+                                        {{ environment.translate('Select') }}
+                                    </button>
+                                    <span class="selected-button-design-preset">{{ environment.translate('Selected') }}</span>
+                                {% endif %}
+                            </div>
+
+                            <div class="button-design-preset-overlay">
+                                <h3>{{ preview.title|title }}</h3>
+                            </div>
                         </div>
 
                     </div>
                 {% endfor %}
             </div>
+            <div class="clear"></div>
 
         </div>
         <!-- select design dialog end -->

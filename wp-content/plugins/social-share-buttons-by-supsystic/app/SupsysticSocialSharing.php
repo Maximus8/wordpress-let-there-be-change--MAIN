@@ -15,7 +15,10 @@ class SupsysticSocialSharing
         }
 
         $pluginPath = dirname(dirname(__FILE__));
-        $environment = new Rsc_Environment('sss', '1.5.0', $pluginPath);
+        $pluginName = 'sss';
+        $pluginTitleName = 'Social Share by Supsystic';
+        $pluginSlug = 'supsystic-social-sharing';
+        $environment = new Rsc_Environment($pluginName, '1.5.4', $pluginPath);
 
         /* Configure */
         $environment->configure(
@@ -27,19 +30,21 @@ class SupsysticSocialSharing
                 'lang_path'        => plugin_basename(
                         dirname(__FILE__)
                     ) . '/langs',
+                'plugin_title_name' => $pluginTitleName,
+                'plugin_slug' => $pluginSlug,
                 'plugin_prefix'    => 'SocialSharing',
                 'plugin_source'    => $pluginPath . '/src',
                 'plugin_menu'      => array(
                     'page_title' => __(
-                        'Social Share by Supsystic',
-                        'supsystic-social-sharing'
+                        $pluginTitleName,
+                        $pluginSlug
                     ),
                     'menu_title' => __(
-                        'Social Share by Supsystic',
-                        'supsystic-social-sharing'
+                        $pluginTitleName,
+                        $pluginSlug
                     ),
                     'capability' => 'manage_options',
-                    'menu_slug'  => 'supsystic-social-sharing',
+                    'menu_slug'  => $pluginSlug,
                     'icon_url'   => 'dashicons-share',
                     'position'   => '101.8',
                 ),
@@ -51,7 +56,9 @@ class SupsysticSocialSharing
                 'uploads_rw'       => true,
                 'jpeg_quality'     => 95,
                 'plugin_db_update' => true,
-                'revision'         => 169
+                'revision'         => 256,
+                'welcome_page_was_showed' => get_option($pluginName . '_welcome_page_was_showed'),
+                'promo_controller' => 'SocialSharing_Promo_Controller'
             )
         );
 
@@ -81,7 +88,7 @@ class SupsysticSocialSharing
         if (!get_option($this->environment->getPluginName().'_installed', false)) {
             register_activation_hook($bootstrap, array($this, 'createSchema'));
         } else {
-            if(get_option($this->environment->getPluginName().'_updated') < 92) {
+            if(get_option($this->environment->getPluginName().'_updated') < 256) {
                 register_activation_hook($bootstrap, array($this, 'updateDb'));
                 update_option($this->environment->getPluginName().'_updated', $this->environment->getConfig()->get('revision'));
             }

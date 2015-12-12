@@ -27,6 +27,7 @@ class SocialSharing_Projects_Controller extends SocialSharing_Core_BaseControlle
                     $totalShares += $share->shares;
                 }
                 $project->totalShares = $totalShares;
+                $project->totalViews = $this->modelsFactory->get('views', 'shares')->getProjectTotalViews($project->id);
             }
         }
 
@@ -43,11 +44,16 @@ class SocialSharing_Projects_Controller extends SocialSharing_Core_BaseControlle
     {
         $title = $request->post->get('title');
         $design = $request->post->get('design');
+        $networksInProject = $request->post->get('networks');
+        $networks = $this->modelsFactory->get('networks')->all();
+        $networkModel = $this->modelsFactory->get('projectNetworks', 'networks');
+
         if(empty($title) || empty($title)) {
             $buttonsPreview = $this->getModelsFactory()->get('projects')->getButtonsDesignPreview();
             return $this->response('@projects/add_new.twig',
                 array(
-                    'buttons_preview' => $buttonsPreview
+                    'buttons_preview' => $buttonsPreview,
+                    'networks'        => $networks,
                 )
             );
         } else {
@@ -56,6 +62,13 @@ class SocialSharing_Projects_Controller extends SocialSharing_Core_BaseControlle
                     $title,
                     $design
                 );
+
+                foreach ((array)$networksInProject as $networkId) {
+                    if (!$networkModel->has($insertId, $networkId)) {
+                        $networkModel->add($insertId, $networkId);
+                    }
+                }
+
             } catch (RuntimeException $e) {
                 return $this->ajaxError($e->getMessage());
             }
@@ -141,6 +154,7 @@ class SocialSharing_Projects_Controller extends SocialSharing_Core_BaseControlle
                 'networks'          => $networks,
                 'posts'             => get_posts(array('posts_per_page' => -1)),
                 'pages'             => get_pages(array('posts_per_page' => -1)),
+                'post_types'        => get_post_types(array('public' => true)),
                 'popup_installed'   => $popupInstalled,
                 'popups'            => $popups,
 				'popup_add_new_url' => $popupAddUrl,

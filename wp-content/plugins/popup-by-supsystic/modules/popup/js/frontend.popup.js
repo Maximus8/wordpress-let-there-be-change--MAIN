@@ -1,3 +1,4 @@
+var g_ppsWindowLoaded = false;
 jQuery(document).ready(function(){
 	if(typeof(ppsPopupsFromFooter) !== 'undefined' && ppsPopupsFromFooter && ppsPopupsFromFooter.length) {
 		ppsPopups = typeof(ppsPopups) === 'undefined' ? [] : ppsPopups;
@@ -8,6 +9,9 @@ jQuery(document).ready(function(){
 		jQuery(document).trigger('ppsBeforePopupsInit', ppsPopups);
 		for(var i = 0; i < ppsPopups.length; i++) {
 			jQuery('body').append( ppsPopups[ i ].rendered_html );
+			ppsMovePopupStyles( ppsPopups[ i ] );	// Move back from replaced style tags - to normal style tag
+			ppsBindPopupLove( ppsPopups[ i ] );
+			ppsBindPopupLoad( ppsPopups[ i ] );
 			ppsBindPopupShow( ppsPopups[ i ] );
 			ppsBindPopupClose( ppsPopups[ i ] );
 			ppsBindPopupActions( ppsPopups[ i ] );
@@ -22,6 +26,19 @@ jQuery(document).ready(function(){
 				}
 			}
 		});
+		// For case when for some reason jQuery(window).load() will not trigger - 
+		// make it work correctly with re-position and re-sizing in any case
+		setTimeout(function(){
+			g_ppsWindowLoaded = true;
+		}, 5000);
+	}
+});
+jQuery(window).load(function(){
+	g_ppsWindowLoaded = true;
+	for(var i = 0; i < ppsPopups.length; i++) {
+		if(ppsPopups[ i ].is_visible) {
+			_ppsPositionPopup({popup: ppsPopups[ i ]});
+		}
 	}
 });
 function _ppsBindOnElementClickPopups() {
@@ -59,6 +76,36 @@ function _ppsBindOnElementClickPopups() {
 				}
 			}
 		});
+	}
+}
+function ppsMovePopupStyles( popup ) {
+	var $style = jQuery('<style type="text/css" />')
+	,	$replacerTag = jQuery('#ppsPopupStylesHidden_'+ popup.view_id);
+	$style.appendTo('body').html( $replacerTag.html() );
+	$replacerTag.remove();
+}
+function ppsBindPopupLove( popup ) {
+	if(parseInt(toeOptionPps('add_love_link'))) {
+		var $shell = ppsGetPopupShell( popup );
+		$shell.append( toeOptionPps('love_link_html') );
+	}
+}
+function ppsBindPopupLoad( popup ) {
+	var preloadImgs = jQuery('.ppsPopupPreloadImg_'+ popup.view_id);
+	popup._imgsCount = preloadImgs.size();
+	if(popup._imgsCount) {
+		popup._imgsLoaded = false;
+		popup._imgsLoadedCount = 0;
+		preloadImgs.load(function(){
+			popup._imgsLoadedCount++;
+			if(popup._imgsLoadedCount >= popup._imgsCount) {
+				popup._imgsLoaded = true;
+				var shell = ppsGetPopupShell( popup );
+				shell.trigger('ppsShowPopupAfterAllImgs', popup);
+			}
+		});
+	} else {
+		popup._imgsLoaded = true;
 	}
 }
 function ppsBindPopupShow( popup ) {
@@ -166,7 +213,7 @@ function ppsBindPopupSubscribers(popup) {
 								jQuery(self).animateRemovePps( 300 );
 								ppsPopupSubscribeSuccess( popup );
 								if(res.data && res.data.redirect) {
-									toeRedirect(res.data.redirect);
+									toeRedirect(res.data.redirect, parseInt(popup.params.tpl.sub_redirect_new_wnd));
 								}
 							} else {
 								if(res.data && res.data.emailExistsRedirect) {
@@ -253,19 +300,30 @@ function _ppsPopupAddStat( popup, action, smType, isUnique ) {
 /**
  * Show popup
  * @param {mixed} popup Popup object or it's ID
+ * @param {objext} params Additional parameters to display
  */
 function ppsShowPopup( popup, params ) {
+	if(!ppsCorrectJqueryUsed()) {
+		ppsReloadCoreJs(ppsShowPopup, [popup, params]);
+		return;
+	}
 	params = params || {};
 	if(jQuery.isNumeric( popup ))
 		popup = ppsGetPopupById( popup );
+	var shell = ppsGetPopupShell( popup );
+	if(!popup._imgsLoaded) {
+		shell.bind('ppsShowPopupAfterAllImgs', function(){
+			ppsShowPopup( popup, params );
+		});
+		return;
+	}
 	_ppsPopupAddStat( popup, 'show', 0, params.isUnique );	// Save show popup statistics
 	ppsShowBgOverlay( popup );
-	var shell = ppsGetPopupShell( popup );
-	_ppsPositionPopup({shell: shell, popup: popup});
+	if(g_ppsWindowLoaded) {
+		_ppsPositionPopup({shell: shell, popup: popup});
+	}
 	if(popup.params.tpl.anim && !popup.resized_for_wnd) {
-		shell.animationDuration( popup.params.tpl.anim_duration, true );
-		shell.removeClass(popup.params.tpl.anim.hide_class);
-		shell.addClass('magictime '+ popup.params.tpl.anim.show_class).show();
+		_ppsHandlePopupAnimationShow( popup, shell );
 	} else {
 		shell.show();
 	}
@@ -279,6 +337,24 @@ function ppsShowPopup( popup, params ) {
 	popup.is_visible = true;
 	popup.is_rendered = true;	// Rendered at least one time
 	jQuery(document).trigger('ppsAfterPopupsActionShow', popup);
+}
+function _ppsHandlePopupAnimationShow( popup, shell ) {
+	var preAnimClass = popup.params.tpl.anim.old ? 'magictime' : 'animated';
+	shell.animationDuration( popup.params.tpl.anim_duration, true );
+	shell.removeClass(popup.params.tpl.anim.hide_class);
+	shell.addClass(preAnimClass+ ' '+ popup.params.tpl.anim.show_class).show();
+	// This need to make properly work responsivness
+	setTimeout(function(){
+		shell.removeClass(preAnimClass+ ' '+ popup.params.tpl.anim.show_class);
+	}, parseInt(popup.params.tpl.anim_duration));
+}
+function _ppsHandlePopupAnimationHide( popup, shell ) {
+	var preAnimClass = popup.params.tpl.anim.old ? 'magictime' : 'animated';
+	shell.removeClass(popup.params.tpl.anim.show_class).addClass(popup.params.tpl.anim.hide_class);
+	setTimeout(function(){
+		shell.removeClass( preAnimClass ).hide();
+		ppsHideBgOverlay( popup );
+	}, popup.params.tpl.anim_duration );
 }
 function _ppsIframesForReload(params) {
 	var popup = params.popup
@@ -331,6 +407,13 @@ function _ppsCheckStopVideo(params) {
 	}
 }
 function _ppsCheckMap(params) {
+	// For case we need to wait until gmap scripts will be loaded
+	if(typeof(gmpGetMapByViewId) === 'undefined') {
+		setTimeout(function(){
+			_ppsCheckMap(params);
+		}, 1000);
+		return;
+	}
 	params = params || {};
 	var shell = params.shell ? params.shell : ppsGetPopupShell( params.popup );
 	if(shell.find('.gmp_map_opts').size()) {
@@ -340,8 +423,8 @@ function _ppsCheckMap(params) {
 			if(map) {	// If map is already there - just refresh it after popup was shown
 				map.refresh();
 			} else {	// If there are no map - but it should be there - just create it
-				var mapId = shell.find('.gmp_map_opts').data('id')
-				,	mapData = gmpGetMapInfoById(mapId);
+				var mapId = shell.find('.gmp_map_opts').data('view-id')
+				,	mapData = gmpGetMapInfoByViewId(mapId);
 				gmpInitMapOnPage( mapData );
 			}
 		});
@@ -392,7 +475,8 @@ function _ppsPositionPopup( params ) {
 		,	shellHeight = shell.outerHeight()
 		,	resized = false
 		,	compareWidth = wndWidth - 10	// less then 10px
-		,	compareHeight = wndHeight - 10;	// less then 10px
+		,	compareHeight = wndHeight - 10	// less then 10px
+		,	resizeDivision = 1;
 		
 		if(shellHeight >= compareHeight) {
 			var initialHeight = parseInt(shell.data('init-height'));
@@ -400,10 +484,7 @@ function _ppsPositionPopup( params ) {
 				initialHeight = shellHeight;
 				shell.data('init-height', initialHeight);
 			}
-			var division = compareHeight / initialHeight;
-			shell.zoom( division );
-			shellWidth = shell.outerWidth();
-			shellHeight = shell.outerHeight();
+			resizeDivision = compareHeight / initialHeight;
 			resized = true;
 		}
 		if(shellWidth >= compareWidth) {
@@ -412,11 +493,16 @@ function _ppsPositionPopup( params ) {
 				initialWidth = shellWidth;
 				shell.data('init-width', initialWidth);
 			}
-			var division = compareWidth / initialWidth;
-			shell.zoom( division );
+			var widthDivision = compareWidth / initialWidth;
+			if(widthDivision < resizeDivision) {
+				resizeDivision = widthDivision;
+			}
+			resized = true;
+		}
+		if(resized) {
+			shell.zoom( resizeDivision );
 			shellWidth = shell.outerWidth();
 			shellHeight = shell.outerHeight();
-			resized = true;
 		}
 		params.popup.resized_for_wnd = resized;
 		jQuery(document).trigger('ppsResize', {popup: params.popup, shell: shell, wndWidth: wndWidth, wndHeight: wndHeight});
@@ -435,11 +521,7 @@ function ppsClosePopup(popup) {
 		popup = ppsGetPopupById( popup );
 	var shell = ppsGetPopupShell( popup );
 	if(popup.params.tpl.anim) {
-		shell.removeClass(popup.params.tpl.anim.show_class).addClass(popup.params.tpl.anim.hide_class);
-		setTimeout(function(){
-			shell.hide();
-			ppsHideBgOverlay( popup );
-		}, popup.params.tpl.anim_duration );
+		_ppsHandlePopupAnimationHide( popup, shell );
 	} else {
 		shell.hide();
 		ppsHideBgOverlay( popup );
@@ -510,9 +592,34 @@ function ppsBindPopupActions(popup) {
 			}
 		});
 	}
+	// Check build-in PopUp subscribe links
 	if(shell.find('.ppsSmLink').size()) {
 		shell.find('.ppsSmLink').click(function(){
 			_ppsPopupSetActionDone(popup, 'share', jQuery(this).data('type'));
+		});
+	}
+	// Check Social Share by Supsystic plugin links in PopUp
+	if(shell.find('.supsystic-social-sharing').size()) {
+		shell.find('.supsystic-social-sharing a').click(function(){
+			var socHost = this.hostname
+			,	socType = '';	// Social network type key
+			if(socHost && socHost != '') {
+				switch(socHost) {
+					case 'www.facebook.com': 
+						socType = 'facebook'; 
+						break;
+					case 'plus.google.com':
+						socType = 'googleplus'; 
+						break;
+					case 'twitter.com':
+						socType = 'twitter'; 
+						break;
+					default:
+						socType = socHost;
+						break;
+				}
+				_ppsPopupSetActionDone(popup, 'share', socType);
+			}
 		});
 	}
 	if(shell.find('.fb-like-box').size()) {

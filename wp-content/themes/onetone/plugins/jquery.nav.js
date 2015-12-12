@@ -224,6 +224,9 @@
 	  else{
 		  stickyTop = 0;
 		  }
+		if($(window).width() <= 919) {
+					$(".site-nav").hide();
+					}
 						
 		  selectorHeight = selectorHeight + stickyTop - 1;
 		  

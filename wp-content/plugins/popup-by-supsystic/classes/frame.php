@@ -115,7 +115,8 @@ class framePps {
 
         register_activation_hook(  PPS_DIR. DS. PPS_MAIN_FILE, array('utilsPps', 'activatePlugin')  ); //See classes/install.php file
         register_uninstall_hook(PPS_DIR. DS. PPS_MAIN_FILE, array('utilsPps', 'deletePlugin'));
-        
+		register_deactivation_hook(PPS_DIR. DS. PPS_MAIN_FILE, array( 'utilsPps', 'deactivatePlugin' ) );
+
 		add_action('init', array($this, 'connectLang'));
         //$operationTime = microtime(true) - $startTime;
     }
@@ -197,25 +198,65 @@ class framePps {
     public function getRes() {
         return $this->_res;
     }
+	public function execAfterWpInit() {
+		$this->_doExec();
+	}
+	/**
+	 * Check if method for module require some special permission. We can detect users permissions only after wp init action was done.
+	 */
+	protected function _execOnlyAfterWpInit() {
+		$res = false;
+        $mod = $this->getModule( $this->_mod );
+        $action = strtolower( $this->_action );
+        if($mod) {
+            $permissions = $mod->getController()->getPermissions();
+            if(!empty($permissions)) {  // Special permissions
+                if(isset($permissions[PPS_METHODS]) 
+                    && !empty($permissions[PPS_METHODS])
+                ) {
+                    foreach($permissions[PPS_METHODS] as $method => $permissions) {   // Make case-insensitive
+                        $permissions[PPS_METHODS][strtolower($method)] = $permissions;
+                    }
+                    if(array_key_exists($action, $permissions[PPS_METHODS])) {        // Permission for this method exists
+						$res = true;
+					}
+                }
+                if(isset($permissions[PPS_USERLEVELS])
+                    && !empty($permissions[PPS_USERLEVELS])
+                ) {
+					$res = true;
+                }
+            }
+        }
+        return $res;
+	}
     protected function _execModules() {
         if($this->_mod) {
             // If module exist and is active
             $mod = $this->getModule($this->_mod);
-            if($mod && $this->_action) {
-                if($this->checkPermissions($this->_mod, $this->_action)) {
-                    switch(reqPps::getVar('reqType')) {
-                        case 'ajax':
-                            add_action('wp_ajax_'. $this->_action, array($mod->getController(), $this->_action));
-                            add_action('wp_ajax_nopriv_'. $this->_action, array($mod->getController(), $this->_action));
-                            break;
-                        default:
-                            $this->_res = $mod->exec($this->_action);
-                            break;
-                    }
-                }
+            if($mod && !empty($this->_action)) {
+				if($this->_execOnlyAfterWpInit()) {
+					add_action('init', array($this, 'execAfterWpInit'));
+				} else {
+					$this->_doExec();
+				}
             }
         }
     }
+	protected function _doExec() {
+		$mod = $this->getModule($this->_mod);
+		if($mod && $this->checkPermissions($this->_mod, $this->_action)) {
+			switch(reqPps::getVar('reqType')) {
+				case 'ajax':
+					add_action('wp_ajax_'. $this->_action, array($mod->getController(), $this->_action));
+					add_action('wp_ajax_nopriv_'. $this->_action, array($mod->getController(), $this->_action));
+					break;
+				default:
+					$this->_res = $mod->exec($this->_action);
+					break;
+			}
+		}
+	}
     protected function _extractTables($tablesDir = PPS_TABLES_DIR) {
         $mDirHandle = opendir($tablesDir);
         while(($file = readdir($mDirHandle)) !== false) {
@@ -290,6 +331,8 @@ class framePps {
      */
     public function addScript($handle, $src = '', $deps = array(), $ver = false, $in_footer = false, $vars = array()) {
 		$src = empty($src) ? $src : uriPps::_($src);
+		if(!$ver)
+			$ver = PPS_VERSION;
         if($this->_scriptsInitialized) {
             wp_enqueue_script($handle, $src, $deps, $ver, $in_footer);
         } else {
@@ -337,6 +380,8 @@ class framePps {
     
     public function addStyle($handle, $src = false, $deps = array(), $ver = false, $media = 'all') {
 		$src = empty($src) ? $src : uriPps::_($src);
+		if(!$ver)
+			$ver = PPS_VERSION;
 		if($this->_stylesInitialized) {
 			wp_enqueue_style($handle, $src, $deps, $ver, $media);
 		} else {

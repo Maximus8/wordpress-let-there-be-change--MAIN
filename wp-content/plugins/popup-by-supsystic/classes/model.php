@@ -80,6 +80,8 @@ abstract class modelPps extends baseObjectPps {
 		return $this;
 	}
 	public function setSelectFields($selectFields) {
+		if(is_array($selectFields))
+			$selectFields = implode(',', $selectFields);
 		$this->_selectFields = $selectFields;
 		return $this;
 	}
@@ -222,5 +224,11 @@ abstract class modelPps extends baseObjectPps {
 	}
 	public function getTbl() {
 		return $this->_tbl;
+	}
+	/**
+	 * We can re-define this method to not retrive all data - for simple tables
+	 */
+	public function setSimpleGetFields() {
+		return $this;
 	}
 }

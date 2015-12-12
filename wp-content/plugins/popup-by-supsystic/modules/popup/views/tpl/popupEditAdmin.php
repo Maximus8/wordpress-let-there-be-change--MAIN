@@ -1,5 +1,5 @@
 <div id="ppsPopupEditTabs">
-	<section class="supsystic-bar supsystic-sticky sticky-padd-next sticky-save-width" data-prev-height="#supsystic-breadcrumbs" data-next-padding-add="15">
+	<section class="supsystic-bar supsystic-sticky sticky-padd-next sticky-save-width sticky-base-width-auto" data-prev-height="#supsystic-breadcrumbs" data-next-padding-add="15">
 		<h3 class="nav-tab-wrapper" style="margin-bottom: 0px; margin-top: 12px;">
 			<?php $i = 0;?>
 			<?php foreach($this->tabs as $tKey => $tData) { ?>
@@ -65,13 +65,31 @@
 						<?php if(in_array($this->popup['type'], array(PPS_FB_LIKE))) {?>
 							jQuery(this).height( '500px' );
 						<?php }?>
-						var top = 15;
-						if(typeof(ppsPopup) !== 'undefined' && ppsPopup.original_id == 11 /*START popup*/) {
-							top = 30;
+						var top = 15
+						,	left = 0;
+						if(typeof(ppsPopup) !== 'undefined') {
+							var addMovePopUps = [	// Additional preview PopUps movements
+								{id: 11, top: 30}	// START popup
+							,	{id: 16, left: 45}	// Pink popup
+							,	{id: 20, left: 40, top: 30}	// Discount popup
+							];
+							for(var i = 0; i < addMovePopUps.length; i++) {
+								if(ppsPopup.id == addMovePopUps[i].id 
+									|| ppsPopup.original_id == addMovePopUps[i].id
+								) {
+									if(addMovePopUps[i].top) {
+										top = addMovePopUps[i].top;
+									}
+									if(addMovePopUps[i].left) {
+										left = addMovePopUps[i].left;
+									}
+								}
+							}
 						}
 						popupShell.css({
 							'position': 'fixed'
 						,	'top': top+ 'px'
+						,	'left': left+ 'px'
 						});
 						contentDoc.click(function(){
 							return false;

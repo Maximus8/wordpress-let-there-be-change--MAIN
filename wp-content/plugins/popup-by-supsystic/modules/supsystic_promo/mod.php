@@ -1,25 +1,85 @@
 <?php
 class supsystic_promoPps extends modulePps {
 	private $_mainLink = '';
-	private $_specSymbols = array(
-		'from'	=> array('?', '&'),
-		'to'	=> array('%', '^'),
-	);
 	private $_minDataInStatToSend = 20;	// At least 20 points in table shuld be present before send stats
 	private $_assetsUrl = '';
 	public function __construct($d) {
 		parent::__construct($d);
 		$this->getMainLink();
+		dispatcherPps::addFilter('jsInitVariables', array($this, 'addMainOpts'));
 	}
 	public function init() {
 		parent::init();
 		add_action('admin_footer', array($this, 'displayAdminFooter'), 9);
 		if(is_admin()) {
-			$this->checkStatisticStatus();
+			add_action('init', array($this, 'checkWelcome'));
+			add_action('init', array($this, 'checkStatisticStatus'));
 		}
 		$this->weLoveYou();
 		dispatcherPps::addFilter('mainAdminTabs', array($this, 'addAdminTab'));
 		dispatcherPps::addFilter('subDestList', array($this, 'addSubDestList'));
+		dispatcherPps::addAction('beforeSaveOpts', array($this, 'checkSaveOpts'));
+		add_action('admin_notices', array($this, 'checkAdminPromoNotices'));
+	}
+	public function checkAdminPromoNotices() {
+		if(!framePps::_()->isAdminPlugOptsPage())	// Our notices - only for our plugin pages for now
+			return;
+		$notices = array();
+		// Start usage
+		$startUsage = (int) framePps::_()->getModule('options')->get('start_usage');
+		$currTime = time();
+		$day = 24 * 3600;
+		if($startUsage) {	// Already saved
+			$rateMsg = sprintf(__("<h3>Hey, I noticed you just use %s over a week – that’s awesome!</h3><p>Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.</p>", PPS_LANG_CODE), PPS_WP_PLUGIN_NAME);
+			$rateMsg .= '<p><a href="https://wordpress.org/support/view/plugin-reviews/popup-by-supsystic?rate=5#postform" target="_blank" class="button button-primary" data-statistic-code="done">'. __('Ok, you deserve it', PPS_LANG_CODE). '</a>
+			<a href="#" class="button" data-statistic-code="later">'. __('Nope, maybe later', PPS_LANG_CODE). '</a>
+			<a href="#" class="button" data-statistic-code="hide">'. __('I already did', PPS_LANG_CODE). '</a></p>';
+			$enbPromoLinkMsg = sprintf(__("<h3>More then eleven days with our %s plugin - Congratulations!</h3>", PPS_LANG_CODE), PPS_WP_PLUGIN_NAME);;
+			$enbPromoLinkMsg .= __('<p>On behalf of the entire <a href="https://supsystic.com/" target="_blank">supsystic.com</a> company I would like to thank you for been with us, and I really hope that our software helped you.</p>', PPS_LANG_CODE);
+			$enbPromoLinkMsg .= __('<p>And today, if you want, - you can help us. This is really simple - you can just add small promo link to our site under your PopUps. This is small step for you, but a big help for us! Sure, if you don\'t want - just skip this and continue enjoy our software!</p>', PPS_LANG_CODE);
+			$enbPromoLinkMsg .= '<p><a href="#" class="button button-primary" data-statistic-code="done">'. __('Ok, you deserve it', PPS_LANG_CODE). '</a>
+			<a href="#" class="button" data-statistic-code="later">'. __('Nope, maybe later', PPS_LANG_CODE). '</a>
+			<a href="#" class="button" data-statistic-code="hide">'. __('Skip', PPS_LANG_CODE). '</a></p>';
+			$notices = array(
+				'rate_msg' => array('html' => $rateMsg, 'show_after' => 7 * $day),
+				'enb_promo_link_msg' => array('html' => $enbPromoLinkMsg, 'show_after' => 11 * $day),
+			);
+			foreach($notices as $nKey => $n) {
+				if($currTime - $startUsage <= $n['show_after']) {
+					unset($notices[ $nKey ]);
+					continue;
+				}
+				$done = (int) framePps::_()->getModule('options')->get('done_'. $nKey);
+				if($done) {
+					unset($notices[ $nKey ]);
+					continue;
+				}
+				$hide = (int) framePps::_()->getModule('options')->get('hide_'. $nKey);
+				if($hide) {
+					unset($notices[ $nKey ]);
+					continue;
+				}
+				$later = (int) framePps::_()->getModule('options')->get('later_'. $nKey);
+				if($later && ($currTime - $later) <= 2 * $day) {	// remember each 2 days
+					unset($notices[ $nKey ]);
+					continue;
+				}
+				if($nKey == 'enb_promo_link_msg' && (int)framePps::_()->getModule('options')->get('add_love_link')) {
+					unset($notices[ $nKey ]);
+					continue;
+				}
+			}
+		} else {
+			framePps::_()->getModule('options')->getModel()->save('start_usage', $currTime);
+		}
+		if(!empty($notices)) {
+			$html = '';
+			foreach($notices as $nKey => $n) {
+				$this->getModel()->saveUsageStat($nKey. '.'. 'show', true);
+				$html .= '<div class="updated notice is-dismissible supsystic-admin-notice" data-code="'. $nKey. '">'. $n['html']. '</div>';
+			}
+			echo $html;
+		}
 	}
 	public function addAdminTab($tabs) {
 		$tabs['overview'] = array(
@@ -34,6 +94,9 @@ class supsystic_promoPps extends modulePps {
 				'campaignmonitor' => array('label' => __('Campaign Monitor - PRO', PPS_LANG_CODE), 'require_confirm' => true),
 				'verticalresponse' => array('label' => __('Vertical Response - PRO', PPS_LANG_CODE), 'require_confirm' => true),
 				'sendgrid' => array('label' => __('SendGrid - PRO', PPS_LANG_CODE), 'require_confirm' => true),
+				'get_response' => array('label' => __('GetResponse - PRO', PPS_LANG_CODE), 'require_confirm' => true),
+				'activecampaign' => array('label' => __('Active Campaign', PPS_LANG_CODE), 'require_confirm' => true),
+				'mailrelay' => array('label' => __('Mailrelay - PRO', PPS_LANG_CODE), 'require_confirm' => true),
 				'arpreach' => array('label' => __('arpReach - PRO', PPS_LANG_CODE), 'require_confirm' => true),
 				'sgautorepondeur' => array('label' => __('SG Autorepondeur - PRO', PPS_LANG_CODE), 'require_confirm' => true),
 			));
@@ -43,54 +106,9 @@ class supsystic_promoPps extends modulePps {
 	public function getOverviewTabContent() {
 		return $this->getView()->getOverviewTabContent();
 	}
-	// We used such methods - _encodeSlug() and _decodeSlug() - as in slug wp don't understand urlencode() functions
-	private function _encodeSlug($slug) {
-		return str_replace($this->_specSymbols['from'], $this->_specSymbols['to'], $slug);
-	}
-	private function _decodeSlug($slug) {
-		return str_replace($this->_specSymbols['to'], $this->_specSymbols['from'], $slug);
-	}
-	public function decodeSlug($slug) {
-		return $this->_decodeSlug($slug);
-	}
-	public function modifyMainAdminSlug($mainSlug) {
-		$firstTimeLookedToPlugin = !installerPps::isUsed();
-		if($firstTimeLookedToPlugin) {
-			$mainSlug = $this->_getNewAdminMenuSlug($mainSlug);
-		}
-		return $mainSlug;
-	}
-	private function _getWelcomMessageMenuData($option, $modifySlug = true) {
-		return array_merge($option, array(
-			'page_title'	=> __('Welcome to Supsystic Secure', PPS_LANG_CODE),
-			'menu_slug'		=> ($modifySlug ? $this->_getNewAdminMenuSlug( $option['menu_slug'] ) : $option['menu_slug'] ),
-			'function'		=> array($this, 'showWelcomePage'),
-		));
-	}
-	public function addWelcomePageToMenus($options) {
-		$firstTimeLookedToPlugin = !installerPps::isUsed();
-		if($firstTimeLookedToPlugin) {
-			foreach($options as $i => $opt) {
-				$options[$i] = $this->_getWelcomMessageMenuData( $options[$i] );
-			}
-		}
-		return $options;
-	}
-	private function _getNewAdminMenuSlug($menuSlug) {
-		// We can't use "&" symbol in slug - so we used "|" symbol
-		$newSlug = $this->_encodeSlug(str_replace('admin.php?page=', '', $menuSlug));
-		return 'welcome-to-'. framePps::_()->getModule('adminmenu')->getMainSlug(). '|return='. $newSlug;
-	}
-	public function addWelcomePageToMainMenu($option) {
-		$firstTimeLookedToPlugin = !installerPps::isUsed();
-		if($firstTimeLookedToPlugin) {
-			$option = $this->_getWelcomMessageMenuData($option, false);
-		}
-		return $option;
-	}
-	/*public function showWelcomePage() {
+	public function showWelcomePage() {
 		$this->getView()->showWelcomePage();
-	}*/
+	}
 	public function displayAdminFooter() {
 		if(framePps::_()->isAdminPlugPage()) {
 			$this->getView()->displayAdminFooter();
@@ -104,6 +122,7 @@ class supsystic_promoPps extends modulePps {
 	public function weLoveYou() {
 		if(!$this->isPro()) {
 			dispatcherPps::addFilter('popupEditTabs', array($this, 'addUserExp'));
+			dispatcherPps::addFilter('popupEditDesignTabs', array($this, 'addUserExpDesign'));
 			dispatcherPps::addFilter('editPopupMainOptsShowOn', array($this, 'showAdditionalmainAdminShowOnOptions'));
 		}
 	}
@@ -111,7 +130,6 @@ class supsystic_promoPps extends modulePps {
 		$this->getView()->showAdditionalmainAdminShowOnOptions($popup);
 	}
 	public function addUserExp($tabs) {
-		$url = $this->getMainLink();
 		$modPath = $this->getAssetsUrl();
 		$tabs['ppsPopupAbTesting'] = array(
 			'title' => __('Testing', PPS_LANG_CODE), 
@@ -123,6 +141,9 @@ class supsystic_promoPps extends modulePps {
 			'avoid_hide_icon' => true,
 			'sort_order' => 55,
 		);
+		return $tabs;
+	}
+	public function addUserExpDesign($tabs) {
 		$tabs['ppsPopupLayeredPopup'] = array(
 			'title' => __('Layered Style', PPS_LANG_CODE), 
 			'content' => $this->getView()->getLayeredStylePromo(),
@@ -138,13 +159,17 @@ class supsystic_promoPps extends modulePps {
 		return $this->_preparePromoLink($link, $ref);
 	}
 	public function checkStatisticStatus(){
-		// Do not send usage functionas statitistics
-		return;
-		if(framePps::_()->getModule('options')->isEmpty('send_stats')) {	// Enabled by default
-			framePps::_()->getModule('options')->getModel()->save('send_stats', 1);
-		}
 		$canSend = (int) framePps::_()->getModule('options')->get('send_stats');
-		if($canSend) {
+		if($canSend && framePps::_()->getModule('user')->isAdmin()) {
+			// Before this version we had many wrong data collected taht we don't need at all. Let's clear them.
+			if(PPS_VERSION == '1.3.5') {
+				$clearedTrashStatData = (int) get_option(PPS_DB_PREF. 'cleared_trash_stat_data');
+				if(!$clearedTrashStatData) {
+					$this->getModel()->clearUsageStat();
+					update_option(PPS_DB_PREF. 'cleared_trash_stat_data', 1);
+					return;	// We just cleared whole data - so don't need to even check send stats
+				}
+			}
 			$this->getModel()->checkAndSend();
 		}
 	}
@@ -199,5 +224,33 @@ class supsystic_promoPps extends modulePps {
 			$this->_assetsUrl = framePps::_()->getModule('popup')->getAssetsUrl(). 'promo/';
 		}
 		return $this->_assetsUrl;
+	}
+	public function checkWelcome() {
+		$from = reqPps::getVar('from', 'get');
+		$pl = reqPps::getVar('pl', 'get');
+		if($from == 'welcome-page' && $pl == PPS_CODE && framePps::_()->getModule('user')->isAdmin()) {
+			$welcomeSent = (int) get_option(PPS_DB_PREF. 'welcome_sent');
+			if(!$welcomeSent) {
+				$this->getModel()->welcomePageSaveInfo();
+				update_option(PPS_DB_PREF. 'welcome_sent', 1);
+			}
+		}
+	}
+	public function getContactLink() {
+		return $this->getMainLink(). '#contact';
+	}
+	public function addMainOpts($opts) {
+		$title = 'WordPress PopUp Plugin';
+		$opts['options']['love_link_html'] = '<a title="'. $title. '" style="color: #26bfc1 !important; font-size: 9px; position: absolute; bottom: 15px; right: 15px;" href="'. $this->generateMainLink('utm_source=plugin&utm_medium=love_link&utm_campaign=popup'). '" target="_blank">'
+			. $title
+			. '</a>';
+		return $opts;
+	}
+	public function checkSaveOpts($newValues) {
+		$loveLinkEnb = (int) framePps::_()->getModule('options')->get('add_love_link');
+		$loveLinkEnbNew = isset($newValues['opt_values']['add_love_link']) ? (int) $newValues['opt_values']['add_love_link'] : 0;
+		if($loveLinkEnb != $loveLinkEnbNew) {
+			$this->getModel()->saveUsageStat('love_link.'. ($loveLinkEnbNew ? 'enb' : 'dslb'));
+		}
 	}
 }

@@ -14,7 +14,7 @@
     display: inline-block;
     position: relative;
     top: 3px;
-    border-bottom: 1px solid #e4e4e4;
+    border-bottom: 1px solid #ccc;
 }
 
 .supsystic-plugin li {
@@ -34,7 +34,7 @@
 
 .supsystic-plugin .admin-nav-button {
     border: 1px solid #ccc;
-    background: #e4e4e4;
+    background: #fff;
     line-height: 16px;
     display: inline-block;
     text-decoration: none;
@@ -44,18 +44,17 @@
     padding: 10px 20px;
     font-weight: 800;
     position: relative;
-    top: 0px;
+    top: 1px;
     outline: none !important;
 }
 
 .supsystic-plugin .admin-nav-button.active {
-    background-color: #4ae8ea !important;
-    border: 1px solid #4ae8ea !important;
+        background-color: #fff !important;
+        border-bottom-color: #fff;
 }
 
 .supsystic-plugin .admin-nav-button:hover {
-    background-color: #4ae8ea !important;
-    border: 1px solid #4ae8ea !important;
+    background-color: #ccc !important;
 }
 
 .supsystic-plugin .admin-nav-button.network-nav-item {
@@ -161,6 +160,10 @@
     border: none !important;
 }
 
+.supsystic-plugin .projects .views, .supsystic-plugin .projects .shares {
+    text-align: center;
+}
+
 .supsystic-plugin .pro-url {
     font-size: 10px !important;
 }
@@ -198,21 +201,9 @@
     margin-top: 32px;
 }
 
- .button-design-preview-wrapper{
+.button-design-preview-wrapper{
     padding: 0 40px;
     text-align: center;
-}
-
-.button-design-preview-block{
-    display: inline-block;
-    max-width: 400px;
-    vertical-align: top;
-    margin: 10px;
-    padding: 5px;
-}
-.button-design-preview-block.not-pro:hover,
-.button-design-preview-block.not-pro.active{
-    outline: none;
 }
 
 .button-design-preset .button-design-preset-overlay {

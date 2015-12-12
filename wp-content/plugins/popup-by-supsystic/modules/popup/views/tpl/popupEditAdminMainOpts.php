@@ -12,8 +12,11 @@
 			) {
 				$warnings[] = sprintf(__('You are using Google Maps in this PopUp, but don\'t have Google Maps Easy plugin installed. You can get it for Free from WordPress site <a target="_blank" href="%s">here</a>, install and start using this PopUp with map.', PPS_LANG_CODE), 'https://wordpress.org/plugins/google-maps-easy/');
 				break;
-			} 
+			}
 		}
+	}
+	if(isset($this->popup['ab_id']) && !empty($this->popup['ab_id'])) {
+		$warnings[] = __('Please be advised that you are editing AB Test PopUp. This mean that independent of options you select in Main settings - there will be always only one PopUp: Base or one from AB Test.', PPS_LANG_CODE);
 	}
 ?>
 <?php if(!empty($warnings)) { ?>
@@ -54,8 +57,7 @@
 		<?php _e('Copy & paste next code - into required link to open PopUp on Click', PPS_LANG_CODE)?>:<br />
 		<?php echo htmlPps::text('ppsCopyTextCode', array(
 			'value' => esc_html('['. PPS_SHORTCODE_CLICK. ' id='. $this->popup['id']. ']'),
-			'attrs' => 'class="ppsCopyTextCode supsystic-tooltip-right" title="'. esc_html(sprintf(__('Check screenshot with details - <a onclick="ppsShowTipScreenPopUp(this); return false;" href="%s">here</a>.', PPS_LANG_CODE), $this->getModule()->getModPath(). 'img/show-on-element-click.png')). '"'));?>
-
+			'attrs' => 'class="ppsCopyTextCode supsystic-tooltip-right" title="'. esc_html(sprintf(__('Check screenshot with details - <a onclick="ppsShowTipScreenPopUp(this); return false;" href="%s">here</a>.', PPS_LANG_CODE), $this->getModule()->getAssetsUrl(). 'img/show-on-element-click.png')). '"'));?>
 		<br />
 		<?php _e('Or, if you know HTML basics, - you can insert "onclick" attribute to any of your element from code below', PPS_LANG_CODE)?>:<br />
 		<?php echo htmlPps::text('ppsCopyTextCode', array(
@@ -91,7 +93,6 @@
 			<?php _e('percents of total scroll', PPS_LANG_CODE)?>
 		</label>
 	</div><br />
-	<?php //dispatcherPps::doAction('editPopupMainOptsShowOn', $this->popup)?>
 	<label class="ppsPopupMainOptLbl">
 		<?php echo htmlPps::radiobutton('params[main][show_on]', array(
 			'attrs' => 'class="ppsProOpt"',
@@ -171,6 +172,27 @@
 			/*'value' => esc_html('<?php echo do_shortcode("['. PPS_SHORTCODE. ' id='. $this->popup['id']. ']")?>'),*/
 			'attrs' => 'class="ppsCopyTextCode"'));?>
 	</div><?php }?><br />
+	<label class="ppsPopupMainOptLbl">
+		<?php echo htmlPps::radiobutton('params[main][show_on]', array(
+			'attrs' => 'class="ppsProOpt"',
+			'value' => 'link_follow',
+			'checked' => htmlPps::checkedOpt($this->popup['params']['main'], 'show_on', 'link_follow')))?>
+		<?php
+			$openByFollowExl = get_bloginfo('wpurl'). '#ppsShowPopUp_'. $this->popup['id'];
+		?>
+		<span class="supsystic-tooltip-right" title="<?php echo esc_html(sprintf(__('Show when user open your site exactly by link, where in the end will be present #ppsShowPopUp_%d. For example <a href="%s" target="_blank">%s</a> (will work only with PRO version).', PPS_LANG_CODE), $this->popup['id'], $openByFollowExl, $openByFollowExl))?>">
+			<?php _e('On Link Follow', PPS_LANG_CODE)?>
+		</span>
+		<?php if(!$this->isPro) {?>
+			<span class="ppsProOptMiniLabel"><a target="_blank" href="<?php echo framePps::_()->getModule('supsystic_promo')->generateMainLink('utm_source=plugin&utm_medium=link_follow&utm_campaign=popup');?>"><?php _e('PRO option', PPS_LANG_CODE)?></a></span>
+		<?php }?>
+	</label>
+	<div id="ppsOptDesc_params_main_show_on_link_follow" style="display: none;" class="ppsOptDescParamsShell">
+		<?php _e('Copy & paste next code - into end of required link on your site', PPS_LANG_CODE)?>:<br />
+		<?php echo htmlPps::text('ppsCopyTextCode', array(
+			'value' => esc_html('#ppsShowPopUp_'. $this->popup['id']),
+			'attrs' => 'class="ppsCopyTextCode"'));?>
+	</div><br />
 </section>
 <section class="ppsPopupMainOptSect">
 	<span class="ppsOptLabel"><?php _e('When to close PopUp', PPS_LANG_CODE)?></span>
@@ -236,7 +258,7 @@
 		<?php _e('Show on next pages / posts', PPS_LANG_CODE)?>
 	</label>
 	<div id="ppsOptDesc_params_main_show_pages_show_on_pages" style="display: none;" class="ppsOptDescParamsShell">
-		<?php echo htmlPps::selectlist('show_pages_list', array('options' => $this->allPagesForSelect, 'value' => $this->selectedShowPages, 'attrs' => 'class="chosen" data-placeholder="'. __('Choose Pages', PPS_LANG_CODE). '"'))?>
+		<?php echo htmlPps::selectlist('show_pages_list', array('options' => $this->allPagesForSelect, 'value' => $this->selectedShowPages, 'attrs' => 'class="chosen chosen-responsive" data-placeholder="'. __('Choose Pages', PPS_LANG_CODE). '"'))?>
 	</div><br />
 	<label class="ppsPopupMainOptLbl">
 		<?php echo htmlPps::radiobutton('params[main][show_pages]', array(
@@ -245,7 +267,7 @@
 		<?php _e('Don\'t show on next pages / posts', PPS_LANG_CODE)?>
 	</label>
 	<div id="ppsOptDesc_params_main_show_pages_not_show_on_pages" style="display: none;" class="ppsOptDescParamsShell">
-		<?php echo htmlPps::selectlist('not_show_pages_list', array('options' => $this->allPagesForSelect, 'value' => $this->selectedHidePages, 'attrs' => 'class="chosen" data-placeholder="'. __('Choose Pages', PPS_LANG_CODE). '"'))?>
+		<?php echo htmlPps::selectlist('not_show_pages_list', array('options' => $this->allPagesForSelect, 'value' => $this->selectedHidePages, 'attrs' => 'class="chosen chosen-responsive" data-placeholder="'. __('Choose Pages', PPS_LANG_CODE). '"'))?>
 	</div>
 </section>
 <section class="ppsPopupMainOptSect">
@@ -348,7 +370,7 @@
 		<?php echo htmlPps::selectlist('params[main][hide_for_countries][]', array(
 			'options' => $this->countriesForSelect, 
 			'value' => (isset($this->popup['params']['main']['hide_for_countries']) ? $this->popup['params']['main']['hide_for_countries'] : array()), 
-			'attrs' => 'class="chosen" data-placeholder="'. __('Choose countries', PPS_LANG_CODE). '"'))?>
+			'attrs' => 'class="chosen chosen-responsive" data-placeholder="'. __('Choose countries', PPS_LANG_CODE). '"'))?>
 	</label><br />
 	<label class="ppsPopupMainOptLbl">
 		<span class="supsystic-tooltip" title="<?php echo esc_html(__('Click to revert feature function: from Hide - to Show, and vice versa.', PPS_LANG_CODE))?>">
@@ -364,7 +386,7 @@
 		<?php echo htmlPps::selectlist('params[main][hide_for_languages][]', array(
 			'options' => $this->languagesForSelect, 
 			'value' => (isset($this->popup['params']['main']['hide_for_languages']) ? $this->popup['params']['main']['hide_for_languages'] : array()), 
-			'attrs' => 'class="chosen" data-placeholder="'. __('Choose languages', PPS_LANG_CODE). '"'))?>
+			'attrs' => 'class="chosen chosen-responsive" data-placeholder="'. __('Choose languages', PPS_LANG_CODE). '"'))?>
 		<?php } else { ?>
 			<div class="alert alert-danger"><?php _e('This feature is supported only in WordPress version 4.0.0 or higher', PPS_LANG_CODE)?></div>
 		<?php }?>

@@ -32,9 +32,11 @@ class SocialSharing_Projects_Model_Tooltips extends SocialSharing_Core_BaseModel
                 'content-lock'      => $e->translate('Allows you to lock content elements by class name before user share this page with any network'),
                 'show-on-pages'     => $e->translate('Choose pages you want to show popup. You can choose "All Pages" or specify posts, pages or URLs'),
                 'mobile-devices'    => $e->translate('Choose this option if you don\'t want to display icons on mobile devices'),
+                'show-only-on-mobile'=> $e->translate('Choose this option if you want to display icons only on mobile devices'),
                 'show-everywhere'   => $e->translate('Show on all pages'),
                 'page-load'         => $e->translate('Show Social Buttons when page loads'),
-                'user-click'        => $e->translate('Show Social Buttons when user clicks on page')
+                'user-click'        => $e->translate('Show Social Buttons when user clicks on page'),
+                'share-post-link'   => $e->translate('Share post link even if post is in the list'),
             )
         );
     }

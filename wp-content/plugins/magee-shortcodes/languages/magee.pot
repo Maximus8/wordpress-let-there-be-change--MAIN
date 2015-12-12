@@ -1,0 +1,2682 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Magee Shortcodes\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-21 14:23+0800\n"
+"PO-Revision-Date: 2015-09-21 14:27+0800\n"
+"Last-Translator: shijun quan <support@mageewp.com>\n"
+"Language-Team: MageeWP\n"
+"Language: en_US\n"
+"MIME-Version: 1.1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.6.6\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: inc/core.php:85 inc/core.php:88
+#: magee-shortcodes/magee-shortcodes/trunk/inc/core.php:79
+#: magee-shortcodes/magee-shortcodes/trunk/inc/core.php:82
+msgid "Magee Shortcodes"
+msgstr ""
+
+#: inc/core.php:232 magee-shortcodes/magee-shortcodes/trunk/inc/core.php:226
+msgid "Shortcodes List"
+msgstr ""
+
+#: inc/core.php:232 magee-shortcodes/magee-shortcodes/trunk/inc/core.php:226
+msgid "Insert shortcode"
+msgstr ""
+
+#: inc/core.php:433 magee-shortcodes/magee-shortcodes/trunk/inc/core.php:427
+msgid "Upload"
+msgstr ""
+
+#: inc/core.php:450 magee-shortcodes/magee-shortcodes/trunk/inc/core.php:444
+msgid "Attach Images to Gallery"
+msgstr ""
+
+#: inc/core.php:514 inc/options.php:561
+#: magee-shortcodes/magee-shortcodes/trunk/inc/core.php:508
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:560
+msgid "Width"
+msgstr ""
+
+#: inc/core.php:518 inc/options.php:1795
+#: magee-shortcodes/magee-shortcodes/trunk/inc/core.php:512
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1764
+msgid "Height"
+msgstr ""
+
+#: inc/core.php:559
+msgid "Select a slider"
+msgstr ""
+
+#: inc/magee-slider.php:8
+msgid "Magee Slider"
+msgstr ""
+
+#: inc/magee-slider.php:10
+msgid "Add New Slider"
+msgstr ""
+
+#: inc/magee-slider.php:11
+msgid "Edit Slider"
+msgstr ""
+
+#: inc/magee-slider.php:12
+msgid "New Slider"
+msgstr ""
+
+#: inc/magee-slider.php:15
+msgid "Search Slider"
+msgstr ""
+
+#: inc/magee-slider.php:16
+msgid "Nothing found"
+msgstr ""
+
+#: inc/magee-slider.php:17
+msgid "Nothing found in Trash"
+msgstr ""
+
+#: inc/magee-slider.php:119
+msgid "Slide Title"
+msgstr ""
+
+#: inc/magee-slider.php:121
+msgid "Slide Caption"
+msgstr ""
+
+#: inc/magee-slider.php:123
+msgid "Sort"
+msgstr ""
+
+#: inc/magee-slider.php:124
+msgid "Delete"
+msgstr ""
+
+#: inc/magee-slider.php:130
+msgid "Use the button above to add Slides !"
+msgstr ""
+
+#: inc/magee-slider.php:158 inc/options.php:498 inc/options.php:694
+#: inc/options.php:1285 inc/options.php:1868 inc/options.php:1973
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:497
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:693
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1284
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1837
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1942
+msgid "Title"
+msgstr ""
+
+#: inc/magee-slider.php:159
+msgid "Number of Slides"
+msgstr ""
+
+#: inc/magee-slider.php:160
+msgid "Date"
+msgstr ""
+
+#: inc/options.php:48 inc/options.php:160 inc/options.php:304
+#: inc/options.php:356 inc/options.php:398 inc/options.php:434
+#: inc/options.php:516 inc/options.php:608 inc/options.php:657
+#: inc/options.php:851 inc/options.php:943 inc/options.php:987
+#: inc/options.php:1058 inc/options.php:1127 inc/options.php:1194
+#: inc/options.php:1253 inc/options.php:1397 inc/options.php:1487
+#: inc/options.php:1521 inc/options.php:1598 inc/options.php:1644
+#: inc/options.php:1723 inc/options.php:1831 inc/options.php:1902
+#: inc/options.php:1937 inc/options.php:2016 inc/options.php:2167
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:47
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:159
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:303
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:355
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:397
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:433
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:515
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:607
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:656
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:850
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:942
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:986
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1057
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1126
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1193
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1252
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1396
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1486
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1567
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1613
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1692
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1800
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1871
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1906
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1985
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2136
+msgid "CSS Class"
+msgstr ""
+
+#: inc/options.php:49 inc/options.php:161 inc/options.php:305
+#: inc/options.php:357 inc/options.php:399 inc/options.php:435
+#: inc/options.php:517 inc/options.php:609 inc/options.php:658
+#: inc/options.php:852 inc/options.php:944 inc/options.php:988
+#: inc/options.php:1059 inc/options.php:1128 inc/options.php:1195
+#: inc/options.php:1254 inc/options.php:1398 inc/options.php:1488
+#: inc/options.php:1522 inc/options.php:1599 inc/options.php:1645
+#: inc/options.php:1724 inc/options.php:1832 inc/options.php:1903
+#: inc/options.php:1938 inc/options.php:2017 inc/options.php:2168
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:48
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:160
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:304
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:356
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:398
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:434
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:516
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:608
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:657
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:851
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:943
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:987
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1058
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1127
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1194
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1253
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1397
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1487
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1568
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1614
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1693
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1801
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1872
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1907
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1986
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2137
+msgid "Add a class to the wrapping HTML element."
+msgstr ""
+
+#: inc/options.php:54 inc/options.php:166 inc/options.php:310
+#: inc/options.php:362 inc/options.php:404 inc/options.php:440
+#: inc/options.php:522 inc/options.php:614 inc/options.php:663
+#: inc/options.php:857 inc/options.php:949 inc/options.php:993
+#: inc/options.php:1064 inc/options.php:1133 inc/options.php:1200
+#: inc/options.php:1259 inc/options.php:1403 inc/options.php:1493
+#: inc/options.php:1604 inc/options.php:1650 inc/options.php:1729
+#: inc/options.php:1837 inc/options.php:1943 inc/options.php:2022
+#: inc/options.php:2173
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:53
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:165
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:309
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:361
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:403
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:439
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:521
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:613
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:662
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:856
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:948
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:992
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1063
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1132
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1199
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1258
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1402
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1492
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1573
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1619
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1698
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1806
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1912
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1991
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2142
+msgid "CSS ID"
+msgstr ""
+
+#: inc/options.php:55 inc/options.php:167 inc/options.php:311
+#: inc/options.php:363 inc/options.php:405 inc/options.php:441
+#: inc/options.php:523 inc/options.php:615 inc/options.php:664
+#: inc/options.php:858 inc/options.php:950 inc/options.php:994
+#: inc/options.php:1065 inc/options.php:1134 inc/options.php:1201
+#: inc/options.php:1260 inc/options.php:1404 inc/options.php:1494
+#: inc/options.php:1605 inc/options.php:1651 inc/options.php:1730
+#: inc/options.php:1838 inc/options.php:1944 inc/options.php:2023
+#: inc/options.php:2174
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:54
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:166
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:310
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:362
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:404
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:440
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:522
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:614
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:663
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:857
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:949
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:993
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1064
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1133
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1200
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1259
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1403
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1493
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1574
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1620
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1699
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1807
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1913
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1992
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2143
+msgid "Add an ID to the wrapping HTML element."
+msgstr ""
+
+#: inc/options.php:60 inc/options.php:1422 inc/options.php:1623
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:59
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1421
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1592
+msgid "Style"
+msgstr ""
+
+#: inc/options.php:63 inc/options.php:1626
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:62
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1595
+msgid "Simple Style"
+msgstr ""
+
+#: inc/options.php:64
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:63
+msgid "Boxed Style"
+msgstr ""
+
+#: inc/options.php:69
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:68
+msgid "Type"
+msgstr ""
+
+#: inc/options.php:73
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:72
+msgid "Type 1"
+msgstr ""
+
+#: inc/options.php:74
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:73
+msgid "Type 2"
+msgstr ""
+
+#: inc/options.php:80
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:79
+msgid "Accordion Items"
+msgstr ""
+
+#: inc/options.php:81
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:80
+msgid "Insert accordion items shortcode."
+msgstr ""
+
+#: inc/options.php:86
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:85
+msgid "Accordion Shortcode"
+msgstr ""
+
+#: inc/options.php:102 inc/options.php:554 inc/options.php:600
+#: inc/options.php:717 inc/options.php:1011 inc/options.php:1548
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:101
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:553
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:599
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:716
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1010
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1517
+msgid "Icon"
+msgstr ""
+
+#: inc/options.php:103 inc/options.php:290 inc/options.php:465
+#: inc/options.php:601 inc/options.php:718 inc/options.php:1012
+#: inc/options.php:1337 inc/options.php:1349 inc/options.php:1361
+#: inc/options.php:1373 inc/options.php:1385 inc/options.php:1475
+#: inc/options.php:1549
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:102
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:289
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:464
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:600
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:717
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1011
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1336
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1348
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1360
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1372
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1384
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1474
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1518
+msgid "Click an icon to select, click again to deselect."
+msgstr ""
+
+#: inc/options.php:108
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:107
+msgid "Warning! Better check yourself, you're not looking too good."
+msgstr ""
+
+#: inc/options.php:110 inc/options.php:2160
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:109
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2129
+msgid "Alert Content"
+msgstr ""
+
+#: inc/options.php:111
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:110
+msgid "Insert the content for the alert."
+msgstr ""
+
+#: inc/options.php:117 inc/options.php:968 inc/options.php:2042
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:116
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:967
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2011
+msgid "Background Color"
+msgstr ""
+
+#: inc/options.php:118
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:117
+msgid "Set background color for alert box."
+msgstr ""
+
+#: inc/options.php:123 inc/options.php:283
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:122
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:282
+msgid "Text Color"
+msgstr ""
+
+#: inc/options.php:124
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:123
+msgid "Set content color & border color for alert box."
+msgstr ""
+
+#: inc/options.php:131 inc/options.php:222 inc/options.php:1438
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:130
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:221
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1437
+msgid "Border Width"
+msgstr ""
+
+#: inc/options.php:132 inc/options.php:139 inc/options.php:975
+#: inc/options.php:2009 inc/options.php:2094 inc/options.php:2129
+#: inc/options.php:2135 inc/options.php:2141 inc/options.php:2147
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:131
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:138
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:974
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1978
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2063
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2098
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2104
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2110
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2116
+msgid "In pixels (px), eg: 1px."
+msgstr ""
+
+#: inc/options.php:138 inc/options.php:974 inc/options.php:2008
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:137
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:973
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1977
+msgid "Border Radius"
+msgstr ""
+
+#: inc/options.php:145
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:144
+msgid "Box Shadow"
+msgstr ""
+
+#: inc/options.php:146
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:145
+msgid "Display a box shadow for alert."
+msgstr ""
+
+#: inc/options.php:152
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:151
+msgid "Dismissable"
+msgstr ""
+
+#: inc/options.php:153
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:152
+msgid "The alert box is dismissable."
+msgstr ""
+
+#: inc/options.php:171
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:170
+msgid "Alert Shortcode"
+msgstr ""
+
+#: inc/options.php:186 inc/options.php:1628
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:185
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1597
+msgid "Button Style"
+msgstr ""
+
+#: inc/options.php:187
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:186
+msgid "Select the button's default style."
+msgstr ""
+
+#: inc/options.php:189 inc/options.php:546 inc/options.php:1583
+#: inc/options.php:1682
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:188
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:545
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1552
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1651
+msgid "Normal"
+msgstr ""
+
+#: inc/options.php:190
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:189
+msgid "Dark"
+msgstr ""
+
+#: inc/options.php:191
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:190
+msgid "Light"
+msgstr ""
+
+#: inc/options.php:192
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:191
+msgid "2d"
+msgstr ""
+
+#: inc/options.php:193
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:192
+msgid "3d"
+msgstr ""
+
+#: inc/options.php:194
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:193
+msgid "Line"
+msgstr ""
+
+#: inc/options.php:195
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:194
+msgid "Line Dark"
+msgstr ""
+
+#: inc/options.php:196
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:195
+msgid "Line Light"
+msgstr ""
+
+#: inc/options.php:203
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:202
+msgid "Button URL"
+msgstr ""
+
+#: inc/options.php:204
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:203
+msgid "Add the button's url eg: http://example.com."
+msgstr ""
+
+#: inc/options.php:209
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:208
+msgid "Button Size"
+msgstr ""
+
+#: inc/options.php:210
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:209
+msgid "Select the button's size."
+msgstr ""
+
+#: inc/options.php:212 inc/options.php:1103
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:211
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1102
+msgid "Small"
+msgstr ""
+
+#: inc/options.php:213
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:212
+msgid "Medium"
+msgstr ""
+
+#: inc/options.php:214 inc/options.php:1105
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:213
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1104
+msgid "Large"
+msgstr ""
+
+#: inc/options.php:215
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:214
+msgid "XLarge"
+msgstr ""
+
+#: inc/options.php:223
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:222
+msgid "In pixels (px), default: 2px."
+msgstr ""
+
+#: inc/options.php:228
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:227
+msgid "Button Shape"
+msgstr ""
+
+#: inc/options.php:229
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:228
+msgid "Select the button's shape. Choose default for theme option selection."
+msgstr ""
+
+#: inc/options.php:231
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:230
+msgid "Default"
+msgstr ""
+
+#: inc/options.php:232 inc/options.php:1038
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:231
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1037
+msgid "Square"
+msgstr ""
+
+#: inc/options.php:233 inc/options.php:1585 inc/options.php:1762
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:232
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1554
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1731
+msgid "Rounded"
+msgstr ""
+
+#: inc/options.php:234
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:233
+msgid "Full Rounded"
+msgstr ""
+
+#: inc/options.php:239
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:238
+msgid "Text Shadow"
+msgstr ""
+
+#: inc/options.php:240
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:239
+msgid "Display shadow for button text."
+msgstr ""
+
+#: inc/options.php:245
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:244
+msgid "Gradient"
+msgstr ""
+
+#: inc/options.php:246
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:245
+msgid "Display gradient for button."
+msgstr ""
+
+#: inc/options.php:251
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:250
+msgid "Block Button"
+msgstr ""
+
+#: inc/options.php:252
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:251
+msgid "Display in full width."
+msgstr ""
+
+#: inc/options.php:258
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:257
+msgid "Button Target"
+msgstr ""
+
+#: inc/options.php:259
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:258
+msgid "_self = open in same window <br />_blank = open in new window."
+msgstr ""
+
+#: inc/options.php:267 inc/options.php:1463
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:266
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1462
+msgid "Button Text"
+msgstr ""
+
+#: inc/options.php:269
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:268
+msgid "Button's Text"
+msgstr ""
+
+#: inc/options.php:270
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:269
+msgid "Add the text that will display in the button."
+msgstr ""
+
+#: inc/options.php:275
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:274
+msgid "Set background color for button."
+msgstr ""
+
+#: inc/options.php:276
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:275
+msgid "Button Color"
+msgstr ""
+
+#: inc/options.php:284
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:283
+msgid "Set content color & border color for button."
+msgstr ""
+
+#: inc/options.php:289 inc/options.php:1474
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:288
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1473
+msgid "Button Icon"
+msgstr ""
+
+#: inc/options.php:296
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:295
+msgid "Icon Animation Type"
+msgstr ""
+
+#: inc/options.php:297
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:296
+msgid "Select the type of animation to use on the button icon."
+msgstr ""
+
+#: inc/options.php:315
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:314
+msgid "Button Shortcode"
+msgstr ""
+
+#: inc/options.php:329
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:328
+msgid "Column Style"
+msgstr ""
+
+#: inc/options.php:330
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:329
+msgid "Select the size of column."
+msgstr ""
+
+#: inc/options.php:332
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:331
+msgid "1/1"
+msgstr ""
+
+#: inc/options.php:333
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:332
+msgid "1/2"
+msgstr ""
+
+#: inc/options.php:334
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:333
+msgid "1/3"
+msgstr ""
+
+#: inc/options.php:335
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:334
+msgid "1/4"
+msgstr ""
+
+#: inc/options.php:336
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:335
+msgid "1/5"
+msgstr ""
+
+#: inc/options.php:337
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:336
+msgid "1/6"
+msgstr ""
+
+#: inc/options.php:338
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:337
+msgid "2/3"
+msgstr ""
+
+#: inc/options.php:339
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:338
+msgid "2/5"
+msgstr ""
+
+#: inc/options.php:340
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:339
+msgid "3/4"
+msgstr ""
+
+#: inc/options.php:341
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:340
+msgid "3/5"
+msgstr ""
+
+#: inc/options.php:342
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:341
+msgid "4/5"
+msgstr ""
+
+#: inc/options.php:343
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:342
+msgid "5/6"
+msgstr ""
+
+#: inc/options.php:348
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:347
+msgid "Column Content"
+msgstr ""
+
+#: inc/options.php:350
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:349
+msgid " Column Content"
+msgstr ""
+
+#: inc/options.php:351
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:350
+msgid "Insert the column's content"
+msgstr ""
+
+#: inc/options.php:367
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:366
+msgid "Column Shortcode"
+msgstr ""
+
+#: inc/options.php:379
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:378
+msgid "Custom Box Content"
+msgstr ""
+
+#: inc/options.php:381 inc/options.php:1247 inc/options.php:1481
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:380
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1246
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1480
+msgid "Content"
+msgstr ""
+
+#: inc/options.php:382
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:381
+msgid "Insert content for custom box."
+msgstr ""
+
+#: inc/options.php:386 inc/options.php:2049
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:385
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2018
+msgid "Background Image"
+msgstr ""
+
+#: inc/options.php:387
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:386
+msgid "Upload an image to display in background of custom box."
+msgstr ""
+
+#: inc/options.php:392
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:391
+msgid "Padding"
+msgstr ""
+
+#: inc/options.php:393
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:392
+msgid "Content Padding. eg:30px"
+msgstr ""
+
+#: inc/options.php:409
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:408
+msgid " Custom Box Shortcode"
+msgstr ""
+
+#: inc/options.php:427
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:426
+msgid "Set end time for countdown."
+msgstr ""
+
+#: inc/options.php:447
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:446
+msgid "Countdowns Shortcode"
+msgstr ""
+
+#: inc/options.php:464
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:463
+msgid "Top Icon"
+msgstr ""
+
+#: inc/options.php:470
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:469
+msgid "Left Icon"
+msgstr ""
+
+#: inc/options.php:471
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:470
+msgid "Insert text before the number."
+msgstr ""
+
+#: inc/options.php:478
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:477
+msgid "Left Text"
+msgstr ""
+
+#: inc/options.php:479
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:478
+msgid "Left text of counter num"
+msgstr ""
+
+#: inc/options.php:485
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:484
+msgid "Counter Num"
+msgstr ""
+
+#: inc/options.php:486
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:485
+msgid "The animated counter number."
+msgstr ""
+
+#: inc/options.php:491
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:490
+msgid "Right Text"
+msgstr ""
+
+#: inc/options.php:492
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:491
+msgid "Insert text after the number."
+msgstr ""
+
+#: inc/options.php:499
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:498
+msgid "Insert Title for counter."
+msgstr ""
+
+#: inc/options.php:504
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:503
+msgid "Display Border"
+msgstr ""
+
+#: inc/options.php:505
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:504
+msgid "Border for counter."
+msgstr ""
+
+#: inc/options.php:507 inc/options.php:1025 inc/options.php:1046
+#: inc/options.php:1575
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:506
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1024
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1045
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1544
+msgid "No"
+msgstr ""
+
+#: inc/options.php:508 inc/options.php:1026 inc/options.php:1047
+#: inc/options.php:1574
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:507
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1025
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1046
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1543
+msgid "Yes"
+msgstr ""
+
+#: inc/options.php:529
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:528
+msgid "Counter Shortcode"
+msgstr ""
+
+#: inc/options.php:543
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:542
+msgid "Divider Style"
+msgstr ""
+
+#: inc/options.php:544
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:543
+msgid "Select the Divider's Style."
+msgstr ""
+
+#: inc/options.php:547
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:546
+msgid "Shadow"
+msgstr ""
+
+#: inc/options.php:548 inc/options.php:2112
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:547
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2081
+msgid "Dashed"
+msgstr ""
+
+#: inc/options.php:549 inc/options.php:2111
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:548
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2080
+msgid "Dotted"
+msgstr ""
+
+#: inc/options.php:550
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:549
+msgid "Double Line"
+msgstr ""
+
+#: inc/options.php:551
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:550
+msgid "Double Dashed"
+msgstr ""
+
+#: inc/options.php:552
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:551
+msgid "Double Dotted"
+msgstr ""
+
+#: inc/options.php:553
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:552
+msgid "Image"
+msgstr ""
+
+#: inc/options.php:555
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:554
+msgid "Back to Top"
+msgstr ""
+
+#: inc/options.php:562
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:561
+msgid "In pixels. Default: 100%"
+msgstr ""
+
+#: inc/options.php:566
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:565
+msgid "Align"
+msgstr ""
+
+#: inc/options.php:567
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:566
+msgid "When the width is not 100%."
+msgstr ""
+
+#: inc/options.php:569 inc/options.php:776 inc/options.php:1186
+#: inc/options.php:1231 inc/options.php:1447 inc/options.php:1812
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:568
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:775
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1185
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1230
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1446
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1781
+msgid "Left"
+msgstr ""
+
+#: inc/options.php:570 inc/options.php:1711
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:569
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1680
+msgid "Center"
+msgstr ""
+
+#: inc/options.php:576
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:575
+msgid "Margin Top"
+msgstr ""
+
+#: inc/options.php:577
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:576
+msgid "Spacing above the separator. In pixels."
+msgstr ""
+
+#: inc/options.php:582
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:581
+msgid "Margin Bottom"
+msgstr ""
+
+#: inc/options.php:583
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:582
+msgid "Spacing under the separator. In pixels."
+msgstr ""
+
+#: inc/options.php:589 inc/options.php:2093
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:588
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2062
+msgid "Border Size"
+msgstr ""
+
+#: inc/options.php:590
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:589
+msgid "In pixels (px), eg: 1px. "
+msgstr ""
+
+#: inc/options.php:594 inc/options.php:1432 inc/options.php:1993
+#: inc/options.php:2100
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:593
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1431
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1962
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2069
+msgid "Border Color"
+msgstr ""
+
+#: inc/options.php:595
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:594
+msgid "Set the border color."
+msgstr ""
+
+#: inc/options.php:619
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:618
+msgid "Divider Shortcode"
+msgstr ""
+
+#: inc/options.php:634
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:633
+msgid "Dropcap Letter"
+msgstr ""
+
+#: inc/options.php:635
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:634
+msgid "Add the letter to be used as dropcap"
+msgstr ""
+
+#: inc/options.php:639 inc/options.php:1803
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:638
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1772
+msgid "Color"
+msgstr ""
+
+#: inc/options.php:640
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:639
+msgid ""
+"Controls the color of the dropcap letter. Leave blank for theme option "
+"selection."
+msgstr ""
+
+#: inc/options.php:644
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:643
+msgid "Boxed Dropcap"
+msgstr ""
+
+#: inc/options.php:645
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:644
+msgid "Choose to get a boxed dropcap."
+msgstr ""
+
+#: inc/options.php:651
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:650
+msgid "Box Radius"
+msgstr ""
+
+#: inc/options.php:652
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:651
+msgid "Choose the radius of the boxed dropcap. In pixels (px), eg: 1px"
+msgstr ""
+
+#: inc/options.php:668
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:667
+msgid "Dropcap Shortcode"
+msgstr ""
+
+#: inc/options.php:681
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:680
+msgid "Feature Box Style"
+msgstr ""
+
+#: inc/options.php:682
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:681
+msgid "Select the Feature Box's Style."
+msgstr ""
+
+#: inc/options.php:684
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:683
+msgid "Icon on Top of Title"
+msgstr ""
+
+#: inc/options.php:685
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:684
+msgid "Icon Beside Title and Content"
+msgstr ""
+
+#: inc/options.php:686
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:685
+msgid "Icon Beside Title"
+msgstr ""
+
+#: inc/options.php:687 inc/options.php:1584
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:686
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1553
+msgid "Boxed"
+msgstr ""
+
+#: inc/options.php:695
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:694
+msgid "Insert title for feature box."
+msgstr ""
+
+#: inc/options.php:701
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:700
+msgid "Title Font Size"
+msgstr ""
+
+#: inc/options.php:702
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:701
+msgid "Set font size for title of feature box."
+msgstr ""
+
+#: inc/options.php:706 inc/options.php:1638 inc/options.php:1987
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:705
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1607
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1956
+msgid "Title Color"
+msgstr ""
+
+#: inc/options.php:707
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:706
+msgid "Set color for title of feature box."
+msgstr ""
+
+#: inc/options.php:711
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:710
+msgid "Icon Hover Animation"
+msgstr ""
+
+#: inc/options.php:712
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:711
+msgid "Select the Icon's Animation."
+msgstr ""
+
+#: inc/options.php:724 inc/options.php:1555
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:723
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1524
+msgid "Icon Size"
+msgstr ""
+
+#: inc/options.php:725
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:724
+msgid "Set size for icon of feature box."
+msgstr ""
+
+#: inc/options.php:729 inc/options.php:1017 inc/options.php:1560
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:728
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1016
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1529
+msgid "Icon Color"
+msgstr ""
+
+#: inc/options.php:730
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:729
+msgid "Set color for icon of feature box."
+msgstr ""
+
+#: inc/options.php:734
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:733
+msgid "Icon Border Color"
+msgstr ""
+
+#: inc/options.php:735
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:734
+msgid "Set border color for icon of feature box."
+msgstr ""
+
+#: inc/options.php:740
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:739
+msgid "Icon Border Width"
+msgstr ""
+
+#: inc/options.php:741
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:740
+msgid "Set border width for icon of feature box."
+msgstr ""
+
+#: inc/options.php:747
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:746
+msgid "Flip Icon"
+msgstr ""
+
+#: inc/options.php:748
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:747
+msgid "Choose to flip the icon of feature box."
+msgstr ""
+
+#: inc/options.php:750 inc/options.php:1710 inc/options.php:2109
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:749
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1679
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2078
+msgid "None"
+msgstr ""
+
+#: inc/options.php:751
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:750
+msgid "Horizontal"
+msgstr ""
+
+#: inc/options.php:752
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:751
+msgid "Vertical"
+msgstr ""
+
+#: inc/options.php:759
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:758
+msgid "Spinning Icon"
+msgstr ""
+
+#: inc/options.php:760
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:759
+msgid "Choose to spin the icon of feature box."
+msgstr ""
+
+#: inc/options.php:766 inc/options.php:1030 inc/options.php:1457
+#: inc/options.php:1565
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:765
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1029
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1456
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1534
+msgid "Icon Circle Background Color"
+msgstr ""
+
+#: inc/options.php:767
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:766
+msgid "Set background for icon circle of feature box."
+msgstr ""
+
+#: inc/options.php:773
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:772
+msgid "Icon Alignment"
+msgstr ""
+
+#: inc/options.php:774
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:773
+msgid "Set alignment for style2/style3 of feature box."
+msgstr ""
+
+#: inc/options.php:777 inc/options.php:1187 inc/options.php:1232
+#: inc/options.php:1448 inc/options.php:1813
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:776
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1186
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1231
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1447
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1782
+msgid "Right"
+msgstr ""
+
+#: inc/options.php:784
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:783
+msgid "Icon Circle"
+msgstr ""
+
+#: inc/options.php:785
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:784
+msgid "Choose to display icon of feature box in circle."
+msgstr ""
+
+#: inc/options.php:792
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:791
+msgid "Icon Image"
+msgstr ""
+
+#: inc/options.php:793
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:792
+msgid "To upload your own icon image, remember to deselect icon above."
+msgstr ""
+
+#: inc/options.php:798
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:797
+msgid "Icon Image Width"
+msgstr ""
+
+#: inc/options.php:799
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:798
+msgid ""
+"If using custom icon image, set icon image width. In percentage of pixels "
+"(px), eg: 1px."
+msgstr ""
+
+#: inc/options.php:804
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:803
+msgid "Icon Image Height"
+msgstr ""
+
+#: inc/options.php:805
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:804
+msgid ""
+"If using custom icon image, set icon image height. In percentage of pixels "
+"(px), eg: 1px."
+msgstr ""
+
+#: inc/options.php:812
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:811
+msgid "Link URL"
+msgstr ""
+
+#: inc/options.php:813
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:812
+msgid "Set link for feature box, eg: http://example.com."
+msgstr ""
+
+#: inc/options.php:818
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:817
+msgid "Link Target"
+msgstr ""
+
+#: inc/options.php:819
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:818
+msgid "_self = open in same window _blank = open in new window."
+msgstr ""
+
+#: inc/options.php:821
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:820
+msgid "_blank"
+msgstr ""
+
+#: inc/options.php:822
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:821
+msgid "_self"
+msgstr ""
+
+#: inc/options.php:829
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:828
+msgid "Link Text"
+msgstr ""
+
+#: inc/options.php:830
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:829
+msgid ""
+"Insert link text for feature box. It would not display if you leave it as "
+"blank."
+msgstr ""
+
+#: inc/options.php:834
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:833
+msgid "Link Color"
+msgstr ""
+
+#: inc/options.php:835
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:834
+msgid "Set color for link of feature box."
+msgstr ""
+
+#: inc/options.php:839
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:838
+msgid "Content Color"
+msgstr ""
+
+#: inc/options.php:840
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:839
+msgid "Set color for content of feature box."
+msgstr ""
+
+#: inc/options.php:844
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:843
+msgid "Set box background color for Boxed Style."
+msgstr ""
+
+#: inc/options.php:845
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:844
+msgid "For Boxed Style"
+msgstr ""
+
+#: inc/options.php:861 inc/options.php:979 inc/options.php:1119
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:860
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:978
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1118
+msgid "Your Content Goes Here"
+msgstr ""
+
+#: inc/options.php:863
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:862
+msgid "Feature Box Content"
+msgstr ""
+
+#: inc/options.php:868
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:867
+msgid "Feature Box Shortcode"
+msgstr ""
+
+#: inc/options.php:885
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:884
+msgid "Direction"
+msgstr ""
+
+#: inc/options.php:886
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:885
+msgid "Select flip directioon."
+msgstr ""
+
+#: inc/options.php:888
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:887
+msgid "horizontal"
+msgstr ""
+
+#: inc/options.php:889
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:888
+msgid "vertical"
+msgstr ""
+
+#: inc/options.php:895
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:894
+msgid "Front Container Paddings"
+msgstr ""
+
+#: inc/options.php:896
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:895
+msgid "Set paddings for front container of flip box."
+msgstr ""
+
+#: inc/options.php:901 inc/options.php:924
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:900
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:923
+msgid "Front Background Color"
+msgstr ""
+
+#: inc/options.php:902
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:901
+msgid "Set background color for front container of flip box."
+msgstr ""
+
+#: inc/options.php:910
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:909
+msgid "Front Content"
+msgstr ""
+
+#: inc/options.php:912
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:911
+msgid "Front content."
+msgstr ""
+
+#: inc/options.php:913
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:912
+msgid "Insert content for front container of flip box."
+msgstr ""
+
+#: inc/options.php:918
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:917
+msgid "Back Container Paddings"
+msgstr ""
+
+#: inc/options.php:919
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:918
+msgid "Set paddings for back container of flip box."
+msgstr ""
+
+#: inc/options.php:925
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:924
+msgid "Set background color for back container of flip box."
+msgstr ""
+
+#: inc/options.php:934
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:933
+msgid "Back Content"
+msgstr ""
+
+#: inc/options.php:936
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:935
+msgid "Back Content."
+msgstr ""
+
+#: inc/options.php:937
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:936
+msgid "Insert content for back container of flip box."
+msgstr ""
+
+#: inc/options.php:954
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:953
+msgid "Flip Box Shortcode"
+msgstr ""
+
+#: inc/options.php:969
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:968
+msgid "Set background color for highlight item."
+msgstr ""
+
+#: inc/options.php:981
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:980
+msgid "Content to Higlight"
+msgstr ""
+
+#: inc/options.php:982
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:981
+msgid "Insert content to highlight."
+msgstr ""
+
+#: inc/options.php:999
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:998
+msgid "Highlight Shortcode"
+msgstr ""
+
+#: inc/options.php:1018
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1017
+msgid "Set color fo list icon."
+msgstr ""
+
+#: inc/options.php:1022
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1021
+msgid "Icon Boxed"
+msgstr ""
+
+#: inc/options.php:1023
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1022
+msgid "Choose to set icon boxed."
+msgstr ""
+
+#: inc/options.php:1031
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1030
+msgid "Set background color for list icon."
+msgstr ""
+
+#: inc/options.php:1035
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1034
+msgid "Boxed Shape"
+msgstr ""
+
+#: inc/options.php:1036
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1035
+msgid "Choose boxed shape for list icon."
+msgstr ""
+
+#: inc/options.php:1039
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1038
+msgid "Circle"
+msgstr ""
+
+#: inc/options.php:1043
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1042
+msgid "Item Border"
+msgstr ""
+
+#: inc/options.php:1044
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1043
+msgid "Choose to display item border for list."
+msgstr ""
+
+#: inc/options.php:1052
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1051
+msgid "Item Size"
+msgstr ""
+
+#: inc/options.php:1053
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1052
+msgid "Set text font size for item."
+msgstr ""
+
+#: inc/options.php:1070
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1069
+msgid "List items"
+msgstr ""
+
+#: inc/options.php:1075
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1074
+msgid "List Shortcode"
+msgstr ""
+
+#: inc/options.php:1089
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1088
+msgid "Modal Anchor Text"
+msgstr ""
+
+#: inc/options.php:1090
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1089
+msgid "Insert anchor text for the modal."
+msgstr ""
+
+#: inc/options.php:1095
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1094
+msgid "Modal Heading"
+msgstr ""
+
+#: inc/options.php:1096
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1095
+msgid "Insert heading text for the modal."
+msgstr ""
+
+#: inc/options.php:1100
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1099
+msgid "Size Of Modal"
+msgstr ""
+
+#: inc/options.php:1101
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1100
+msgid "Select the modal window size."
+msgstr ""
+
+#: inc/options.php:1104
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1103
+msgid "Middle"
+msgstr ""
+
+#: inc/options.php:1111
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1110
+msgid "Show Footer"
+msgstr ""
+
+#: inc/options.php:1112
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1111
+msgid "Choose to show the modal footer with close button."
+msgstr ""
+
+#: inc/options.php:1114
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1113
+msgid "yes"
+msgstr ""
+
+#: inc/options.php:1115
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1114
+msgid "no"
+msgstr ""
+
+#: inc/options.php:1121
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1120
+msgid "Contents of Modal"
+msgstr ""
+
+#: inc/options.php:1122
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1121
+msgid "Add your content to be displayed in modal."
+msgstr ""
+
+#: inc/options.php:1138
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1137
+msgid "Modal Shortcode"
+msgstr ""
+
+#: inc/options.php:1152
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1151
+msgid "Popover Heading"
+msgstr ""
+
+#: inc/options.php:1153
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1152
+msgid "Insert heading text of the popover."
+msgstr ""
+
+#: inc/options.php:1158
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1157
+msgid "Triggering Text"
+msgstr ""
+
+#: inc/options.php:1159
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1158
+msgid "Content that will trigger the popover."
+msgstr ""
+
+#: inc/options.php:1166
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1165
+msgid "Contents Inside Popover"
+msgstr ""
+
+#: inc/options.php:1167
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1166
+msgid "Text to be displayed inside the popover."
+msgstr ""
+
+#: inc/options.php:1172
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1171
+msgid "Popover Trigger Method"
+msgstr ""
+
+#: inc/options.php:1173
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1172
+msgid "Choose mouse action to trigger popover."
+msgstr ""
+
+#: inc/options.php:1175 inc/options.php:1241
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1174
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1240
+msgid "Click"
+msgstr ""
+
+#: inc/options.php:1176 inc/options.php:1240
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1175
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1239
+msgid "Hover"
+msgstr ""
+
+#: inc/options.php:1181
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1180
+msgid "Popover Position"
+msgstr ""
+
+#: inc/options.php:1182
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1181
+msgid "Choose the display position of the popover."
+msgstr ""
+
+#: inc/options.php:1184 inc/options.php:1229 inc/options.php:1449
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1183
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1228
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1448
+msgid "Top"
+msgstr ""
+
+#: inc/options.php:1185 inc/options.php:1230 inc/options.php:1450
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1184
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1229
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1449
+msgid "Bottom"
+msgstr ""
+
+#: inc/options.php:1205
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1204
+msgid "Popover Shortcode"
+msgstr ""
+
+#: inc/options.php:1221
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1220
+msgid "Tooltip Text"
+msgstr ""
+
+#: inc/options.php:1222
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1221
+msgid "Insert the text that displays in the tooltip"
+msgstr ""
+
+#: inc/options.php:1226
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1225
+msgid "Tooltip Position"
+msgstr ""
+
+#: inc/options.php:1227
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1226
+msgid "Choose the display position."
+msgstr ""
+
+#: inc/options.php:1237
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1236
+msgid "Tooltip Trigger"
+msgstr ""
+
+#: inc/options.php:1238
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1237
+msgid "Choose action to trigger the tooltip."
+msgstr ""
+
+#: inc/options.php:1248
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1247
+msgid "Insert the text that will activate the tooltip hover"
+msgstr ""
+
+#: inc/options.php:1264
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1263
+msgid "Tooltip Shortcode"
+msgstr ""
+
+#: inc/options.php:1279 inc/options.php:1689
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1278
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1658
+msgid "Name"
+msgstr ""
+
+#: inc/options.php:1280
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1279
+msgid "Insert the name of the person."
+msgstr ""
+
+#: inc/options.php:1286
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1285
+msgid "Insert the title of the person"
+msgstr ""
+
+#: inc/options.php:1291
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1290
+msgid "Profile Description"
+msgstr ""
+
+#: inc/options.php:1292
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1291
+msgid "Enter the content to be displayed"
+msgstr ""
+
+#: inc/options.php:1296
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1295
+msgid "Picture"
+msgstr ""
+
+#: inc/options.php:1297
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1296
+msgid "Upload an image to display."
+msgstr ""
+
+#: inc/options.php:1302
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1301
+msgid "Picture Link URL"
+msgstr ""
+
+#: inc/options.php:1303
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1302
+msgid "Add the URL the picture will link to, ex: http://example.com."
+msgstr ""
+
+#: inc/options.php:1308
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1307
+msgid "Picture Border Size"
+msgstr ""
+
+#: inc/options.php:1309
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1308
+msgid "In pixels (px), ex: 1px. Leave blank for theme option selection."
+msgstr ""
+
+#: inc/options.php:1313
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1312
+msgid "Picture Border Color"
+msgstr ""
+
+#: inc/options.php:1314
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1313
+msgid ""
+"Controls the picture's border color. Leave blank for theme option selection."
+msgstr ""
+
+#: inc/options.php:1319
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1318
+msgid "Picture Border Radius"
+msgstr ""
+
+#: inc/options.php:1320
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1319
+msgid ""
+"Choose the border radius of the person image. In pixels (px), ex: 1px, or "
+"\"round\".  Leave blank for theme option selection."
+msgstr ""
+
+#: inc/options.php:1325
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1324
+msgid "Social Icon Box Radius"
+msgstr ""
+
+#: inc/options.php:1326
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1325
+msgid ""
+"Choose the border radius of the boxed icons. In pixels (px), ex: 1px, or "
+"\"round\". Leave blank for theme option selection."
+msgstr ""
+
+#: inc/options.php:1331
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1330
+msgid "Social Icon Custom Colors"
+msgstr ""
+
+#: inc/options.php:1332
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1331
+msgid ""
+"Controls the Icon's border color. Leave blank for theme option selection."
+msgstr ""
+
+#: inc/options.php:1336
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1335
+msgid "Icon1"
+msgstr ""
+
+#: inc/options.php:1343
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1342
+msgid "Link1 "
+msgstr ""
+
+#: inc/options.php:1344
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1343
+msgid "The Icon1 Link "
+msgstr ""
+
+#: inc/options.php:1348
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1347
+msgid "Icon2"
+msgstr ""
+
+#: inc/options.php:1355
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1354
+msgid "Link2 "
+msgstr ""
+
+#: inc/options.php:1356
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1355
+msgid "The Icon2 Link "
+msgstr ""
+
+#: inc/options.php:1360
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1359
+msgid "Icon3"
+msgstr ""
+
+#: inc/options.php:1367
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1366
+msgid "Link3 "
+msgstr ""
+
+#: inc/options.php:1368
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1367
+msgid "The Icon3 Link "
+msgstr ""
+
+#: inc/options.php:1372
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1371
+msgid "Icon4"
+msgstr ""
+
+#: inc/options.php:1379
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1378
+msgid "Link4"
+msgstr ""
+
+#: inc/options.php:1380
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1379
+msgid "The Icon4 Link "
+msgstr ""
+
+#: inc/options.php:1384
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1383
+msgid "Icon5"
+msgstr ""
+
+#: inc/options.php:1391
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1390
+msgid "Link5"
+msgstr ""
+
+#: inc/options.php:1392
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1391
+msgid "The Icon5 Link "
+msgstr ""
+
+#: inc/options.php:1408
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1407
+msgid "Person Shortcode"
+msgstr ""
+
+#: inc/options.php:1423
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1422
+msgid "Select style for promo box."
+msgstr ""
+
+#: inc/options.php:1425
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1424
+msgid "normal"
+msgstr ""
+
+#: inc/options.php:1426
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1425
+msgid "boxed"
+msgstr ""
+
+#: inc/options.php:1433
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1432
+msgid "Set color for highlight border of promo box."
+msgstr ""
+
+#: inc/options.php:1439
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1438
+msgid "Set width for highlight border of promo box."
+msgstr ""
+
+#: inc/options.php:1444
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1443
+msgid "Border Position"
+msgstr ""
+
+#: inc/options.php:1445
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1444
+msgid "Choose position for highlight border of promo box."
+msgstr ""
+
+#: inc/options.php:1458
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1457
+msgid "Set background color for promo box."
+msgstr ""
+
+#: inc/options.php:1464
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1463
+msgid "Inser text for button of promo box."
+msgstr ""
+
+#: inc/options.php:1469
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1468
+msgid "Button Link URL"
+msgstr ""
+
+#: inc/options.php:1470
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1469
+msgid "Inser link for button of promo box, eg: http://example.com."
+msgstr ""
+
+#: inc/options.php:1482
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1481
+msgid "Insert content for promo box."
+msgstr ""
+
+#: inc/options.php:1498
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1497
+msgid "Promo Box Shortcode"
+msgstr ""
+
+#: inc/options.php:1513 inc/options.php:1526
+msgid "Slider"
+msgstr ""
+
+#: inc/options.php:1543
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1512
+msgid "Title "
+msgstr ""
+
+#: inc/options.php:1544
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1513
+msgid "Insert the title for the social icon."
+msgstr ""
+
+#: inc/options.php:1556
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1525
+msgid "In pixels (px), eg: 13px."
+msgstr ""
+
+#: inc/options.php:1561
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1530
+msgid "Set color for icon."
+msgstr ""
+
+#: inc/options.php:1566
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1535
+msgid "Set background color for icon."
+msgstr ""
+
+#: inc/options.php:1571
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1540
+msgid "Icon 3D effect"
+msgstr ""
+
+#: inc/options.php:1572
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1541
+msgid "Display box shadow for icon."
+msgstr ""
+
+#: inc/options.php:1580
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1549
+msgid "Icon Box Radius Style"
+msgstr ""
+
+#: inc/options.php:1586
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1555
+msgid "Circle "
+msgstr ""
+
+#: inc/options.php:1592
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1561
+msgid "Icon Link URL"
+msgstr ""
+
+#: inc/options.php:1593
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1562
+msgid "Add the icon's url eg: http://example.com."
+msgstr ""
+
+#: inc/options.php:1609
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1578
+msgid "Social Shortcode"
+msgstr ""
+
+#: inc/options.php:1624
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1593
+msgid "Select tabs' style."
+msgstr ""
+
+#: inc/options.php:1627
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1596
+msgid "Simple Style Justified"
+msgstr ""
+
+#: inc/options.php:1629
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1598
+msgid "Button Style Justified"
+msgstr ""
+
+#: inc/options.php:1630
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1599
+msgid "Normal Style"
+msgstr ""
+
+#: inc/options.php:1631
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1600
+msgid "Normal Style Justified"
+msgstr ""
+
+#: inc/options.php:1632
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1601
+msgid "Vertical Style"
+msgstr ""
+
+#: inc/options.php:1633
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1602
+msgid "Vertical Style Right"
+msgstr ""
+
+#: inc/options.php:1639
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1608
+msgid "Set color for tab item's title."
+msgstr ""
+
+#: inc/options.php:1656
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1625
+msgid "Tab Items"
+msgstr ""
+
+#: inc/options.php:1657
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1626
+msgid "Insert tab items."
+msgstr ""
+
+#: inc/options.php:1663
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1632
+msgid "Tab Shortcode"
+msgstr ""
+
+#: inc/options.php:1679
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1648
+msgid "Style "
+msgstr ""
+
+#: inc/options.php:1680
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1649
+msgid "Select testimonial's style"
+msgstr ""
+
+#: inc/options.php:1683
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1652
+msgid "Box"
+msgstr ""
+
+#: inc/options.php:1690
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1659
+msgid "Name of testimonial's author."
+msgstr ""
+
+#: inc/options.php:1695
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1664
+msgid "Byline"
+msgstr ""
+
+#: inc/options.php:1696
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1665
+msgid "Byline of testimonial's author."
+msgstr ""
+
+#: inc/options.php:1700
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1669
+msgid "Avatar"
+msgstr ""
+
+#: inc/options.php:1701
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1670
+msgid "Avatar of testimonial's author."
+msgstr ""
+
+#: inc/options.php:1707
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1676
+msgid "Alignment"
+msgstr ""
+
+#: inc/options.php:1708
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1677
+msgid "Select the content's alignment."
+msgstr ""
+
+#: inc/options.php:1715 inc/options.php:1717
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1684
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1686
+msgid "Testimonial Content"
+msgstr ""
+
+#: inc/options.php:1718
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1687
+msgid "Insert content for testimonial."
+msgstr ""
+
+#: inc/options.php:1734
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1703
+msgid "Testimonial Shortcode"
+msgstr ""
+
+#: inc/options.php:1751 inc/options.php:1755
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1720
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1724
+msgid "Striped"
+msgstr ""
+
+#: inc/options.php:1752
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1721
+msgid "Choose to get the filled area striped."
+msgstr ""
+
+#: inc/options.php:1754
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1723
+msgid "None Striped"
+msgstr ""
+
+#: inc/options.php:1756
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1725
+msgid "Striped Animated"
+msgstr ""
+
+#: inc/options.php:1763
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1732
+msgid "Choose to set the progress bar as rounded."
+msgstr ""
+
+#: inc/options.php:1765
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1734
+msgid "On"
+msgstr ""
+
+#: inc/options.php:1766
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1735
+msgid "Off"
+msgstr ""
+
+#: inc/options.php:1772
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1741
+msgid "Display  Number"
+msgstr ""
+
+#: inc/options.php:1773
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1742
+msgid "Choose to diplay number for progress bar."
+msgstr ""
+
+#: inc/options.php:1781 inc/options.php:1860
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1750
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1829
+msgid "Percent"
+msgstr ""
+
+#: inc/options.php:1782
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1751
+msgid "Set percentage for progress bar. 0~100."
+msgstr ""
+
+#: inc/options.php:1788
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1757
+msgid "Text"
+msgstr ""
+
+#: inc/options.php:1789
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1758
+msgid "Insert text for progress bar."
+msgstr ""
+
+#: inc/options.php:1796
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1765
+msgid "Set height for progress bar."
+msgstr ""
+
+#: inc/options.php:1804
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1773
+msgid "Set background color for filled area in progress bar."
+msgstr ""
+
+#: inc/options.php:1809
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1778
+msgid "Text Align"
+msgstr ""
+
+#: inc/options.php:1810
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1779
+msgid "Set align for progress bar."
+msgstr ""
+
+#: inc/options.php:1819
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1788
+msgid "Text Position"
+msgstr ""
+
+#: inc/options.php:1820
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1789
+msgid "Choose text position for progress bar."
+msgstr ""
+
+#: inc/options.php:1822
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1791
+msgid "Text on Progress bars"
+msgstr ""
+
+#: inc/options.php:1823
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1792
+msgid "Text above progress bars"
+msgstr ""
+
+#: inc/options.php:1844
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1813
+msgid "Progress Shortcode"
+msgstr ""
+
+#: inc/options.php:1861
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1830
+msgid "From 1 to 100."
+msgstr ""
+
+#: inc/options.php:1869
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1838
+msgid "Insert title for piechart. It need to be short."
+msgstr ""
+
+#: inc/options.php:1875
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1844
+msgid "Size"
+msgstr ""
+
+#: inc/options.php:1876
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1845
+msgid "Set size for piechart."
+msgstr ""
+
+#: inc/options.php:1882
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1851
+msgid "Font Size"
+msgstr ""
+
+#: inc/options.php:1883
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1852
+msgid "Set font size for piechart title."
+msgstr ""
+
+#: inc/options.php:1888
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1857
+msgid "Filled Color"
+msgstr ""
+
+#: inc/options.php:1889
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1858
+msgid "Set color for filled area in piechart."
+msgstr ""
+
+#: inc/options.php:1894
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1863
+msgid "Unfilled Color"
+msgstr ""
+
+#: inc/options.php:1895
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1864
+msgid "Set color for unfilled area in piechart."
+msgstr ""
+
+#: inc/options.php:1908
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1877
+msgid "Piechart Shortcode"
+msgstr ""
+
+#: inc/options.php:1923
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1892
+msgid "Columns"
+msgstr ""
+
+#: inc/options.php:1924
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1893
+msgid "Number of items."
+msgstr ""
+
+#: inc/options.php:1927
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1896
+msgid "2 columns"
+msgstr ""
+
+#: inc/options.php:1928
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1897
+msgid "3 columns"
+msgstr ""
+
+#: inc/options.php:1929
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1898
+msgid "4 columns"
+msgstr ""
+
+#: inc/options.php:1930
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1899
+msgid "5 columns"
+msgstr ""
+
+#: inc/options.php:1949
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1918
+msgid "Timeline Items"
+msgstr ""
+
+#: inc/options.php:1950
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1919
+msgid "Insert timeline items."
+msgstr ""
+
+#: inc/options.php:1955
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1924
+msgid "Timeline Shortcode"
+msgstr ""
+
+#: inc/options.php:1974
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1943
+msgid "Insert title for panel."
+msgstr ""
+
+#: inc/options.php:1977
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1946
+msgid "Panel content."
+msgstr ""
+
+#: inc/options.php:1979
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1948
+msgid "Panel Content"
+msgstr ""
+
+#: inc/options.php:1980
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1949
+msgid "Insert content for panel."
+msgstr ""
+
+#: inc/options.php:1988
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1957
+msgid "Set color for panel title."
+msgstr ""
+
+#: inc/options.php:1994
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1963
+msgid "Set color for panel border."
+msgstr ""
+
+#: inc/options.php:2000
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1969
+msgid "Title Background Color"
+msgstr ""
+
+#: inc/options.php:2001
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1970
+msgid "Set background color for panel title."
+msgstr ""
+
+#: inc/options.php:2027
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:1996
+msgid "Panel Shortcode"
+msgstr ""
+
+#: inc/options.php:2043
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2012
+msgid "Set background for section. Leave blank for transparent."
+msgstr ""
+
+#: inc/options.php:2050
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2019
+msgid "Upload an image to display in the background."
+msgstr ""
+
+#: inc/options.php:2054
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2023
+msgid "Background Repeat"
+msgstr ""
+
+#: inc/options.php:2055
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2024
+msgid "Choose repeat style for the background image."
+msgstr ""
+
+#: inc/options.php:2058
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2027
+msgid "repeat"
+msgstr ""
+
+#: inc/options.php:2059
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2028
+msgid "repeat-x"
+msgstr ""
+
+#: inc/options.php:2060
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2029
+msgid "repeat-y"
+msgstr ""
+
+#: inc/options.php:2061
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2030
+msgid "no-repeat"
+msgstr ""
+
+#: inc/options.php:2062
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2031
+msgid "inherit"
+msgstr ""
+
+#: inc/options.php:2068 inc/options.php:2105
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2037
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2074
+msgid "Background Position"
+msgstr ""
+
+#: inc/options.php:2069
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2038
+msgid "Choose the postion of the background image."
+msgstr ""
+
+#: inc/options.php:2072
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2041
+msgid "top left"
+msgstr ""
+
+#: inc/options.php:2073
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2042
+msgid "top center"
+msgstr ""
+
+#: inc/options.php:2074
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2043
+msgid "top right"
+msgstr ""
+
+#: inc/options.php:2075
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2044
+msgid "center left"
+msgstr ""
+
+#: inc/options.php:2076
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2045
+msgid "center center"
+msgstr ""
+
+#: inc/options.php:2077
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2046
+msgid "center right"
+msgstr ""
+
+#: inc/options.php:2078
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2047
+msgid "bottom left"
+msgstr ""
+
+#: inc/options.php:2079
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2048
+msgid "bottom center"
+msgstr ""
+
+#: inc/options.php:2080
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2049
+msgid "bottom right"
+msgstr ""
+
+#: inc/options.php:2085
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2054
+msgid "Background Parallax"
+msgstr ""
+
+#: inc/options.php:2086
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2055
+msgid "Choose how the background image scrolls and responds."
+msgstr ""
+
+#: inc/options.php:2101
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2070
+msgid "Set border color for section."
+msgstr ""
+
+#: inc/options.php:2106
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2075
+msgid "Select border style for section"
+msgstr ""
+
+#: inc/options.php:2110
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2079
+msgid "Hidden"
+msgstr ""
+
+#: inc/options.php:2113
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2082
+msgid "Solid"
+msgstr ""
+
+#: inc/options.php:2114
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2083
+msgid "Double"
+msgstr ""
+
+#: inc/options.php:2115
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2084
+msgid "Groove"
+msgstr ""
+
+#: inc/options.php:2116
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2085
+msgid "Ridge"
+msgstr ""
+
+#: inc/options.php:2117
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2086
+msgid "Inset"
+msgstr ""
+
+#: inc/options.php:2118
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2087
+msgid "Outset"
+msgstr ""
+
+#: inc/options.php:2119
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2088
+msgid "Initial"
+msgstr ""
+
+#: inc/options.php:2120
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2089
+msgid "Inherit"
+msgstr ""
+
+#: inc/options.php:2128
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2097
+msgid "Padding Top"
+msgstr ""
+
+#: inc/options.php:2134
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2103
+msgid "Padding Bottom"
+msgstr ""
+
+#: inc/options.php:2140
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2109
+msgid "Padding Left"
+msgstr ""
+
+#: inc/options.php:2146
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2115
+msgid "Padding Right"
+msgstr ""
+
+#: inc/options.php:2151
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2120
+msgid "Contents in Container ?"
+msgstr ""
+
+#: inc/options.php:2152
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2121
+msgid "Put the content in container."
+msgstr ""
+
+#: inc/options.php:2158
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2127
+msgid "Section content."
+msgstr ""
+
+#: inc/options.php:2161
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2130
+msgid "Insert content for section."
+msgstr ""
+
+#: inc/options.php:2178
+#: magee-shortcodes/magee-shortcodes/trunk/inc/options.php:2147
+msgid "Section Shortcode"
+msgstr ""
+
+#: magee-shortcodes/magee-shortcodes/trunk/shortcodes/class-countdowns.php:44
+#: shortcodes/class-countdowns.php:44
+msgid "Days"
+msgstr ""
+
+#: magee-shortcodes/magee-shortcodes/trunk/shortcodes/class-countdowns.php:52
+#: shortcodes/class-countdowns.php:52
+msgid "Hours"
+msgstr ""
+
+#: magee-shortcodes/magee-shortcodes/trunk/shortcodes/class-countdowns.php:60
+#: shortcodes/class-countdowns.php:60
+msgid "Minitues"
+msgstr ""
+
+#: magee-shortcodes/magee-shortcodes/trunk/shortcodes/class-countdowns.php:68
+#: shortcodes/class-countdowns.php:68
+msgid "Seconds"
+msgstr ""

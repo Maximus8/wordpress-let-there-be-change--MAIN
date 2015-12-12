@@ -8,6 +8,7 @@ class subscribePps extends modulePps {
 				'aweber' => array('label' => __('Aweber', PPS_LANG_CODE)),
 				'mailchimp' => array('label' => __('MailChimp', PPS_LANG_CODE), 'require_confirm' => true),
 				'mailpoet' => array('label' => __('MailPoet', PPS_LANG_CODE), 'require_confirm' => true),
+				//'newsletter' => array('label' => __('Newsletter', PPS_LANG_CODE), 'require_confirm' => true),
 			));
 		}
 		return $this->_destList;
@@ -77,6 +78,10 @@ class subscribePps extends modulePps {
 			if(isset($f['enb']) && $f['enb']) {
 				$htmlType = $f['html'];
 				$name = $k;
+				// Will not work for now - almost all templates detect it in CSS as [type="text"], and there are no styles for [type="email"]
+				/*if($k == 'email') {
+					$htmlType = 'email';
+				}*/
 				if($popup && isset($popup['params']) 
 					&& isset($popup['params']['tpl']['sub_dest'])
 					&& $popup['params']['tpl']['sub_dest'] == 'aweber'
@@ -100,6 +105,12 @@ class subscribePps extends modulePps {
 					foreach($f['options'] as $opt) {
 						$htmlParams['options'][ $opt['name'] ] = $opt['label'];
 					}
+				}
+				if(isset($f['value']) && !empty($f['value'])) {
+					$htmlParams['value'] = $f['value'];
+				}
+				if(isset($f['mandatory']) && !empty($f['mandatory']) && (int)$f['mandatory']) {
+					$htmlParams['required'] = true;
 				}
 				$inputHtml = htmlPps::$htmlType($name, $htmlParams);
 				if($htmlType == 'selectbox') {

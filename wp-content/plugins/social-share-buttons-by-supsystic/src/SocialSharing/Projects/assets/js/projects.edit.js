@@ -1,10 +1,17 @@
 (function ($, app) {
 
     $(document).ready(function () {
+        //After page loaded selecting preview button example by selected design
+        function selectExamplePreviewButtonDesign() {
+            var $selectedDesignExample = $($($buttonSetsTable.find('.iradio_minimal.checked')).parent().find('a.social-sharing-button')[0]).clone().addClass('animation-preview');
+            $selectedDesignExample.find('i.fa').addClass('icon-animation-preview');
+            $('#button-preview-example-wrapper').html($selectedDesignExample);
+        }
 
         var scroll,
             $networksList = $('.networks'),
             $networksDialog,
+            $networksDialogOnCreateProject,
             $networksDialogTrigger,
             $buttonsDesignDialog,
             $wtsList = $('.where-to-show'),
@@ -12,6 +19,7 @@
             $showEverywhere = $('input[name="settings[show_at]"][value="everywhere"]'),
             $showOnlyOnHome = $('input[name="settings[show_at]"][value="homepage"]'),
             $hideOnMobile = $('input[name="settings[hide_on_mobile]"]'),
+            $showOnlyOnMobile = $('input[name="settings[show_only_on_mobile]"]'),
             $pages = $('.chosen'),
             $displayTotalShares = $('input[name="settings[display_total_shares]"]'),
             $counterStyles = $('select[name="settings[shares_style]"]'),
@@ -25,7 +33,8 @@
             $animation = $('#ba-button-animation'),
             $iconAnimation = $('#ba-icons-animation'),
             $adminNavButtons = $('.admin-nav-button'),
-            buttonWidth = $('.sharer-flat').width();
+            buttonWidth = $('.sharer-flat').width(),
+            sharePostLinkInList = $('label[for="wts-share-post-link-in-list"]');
 
         // Rename
         $('h2[contenteditable]').on('keydown', function (e) {
@@ -104,7 +113,7 @@
             })
         });
 
-        $('.animation-preview').hover(function () {
+        $('body').on('hover', 'a.animation-preview', function() {
             var $preview = $(this),
                 current = $animation.val();
 
@@ -114,7 +123,7 @@
             })
         });
 
-        $('.animation-preview').hover(function () {
+        $('body').on('hover', 'a.animation-preview', function() {
             var $preview = $('.icon-animation-preview'),
                 current = $iconAnimation.val();
 
@@ -127,10 +136,11 @@
         // Design and animation
         $design.on('click', function () {
             var type = $(this).val(),
-                $preview = $('.animation-preview');
+                $preview = $('#button-preview-example-wrapper'),
+                $exampleHtml = $($(this).closest('th').find('a.social-sharing-button')[0]).clone().addClass('animation-preview');
 
-            $preview.removeClass('sharer-flat-1 sharer-flat-2 sharer-flat-3 sharer-flat-4 sharer-flat-5 sharer-flat-6 sharer-flat-7 sharer-flat-8 sharer-flat-9');
-            $preview.addClass('sharer-'+type);
+            $exampleHtml.find('i.fa').addClass('icon-animation-preview');
+            $preview.html($exampleHtml);
         });
 
         // Chosen
@@ -185,12 +195,18 @@
             $wtsExtras.hide();
 
             var hasExtra = $(this).parents('li').has('ul.wts-extra').length;
+            var selectFirstItemInExtra = $(this).closest('ul.not-select-first').length;
             if (hasExtra) {
                 $(this).parents('li')
                     .find('.wts-extra')
-                    .show()
-                    .find('li:first input')
-                    .attr('checked', 'checked');
+                    .show();
+
+                if (!selectFirstItemInExtra) {
+                    $(this).parents('li')
+                        .find('.wts-extra:not(.not-select-first)')
+                        .find('li:first input')
+                        .attr('checked', 'checked');
+                }
             }
 
             $('#wts-shortcode').hide();
@@ -355,9 +371,10 @@
         $buttonsDesignDialog = $('#select-design-dialog');
         $('#choose-buttons-template').on('click', function() {
             $buttonsDesignDialog.dialog('open');
-            $('#select-design-dialog').find('.button').blur();
+            $buttonsDesignDialog.find('.button').blur();
         });
         $buttonsDesignDialog.dialog({
+            position: { my: "top", at: "center", of: window },
             autoOpen: false,
             modal: true,
             width: '80%',
@@ -370,7 +387,7 @@
         });
 
         // Select buttons design
-        $('#select-design-dialog .button-design-preview-block').on('click', function () {
+        $('#select-design-dialog .button-design-preset').on('click', function () {
             if(!$(this).hasClass('not-pro')) {
                 var currentSet = $(this).data('design'),
                     $rows = $buttonSetsTable.find('tr'),
@@ -404,6 +421,8 @@
                     alert('Failed to load selected set');
                 }
                 $buttonsDesignDialog.dialog('close');
+
+                selectExamplePreviewButtonDesign();
             }
         });
 
@@ -505,7 +524,7 @@
         $('.button.delete').bind('click', function (e) {
             e.preventDefault();
 
-            if (confirm('Are you sure?')) {
+            if (confirm('Are you sure want to remove this Project?')) {
                 $(this).html($('<i/>', { class: 'fa fa-fw fa-circle-o-notch fa-spin' }));
                 $.post(this.href).done(function () {
                     window.location.href = $('#addProject_modal').parents('li')
@@ -617,12 +636,17 @@
         $('[name="settings[where_to_show]"]').on('click', function() {
             if($(this).val() == 'sidebar') {
                 $('#wts-sidebar-nav').iCheck('update')
-                    .parent().show();
+                    .parent().parent().show();
             } else {
                 $('#wts-sidebar-nav').iCheck('update')
-                    .parent().hide();
+                    .parent().parent().hide();
             }
             window.ppsCheckUpdateArea($(this).closest('.where-to-show'));
+            if ($(this).val() == 'content' || $(this).val() == 'code') {
+                sharePostLinkInList.show();
+            } else {
+                sharePostLinkInList.hide();
+            }
         });
 
         var saveTooltip = function($element) {
@@ -638,7 +662,7 @@
                 'project_id': parseInt($('#networks [name="project_id"]').val()),
                 'data': { 'id': networkId, 'value': tooltip }
             }).done(function(response) {
-                console.log(response);
+                //console.log(response);
             });
         };
 
@@ -655,7 +679,7 @@
                 'project_id': parseInt($('#networks [name="project_id"]').val()),
                 'data': { 'id': networkId, 'value': title }
             }).done(function(response) {
-                console.log(response);
+                //console.log(response);
             });
         };
 
@@ -672,7 +696,7 @@
                 'project_id': parseInt($('#networks [name="project_id"]').val()),
                 'data': { 'id': networkId, 'value': name }
             }).done(function(response) {
-                console.log(response);
+                //console.log(response);
             });
         };
 
@@ -815,6 +839,40 @@
         });
 
         // Create new project
+        $networksDialogOnCreateProject = $('#networks-dialog-on-create-project');
+        $networksDialogOnCreateProject.dialog({
+            autoOpen: false,
+            modal: true,
+            width: 500,
+            appendTo: '#wpwrap',
+            buttons: {
+                Create: (function btnSelect() {
+                    var title   = $('#projectTitle').val(),
+                        design  = $('#buttonDesign').val(),
+                        networksId = {};
+
+                    $('#networks-dialog-on-create-project div.checked input[type="checkbox"]').each(function(index, element) {
+                        networksId[index] = $(element).val();
+                    });
+
+                    var request = app.request({
+                        module: 'projects',
+                        action: 'add'
+                    }, {
+                        title: title,
+                        design: design,
+                        networks: networksId
+                    });
+
+                    request.done(function (data) {
+                        window.location.href = data.redirect_url;
+                    });
+                }),
+                Close: (function btnClose() {
+                    $networksDialogOnCreateProject.dialog('close');
+                })
+            }
+        });
         $('#createNewSocialButtonProject').on('click', function() {
             $('#projectNameEmpty').hide();
             $('#projectStyleEmpty').hide();
@@ -831,17 +889,7 @@
                 return;
             }
 
-            var request = app.request({
-                module: 'projects',
-                action: 'add'
-            }, {
-                title: title,
-                design: design
-            });
-
-            request.done(function (data) {
-                window.location.href = data.redirect_url;
-            });
+            $networksDialogOnCreateProject.dialog('open');
         });
 
         //Select button design on project creating
@@ -854,12 +902,59 @@
             }
         });
 
-        // Select design preset on page open
-        $('.button-design-preview-wrapper').find('.button-design-preset').first().addClass('active');
+        //Dependence for checkboxes 'Hide on mobile devices' && 'Show Only on Mobile Devices'
+        $hideOnMobile.bind('click', function () {
+            if (this.checked) {
+                $showOnlyOnMobile.removeClass('checked');
+                $showOnlyOnMobile.parent().removeClass('checked');
+                $showOnlyOnMobile.parent().addClass('disabled');
+                $showOnlyOnMobile.attr('disabled', 'disabled');
+            } else {
+                $showOnlyOnMobile.removeAttr('disabled');
+                $showOnlyOnMobile.removeAttr('disabled');
+                $showOnlyOnMobile.parent().removeClass('disabled');
+            }
+        });
 
-        // Select design preset on page open in modal window
-        $('#select-design-dialog').find('div[data-design="'+currentSet+'"] .button-select').hide();
-        $('#select-design-dialog').find('div[data-design="'+currentSet+'"] .selected-button-design-preset').show();
+        if ($hideOnMobile.attr('checked')) {
+            $showOnlyOnMobile.parent().removeClass('checked');
+            $showOnlyOnMobile.parent().addClass('disabled');
+        }
+
+        $showOnlyOnMobile.bind('click', function () {
+            if (this.checked) {
+                $hideOnMobile.removeClass('checked');
+                $hideOnMobile.parent().removeClass('checked');
+                $hideOnMobile.parent().addClass('disabled');
+                $hideOnMobile.attr('disabled', 'disabled');
+            } else {
+                $hideOnMobile.removeAttr('disabled');
+                $hideOnMobile.removeAttr('disabled');
+                $hideOnMobile.parent().removeClass('disabled');
+            }
+        });
+
+        if ($showOnlyOnMobile.attr('checked')) {
+            $hideOnMobile.parent().removeClass('checked');
+            $hideOnMobile.parent().addClass('disabled');
+        }
+
+        // Select design preset on page(create new project) open
+        $('.button-design-preview-wrapper.create-project-page').find('.button-design-preset').first().addClass('active');
+
+        // Select design preset on page(progect settings, tab 'Design') open in modal window
+        $buttonsDesignDialog.find('div[data-design="'+currentSet+'"] .button-select').hide();
+        $buttonsDesignDialog.find('div[data-design="'+currentSet+'"] .selected-button-design-preset').show();
+        $buttonsDesignDialog.find('div[data-design="'+currentSet+'"]').addClass('active');
+
+        selectExamplePreviewButtonDesign();
+
+        //link for plugin in sale site
+        $('.button-design-preset.not-pro').on('click', function() {
+            var selectedProDesign = $(this).data('design');
+            var url = '//supsystic.com/plugins/social-share-plugin/?utm_source=plugin&utm_medium=' + selectedProDesign + '&utm_campaign=socialbuttons';
+            window.location.href = url;
+        });
     });
 
 }(window.jQuery, window.supsystic.SocialSharing));

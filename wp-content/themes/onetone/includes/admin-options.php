@@ -6,13 +6,13 @@ function optionsframework_option_name() {
 
 	$themename = get_option( 'stylesheet' );
 	$themename = preg_replace("/\W/", "_", strtolower($themename) );
-	
-	if( is_child_theme() ){
-		
+
+	if( is_child_theme() ){	
 		$themename = str_replace("_child","",$themename ) ;
-		
 		}
-		
+	if( defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE != 'en' )
+	$themename = $themename.ICL_LANGUAGE_CODE;
+	
 	return $themename;
 }
 
@@ -30,6 +30,8 @@ $social_icons = array(
 			array ('title'=>'RSS','icon' => 'rss', 'link'=>'#')
         );
 
+
+
 /**
  * Defines an array of options that will be used to generate the settings page and be saved in the database.
  * When creating the 'id' fields, make sure to use all lowercase and no spaces.
@@ -39,10 +41,44 @@ $social_icons = array(
 
 function optionsframework_options() {
      global $social_icons,$sidebars ;
-
+	 
+	 $os_fonts        = onetone_options_typography_get_os_fonts();
+    $os_fonts        = array_merge(array('' => __( '-- Default --', 'onetone' ) ), $os_fonts);
 	$font_color         = array('color' =>  '');
 	$section_font_color = array('color' => '');
  
+    $section_title_typography_defaults_1 = array(
+		'size'  => '36px',
+		'face'  => '',
+		'style' => '700',
+		'color' => '#666666' );
+		
+		$section_content_typography_defaults_1 = array(
+		'size'  => '14px',
+		'face'  => '',
+		'style' => '400',
+		'color' => '#666666' );
+		
+		$typography_options = array(
+		'sizes'  => array( '10','11','12','13','14','16','18','20','24','26','28','30','35','36','38','40','46','48','50','60' ),
+		'faces'  => $os_fonts,
+		'styles' => array(
+				  'normal' =>  'normal',
+				  'italic' => 'italic', 
+				  'bold' => 'bold',
+				  'bold italic' => 'bold italic',
+				  '100' => '100', 
+				  '200' =>  '200',
+				  '300' => '300',
+				  '400' => '400', 
+				  '500' =>  '500', 
+				  '600' =>  '600', 
+				  '700' =>  '700', 
+				  '800' =>  '800',
+				  '900' =>  '900' 
+				  ),
+		
+		'color'  => true );
     
 	$choices =  array( 
           
@@ -63,7 +99,7 @@ function optionsframework_options() {
          
         );
 	$align =  array( 
-          
+          '' => __( 'Default', 'onetone' ),
           'left' => __( 'left', 'onetone' ),
           'right' => __( 'right', 'onetone' ),
            'center'  => __( 'center', 'onetone' )         
@@ -93,15 +129,14 @@ function optionsframework_options() {
   
     $opacity             =  array_combine(range(0.1,1,0.1), range(0.1,1,0.1));
     $font_size           =  array_combine(range(1,100,1), range(1,100,1));
-	$section_title       = array("","About Us","Services","Gallery","Contact","Custom Section","");
-	$section_menu        = array("Home","About Us","Services","Gallery","Contact","Custom Section","");
-	$section_slug        = array('home','about-us','services','gallery','contact','custom-section','clients');
-	$section_padding     = array('','50px 0','50px 0','50px 0','50px 0','50px 0','30px 0');
-	$text_align          = array('center','left','center','center','center','left','center');
+	$section_title       = array("","","","GALLERY","OUR TEAM","ABOUT","TESTIMONIALS","","CONTACT");
+	$section_menu        = array("Home","","Services","Gallery","Team","About","Testimonials","","Contact");
+	$section_slug        = array('home','','services','gallery','team','about','testimonials','','contact');
+	$section_padding     = array('','30px 0','50px 0','50px 0','50px 0','50px 0','10px 0 50px','50px 0','50px 0');
+	$text_align          = array('center','left','center','center','center','left','center','left','center');
 	
 	$default_section_num = count($section_menu);
-	$section_num         = onetone_option('section_num');
-	$section_num         = $section_num == ""?7:$section_num;
+	$section_num         = onetone_option('section_num',9);
 	$section_background  = array(
 	     array(
 		'color' => '',
@@ -110,254 +145,209 @@ function optionsframework_options() {
 		'position' => 'top left',
 		'attachment'=>'scroll' ),
 		 array(
-		'color' => '',
-		'image' => ONETONE_THEME_BASE_URL.'/images/home-bg02.jpg',
+		'color' => '#eeeeee',
+		'image' => '',
+		'repeat' => 'repeat',
+		'position' => 'top left',
+		'attachment'=>'scroll' ),
+		 array(
+		'color' => '#ffffff',
+		'image' => '',
+		'repeat' => 'repeat',
+		'position' => 'top left',
+		'attachment'=>'scroll' ),
+		 array(
+		'color' => '#eeeeee',
+		'image' => '',
+		'repeat' => 'repeat',
+		'position' => 'top left',
+		'attachment'=>'scroll' ),
+		 ##  section 5
+		 array(
+		'color' => '#ffffff',
+		'image' => '',
 		'repeat' => 'repeat',
 		'position' => 'top left',
 		'attachment'=>'scroll' ),
 		 array(
 		'color' => '',
-		'image' => ONETONE_THEME_BASE_URL.'/images/home-bg03.jpg',
+		'image' => esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/banner_large.jpg'),
 		'repeat' => 'repeat',
 		'position' => 'top left',
 		'attachment'=>'scroll' ),
 		 array(
-		'color' => '',
-		'image' => ONETONE_THEME_BASE_URL.'/images/home-bg02.jpg',
+		'color' => '#eda869',
+		'image' => esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/123.jpg'),
+		'repeat' => 'no-repeat',
+		'position' => 'bottom center',
+		'attachment'=>'scroll' ),
+		 array(
+		'color' => '#ffffff',
+		'image' => '',
 		'repeat' => 'repeat',
 		'position' => 'top left',
 		'attachment'=>'scroll' ),
 		 
-		 array(
+		  array(
 		'color' => '',
-		'image' => ONETONE_THEME_BASE_URL.'/images/home-bg03.jpg',
-		'repeat' => 'repeat',
-		'position' => 'top left',
-		'attachment'=>'scroll' ),
-		 array(
-		'color' => '',
-		'image' => ONETONE_THEME_BASE_URL.'/images/home-bg02.jpg',
-		'repeat' => 'repeat',
-		'position' => 'top left',
-		'attachment'=>'scroll' ),
-		 array(
-		'color' => '#dddddd',
-		'image' => '',
+		'image' => esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/last4.jpg'),
 		'repeat' => 'repeat',
 		'position' => 'top left',
 		'attachment'=>'scroll' )
+		 
+		 
+		 
 			);
-	$section_css_class = array("section-banner","section-about","","","","","");
+	$section_css_class = array("section-banner","","","","","","","","");
 	
 	
-	$section_content   = array('<div class="banner-box"><br/>
-        	<h1>TARAY BOGRILOYAT srians</h1>
-			<div class="sub-title">
-            <span>CRAS URNA LEO, FRINGILLA NEC ALIQUAM AC, VARIUS IN ENIM. MAECENAS NON FELIS AUGUE, 
-QUIS SAGITTIS JUSTO. DONEC GRAVIDA, ARCU IN ALIQUET CONVALLIS</span></div>
-			<div class="banner-scroll"><a href="#about-us" class="scroll" data-section="about-us"><img src="'.ONETONE_THEME_BASE_URL.'/images/down.png" alt=""></a></div>
-            <div class="banner-sns">
-			<ul class="">
-            	<li><a href="#"><i class="fa fa-2 fa-facebook">&nbsp;</i></a></li>
-                <li><a href="#"><i class="fa fa-2 fa-skype">&nbsp;</i></a></li>
-                <li><a href="#"><i class="fa fa-2 fa-twitter">&nbsp;</i></a></li>
-                <li><a href="#"><i class="fa fa-2 fa-linkedin">&nbsp;</i></a></li>
-                <li><a href="#"><i class="fa fa-2 fa-google-plus">&nbsp;</i></a></li>
-                <li><a href="#"><i class="fa fa-2 fa-rss">&nbsp;</i></a></li>
-            </ul></div>
-            </div>',
-			'<div class="two_third">
-            	<h3>Biography</h3>
-                <p>Morbi rutrum, elit ac fermentum egestas, tortor ante vestibulum est, eget 
-					scelerisque nisl velit eget tellus. Fusce porta facilisis luctus. Integer neque 
-					dolor, rhoncus nec euismod eget, pharetra et tortor. Nulla id pulvinar nunc. 
-					Vestibulum auctor nisl vel lectus ullamcorper sed pellentesque dolor 
-					eleifend. Praesent lobortis magna vel diam mattis sagittis.Mauris porta odio 
-					eu risus scelerisque id facilisis ipsum dictum vitae volutpat. Lorem ipsum 
-					dolor sit amet, consectetur adipiscing elit. Sed pulvinar neque eu purus 
-					sollicitudin et sollicitudin dui ultricies. Maecenas cursus auctor tellus sit 
-					amet blandit. Maecenas a erat ac nibh molestie interdum. Class aptent 
-					taciti sociosqu ad litora torquent per conubia nostra, per inceptos 
-					himenaeos. Sed lorem enim, ultricies sed sodales id, convallis molestie 
-					ipsum. Morbi eget dolor ligula. Vivamus accumsan rutrum nisi nec 
-					elementum. Pellentesque at nunc risus. Phasellus ullamcorper 
-					bibendum varius. Quisque quis ligula sit amet felis ornare porta. Aenean 
-					viverra lacus et mi elementum mollis. Praesent eu justo elit.</p>
-            </div>
-            <div class="one_third last">
-            	<h3>Personal Info</h3>
-                <ul>
-                	<li class="info-phone">+1123 2456 689</li>
-					<li class="info-address">3301 Lorem Ipsum, Dolor Sit St</li>
-					<li class="info-email"><a href="#">support@mageewp.com. </a></li>
-					<li class="info-website"><a href="#">Mageewp.com</a></li>
-                </ul>                	
-            </div>',
-			'[ms_column style="1/3" class="" id=""]
-[ms_featurebox style="1" title_font_size="24px" title_color="" icon_circle="no" icon_size="4em" title="Service 1" icon="fa-desktop" alignment="left" icon_animation_type="" icon_color="#666" icon_background_color="" icon_border_color="" icon_border_width=""  flip_icon="none" spinning_icon="no" icon_image="" icon_image_width="" icon_image_height="" link_url="" link_target="_blank" link_text="Read More" link_color="" content_color="" content_box_background_color="" class="" id=""]
+	$section_title_typography_defaults = array(
+      array('size'  => '48px','face'  => '','style' => 'normal','color' => '#666666' ),
+	  array('size'  => '48px','face'  => '','style' => 'normal','color' => '#666666' ),
+	  array('size'  => '48px','face'  => '','style' => 'normal','color' => '#666666' ),
+	  array('size'  => '36px','face'  => '','style' => 'bold','color' => '#666666' ),
+	  array('size'  => '36px','face'  => '','style' => 'bold','color' => '#666666' ),
+	  array('size'  => '36px','face'  => '','style' => 'bold','color' => '#ffffff' ),
+	  array('size'  => '36px','face'  => '','style' => 'bold','color' => '#ffffff' ),
+	  array('size'  => '36px','face'  => '','style' => 'bold','color' => '#666666' ),
+	  array('size'  => '36px','face'  => '','style' => 'bold','color' => '#666666' ),
+											   
+         );
+	
+		$section_content_typography_defaults = array(
+          array('size'  => '14px','face'  => '','style' => 'normal','color' => '#666666' ),
+		  array('size'  => '14px','face'  => '','style' => 'normal','color' => '#666666' ),
+		  array('size'  => '14px','face'  => '','style' => 'normal','color' => '#666666' ),
+		  array('size'  => '14px','face'  => '','style' => 'normal','color' => '#666666' ),
+		  array('size'  => '14px','face'  => '','style' => 'normal','color' => '#666666' ),
+		  array('size'  => '14px','face'  => '','style' => 'normal','color' => '#ffffff' ),
+		  array('size'  => '14px','face'  => '','style' => 'normal','color' => '#ffffff' ),
+		  array('size'  => '14px','face'  => '','style' => 'normal','color' => '#666666' ),
+		  array('size'  => '14px','face'  => '','style' => 'normal','color' => '#666666' ),
+		  array('size'  => '14px','face'  => '','style' => 'normal','color' => '#666666' ),
+													 
+          );
+		
+	
+	
+	$section_content   = array('<div class="banner-box">
 
-Donec in vehicula augue. Sed et 
-					nisi sem, at semper dolor. 
-					Pellentesque habitant morbi 
-					tristique senectus et netu..
+&nbsp;
+<h1>Powerful One page Theme</h1>
+<div class="sub-title">Based on Bootstrap framework and Shortcodes, quick set and easy build, <br>shines one page small business website.</div>
+<div class="banner-scroll"><a class="scroll" href="#about" data-section="about"><img src="'.esc_url('http://www.mageewp.com/onetone/wp-content/themes/onetone/images/down.png').'" alt="" /></a></div>
+<div class="banner-sns">
+<ul class="">
+	<li><a href="#"><i class="fa fa-2 fa-facebook">&nbsp;</i></a></li>
+	<li><a href="#"><i class="fa fa-2 fa-skype">&nbsp;</i></a></li>
+	<li><a href="#"><i class="fa fa-2 fa-twitter">&nbsp;</i></a></li>
+	<li><a href="#"><i class="fa fa-2 fa-linkedin">&nbsp;</i></a></li>
+	<li><a href="#"><i class="fa fa-2 fa-google-plus">&nbsp;</i></a></li>
+	<li><a href="#"><i class="fa fa-2 fa-rss">&nbsp;</i></a></li>
+</ul>
+</div>
+</div>',
 
-[/ms_featurebox]
+'[ms_promo_box style="normal" border_color="" border_width="0" background_color="" button_color="#eda869" button_link="" button_icon="" button_text="Click Me" class="" id=""]
+<h4>Morbi rutrum, elit ac fermentum egestas, tortor ante vestibulum est, eget scelerisque nisl velit eget tellus.</h4>
+[/ms_promo_box]',
+
+
+			'[ms_row]
+[ms_column style="1/3"]
+[ms_featurebox style="1" title_font_size="18px" title_color="#666666" icon_circle="no" icon_size="46px" title="FREE PSD TEMPLATE " icon="fa-leaf" alignment="left" icon_animation_type="" icon_color="#000000" icon_background_color="" icon_border_color="" icon_border_width="" flip_icon="none" spinning_icon="no" icon_image="" icon_image_width="" icon_image_height="" link_url="" link_target="_blank" link_text= link_color="" content_color="#666666" content_box_background_color="" class="" id=""]Integer pulvinar elementum est, suscipit ornare ante finibus ac. Praesent vel ex dignissim, rhoncus eros luctus, dignissim arcu. [/ms_featurebox]
 [/ms_column]
+[ms_column style="1/3"]
+[ms_featurebox style="1" title_font_size="18px" title_color="#666666" icon_circle="no" icon_size="46px" title="FREE PSD TEMPLATE" icon="fa-hourglass-end" alignment="left" icon_animation_type="" icon_color="#000000" icon_background_color="" icon_border_color="" icon_border_width="" flip_icon="none" spinning_icon="no" icon_image="" icon_image_width="" icon_image_height="" link_url="" link_target="_blank" link_text= link_color="" content_color="#666666" content_box_background_color="" class="" id=""]Integer pulvinar elementum est, suscipit ornare ante finibus ac. Praesent vel ex dignissim, rhoncus eros luctus, dignissim arcu.[/ms_featurebox]
+[/ms_column]
+[ms_column style="1/3"]
+[ms_featurebox style="1" title_font_size="18px" title_color="#666666" icon_circle="no" icon_size="46px" title="FREE PSD TEMPLATE" icon="fa-signal" alignment="left" icon_animation_type="" icon_color="#000000" icon_background_color="" icon_border_color="" icon_border_width="" flip_icon="none" spinning_icon="no" icon_image="" icon_image_width="" icon_image_height="" link_url="" link_target="_blank" link_text="" link_color="" content_color="#666666" content_box_background_color="" class="" id=""]Integer pulvinar elementum est, suscipit ornare ante finibus ac. Praesent vel ex dignissim, rhoncus eros luctus, dignissim arcu. [/ms_featurebox]
+[/ms_column]
+[/ms_row]
+[ms_row]
+[ms_column style="1/3"]
+[ms_featurebox style="1" title_font_size="18px" title_color="#666666" icon_circle="no" icon_size="46px" title="FREE PSD TEMPLATE" icon="fa-heart" alignment="left" icon_animation_type="" icon_color="#000000" icon_background_color="" icon_border_color="" icon_border_width="" flip_icon="none" spinning_icon="no" icon_image="" icon_image_width="" icon_image_height="" link_url="" link_target="_blank" link_text="" link_color="" content_color="#666666" content_box_background_color="" class="" id=""]Integer pulvinar elementum est, suscipit ornare ante finibus ac. Praesent vel ex dignissim, rhoncus eros luctus, dignissim arcu.[/ms_featurebox]
+[/ms_column]
+[ms_column style="1/3"]
+[ms_featurebox style="1" title_font_size="18px" title_color="#666666" icon_circle="no" icon_size="46px" title="FREE PSD TEMPLATE " icon="fa-video-camera" alignment="left" icon_animation_type="" icon_color="#000000" icon_background_color="" icon_border_color="" icon_border_width="" flip_icon="none" spinning_icon="no" icon_image="" icon_image_width="" icon_image_height="" link_url="" link_target="_blank" link_text="" link_color="" content_color="#666666" content_box_background_color="" class="" id=""]Integer pulvinar elementum est, suscipit ornare ante finibus ac. Praesent vel ex dignissim, rhoncus eros luctus, dignissim arcu.[/ms_featurebox]
+[/ms_column]
+[ms_column style="1/3"]
+[ms_featurebox style="1" title_font_size="18px" title_color="#666666" icon_circle="no" icon_size="46px" title="FREE PSD TEMPLATE" icon="fa-tag" alignment="left" icon_animation_type="" icon_color="#000000" icon_background_color="" icon_border_color="" icon_border_width="" flip_icon="none" spinning_icon="no" icon_image="" icon_image_width="" icon_image_height="" link_url="" link_target="_blank" link_text="" link_color="" content_color="#666666" content_box_background_color="" class="" id=""]Integer pulvinar elementum est, suscipit ornare ante finibus ac. Praesent vel ex dignissim, rhoncus eros luctus, dignissim arcu.[/ms_featurebox]
+[/ms_column]
+[/ms_row]',
 
+
+			'<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere ce.<br>Etiam ut dui eu nisi lobortis rhoncus ac quis nunc.</p>
+[ms_divider style="blank" align="left"  width="100%"  margin_top="30px" margin_bottom="0" border_size="" border_color="" icon="" class="" id=""]
+[ms_row no_padding="yes"]
+[ms_column style="1/3"][ms_image_frame src="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/7.jpg').'" link="javascript:;" link_target="_self" class="" id=""][/ms_column]
+[ms_column style="1/3"][ms_image_frame src="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/8.jpg').'" link="javascript:;" link_target="_self" class="" id=""][/ms_column]
+[ms_column style="1/3"][ms_image_frame src="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/9.jpg').'" link="javascript:;" link_target="_self" class="" id=""][/ms_column]
+[ms_column style="1/3"][ms_image_frame src="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/10.jpg').'" link="javascript:;" link_target="_self" class="" id=""][/ms_column]
+[ms_column style="1/3"][ms_image_frame src="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/11.jpg').'" link="javascript:;" link_target="_self" class="" id=""][/ms_column]
+[ms_column style="1/3"][ms_image_frame src="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/12.jpg').'" link="javascript:;" link_target="_self" class="" id=""][/ms_column]
+[/ms_row]',
+
+
+			'<p style="text-align: center;">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere ce.<br>Etiam ut dui eu nisi lobortis rhoncus ac quis nunc.</p>
+[ms_divider style="blank" align="left"  width="100%"  margin_top="30px" margin_bottom="0" border_size="" border_color="" icon="" class="" id=""]
+[ms_row]
+[ms_column style="1/4"]
+[ms_person name="Kevin Perry" title="Software Developer" picture="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/001.jpg').'" piclink="" picborder="1px" picbordercolor="#eeeeee" picborderradius="0" iconboxedradius="4px"iconcolor="#000000" icon1="fa-facebook" icon2="fa-twitter" icon3="fa-google-plus" icon4="" icon5="" link1="" link2="" link3="" link4="" link5="" class="" id=""]Vivamus congue justo eget diam interdum scelerisque. In hac habitasse platea dictumst. [/ms_person]
+[/ms_column]
+[ms_column style="1/4"]
+[ms_person name="Jennifer Lee" title="Software Engineer" picture="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/002.jpg').'" piclink="" picborder="1px" picbordercolor="#eeeeee" picborderradius="0" iconboxedradius="4px" iconcolor="#000000" icon1="fa-facebook" icon2="fa-twitter" icon3="fa-google-plus" icon4="" icon5="" link1="" link2="" link3="" link4="" link5="" class="" id=""]Vivamus congue justo eget diam interdum scelerisque. In hac habitasse platea dictumst. [/ms_person]
+[/ms_column]
+[ms_column style="1/4"]
+[ms_person name="Brandon Ross" title="Java Developer" picture="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/003.jpg').'" piclink="" picborder="1px" picbordercolor="#eeeeee" picborderradius="0" iconboxedradius="4px" iconcolor="#000000" icon1="fa-facebook" icon2="fa-twitter" icon3="fa-google-plus" icon4="" icon5="" link1="" link2="" link3="" link4="" link5="" class="" id=""]Vivamus congue justo eget diam interdum scelerisque. In hac habitasse platea dictumst. [/ms_person]
+[/ms_column]
+[ms_column style="1/4"]
+[ms_person name="Sara Wright" title="Systems Engineer" picture="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/004.jpg').'" piclink="" picborder="1px" picbordercolor="#eeeeee" picborderradius="0" iconboxedradius="4px" iconcolor="#000000" icon1="fa-facebook" icon2="fa-twitter" icon3="fa-google-plus" icon4="" icon5="" link1="" link2="" link3="" link4="" link5="" class="" id=""]Vivamus congue justo eget diam interdum scelerisque. In hac habitasse platea dictumst. [/ms_person]
+[/ms_column]
+[/ms_row]',
+
+
+			'<p style="text-align:center;">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cet.<br>
+Etiam ut dui eu nisi lobortis rhoncus ac quis nunc.</p>
+[ms_row]
+[ms_column style="2/3" class="" id=""]
+<h3 style="color: #ffffff;">Biography</h3>
+<p>Morbi rutrum, elit ac fermentum egestas, tortor ante vestibulum est, eget scelerisque nisl velit eget tellus. Fusce porta facilisis luctus. Integer neque dolor, rhoncus nec euismod eget, pharetra et tortor. Nulla id pulvinar nunc. Vestibulum auctor nisl vel lectus ullamcorper sed pellentesque dolor eleifend. Praesent lobortis magna vel diam mattis sagittis.Mauris porta odio eu risus scelerisque id facilisis ipsum dictum vitae volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar neque eu purus sollicitudin et sollicitudin dui ultricies. Maecenas cursus auctor tellus sit amet blandit. Maecenas a erat ac nibh molestie interdum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed lorem enim, ultricies sed sodales id, convallis molestie ipsum. Morbi eget dolor ligula. Vivamus accumsan rutrum nisi nec elementum. Pellentesque at nunc risus. Phasellus ullamcorper bibendum varius. Quisque quis ligula sit amet felis ornare porta. Aenean viverra lacus et mi elementum mollis. Praesent eu justo elit.</p>
+[/ms_column]
 [ms_column style="1/3" class="" id=""]
-[ms_featurebox style="1" title_font_size="24px" title_color="" icon_circle="no" icon_size="4em" title="Service 2" icon="fa-comments-o" alignment="left" icon_animation_type="" icon_color="#666" icon_background_color="" icon_border_color="" icon_border_width=""  flip_icon="none" spinning_icon="no" icon_image="" icon_image_width="" icon_image_height="" link_url="" link_target="_blank" link_text="Read More" link_color="" content_color="" content_box_background_color="" class="" id=""]
-
-Donec in vehicula augue. Sed et 
-					nisi sem, at semper dolor. 
-					Pellentesque habitant morbi 
-					tristique senectus et netu..
-
-[/ms_featurebox]
+<h3 style="color: #ffffff;">Personal Info</h3>
+[ms_list icon="fa-phone" icon_color="" icon_boxed="no" background_color="" boxed_shape="square" item_border="no" item_size="14px" class="" id=""][ms_list_item]+1123 2456 689[/ms_list_item][/ms_list]
+[ms_list icon="fa-map-marker" icon_color="" icon_boxed="no" background_color="" boxed_shape="square" item_border="no" item_size="14px" class="" id=""][ms_list_item]3301 Lorem Ipsum, Dolor Sit St[/ms_list_item][/ms_list]
+[ms_list icon="fa-envelope-o" icon_color="" icon_boxed="no" background_color="" boxed_shape="square" item_border="no" item_size="14px" class="" id=""][ms_list_item]<a href="#">support@mageewp.com</a>.[/ms_list_item][/ms_list]
+[ms_list icon="fa-internet-explorer" icon_color="" icon_boxed="no" background_color="" boxed_shape="square" item_border="no" item_size="14px" class="" id=""][ms_list_item]<a href="#">Mageewp.com</a>[/ms_list_item][/ms_list]
 [/ms_column]
+[/ms_row]',
 
+'<p style="text-align: center; color: #ffffff;">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere c.<br>Etiam ut dui eu nisi lobortis rhoncus ac quis nunc.</p>',
+
+'[ms_row]
 [ms_column style="1/3" class="" id=""]
-[ms_featurebox style="1" title_font_size="24px" title_color="" icon_circle="no" icon_size="4em" title="Service 3" icon="fa-search" alignment="left" icon_animation_type="" icon_color="#666" icon_background_color="" icon_border_color="" icon_border_width=""  flip_icon="none" spinning_icon="no" icon_image="" icon_image_width="" icon_image_height="" link_url="" link_target="_blank" link_text="Read More" link_color="" content_color="" content_box_background_color="" class="" id=""]
-
-Donec in vehicula augue. Sed et 
-					nisi sem, at semper dolor. 
-					Pellentesque habitant morbi 
-					tristique senectus et netu..
-
-[/ms_featurebox]
+[ms_testimonial style="normal" name="JACK GREEN" avatar="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/111.jpg').'" byline="Web Developer" alignment="none" class="" id=""]Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat non ex quis consectetur. Aliquam iaculis dolor erat, ut ornare dui vulputate nec. Cras a sem mattis, tincidunt urna nec, iaculis nisl. Nam congue ultricies dui.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat non ex quis consectetur. Aliquam iaculis dolor erat, ut ornare dui vulputate nec. Cras a sem mattis, tincidunt urna nec, iaculis nisl. Nam congue ultricies dui.[/ms_testimonial]
 [/ms_column]
-',
-			'<div class="portfolio-list">
-        		<ul>
-            		<li><a href="'.ONETONE_THEME_BASE_URL.'/images/g1.jpg" rel="portfolio-image"><img class="port-img" src="'.ONETONE_THEME_BASE_URL.'/images/g1.jpg"></a></li>
-                	<li><a href="'.ONETONE_THEME_BASE_URL.'/images/g1.jpg" rel="portfolio-image"><img class="port-img" src="'.ONETONE_THEME_BASE_URL.'/images/g2.jpg"></a></li>
-               		<li><a href="'.ONETONE_THEME_BASE_URL.'/images/g1.jpg" rel="portfolio-image"><img class="port-img" src="'.ONETONE_THEME_BASE_URL.'/images/g3.jpg"></a></li>
-               		<li><a href="'.ONETONE_THEME_BASE_URL.'/images/g1.jpg" rel="portfolio-image"><img class="port-img" src="'.ONETONE_THEME_BASE_URL.'/images/g4.jpg"></a></li>
-               		<li><a href="'.ONETONE_THEME_BASE_URL.'/images/g1.jpg" rel="portfolio-image"><img class="port-img" src="'.ONETONE_THEME_BASE_URL.'/images/g5.jpg"></a></li>
-               		<li><a href="'.ONETONE_THEME_BASE_URL.'/images/g1.jpg" rel="portfolio-image"><img class="port-img" src="'.ONETONE_THEME_BASE_URL.'/images/g6.jpg"></a></li>
-               		<li><a href="'.ONETONE_THEME_BASE_URL.'/images/g1.jpg" rel="portfolio-image"><img class="port-img" src="'.ONETONE_THEME_BASE_URL.'/images/g7.jpg"></a></li>
-                	<li><a href="'.ONETONE_THEME_BASE_URL.'/images/g1.jpg" rel="portfolio-image"><img class="port-img" src="'.ONETONE_THEME_BASE_URL.'/images/g8.jpg"></a></li>
-            	</ul>
-        	</div>',
-			'<p class="contact-text">INTEGER ALIQUET ARCU SIT AMET SEM PORTA FACILISIS. CURABITUR SAPIEN SAPIEN, 
-				BLANDIT IN MOLESTIE ET, SAGITTIS ID LOREM. NULLA MALESUADA MAURIS ID TURPIS</p>
-			<div class="contact-area">
-			  <form class="contact-form" method="post" action="">
-			   <input type="text" name="name" id="name" value="" placeholder="Name" size="22" tabindex="1" aria-required="true">
-			   <input type="text" name="email" id="email" value="" placeholder="Email" size="22" tabindex="2" aria-required="true"> 
-			   <textarea name="message" id="message" cols="39" rows="7" tabindex="4" placeholder="Message"></textarea>
-			   <p class="noticefailed"></p>
-			   <input type="hidden" name="sendto" id="sendto" value="YOUR EMAIL HERE(Default Admin Email)">
-			   <input type="button" name="submit" id="submit" value="Post">
-			  </form>
-			 </div>
-			',
-			'<p>Donec in vehicula augue. Sed et nisi sem, at semper dolor. Pellentesque habitant morbi tristique 
-			senectus et netus et malesuada fames ac turpis egestas. Mauris ut urna nibh, a semper 
-			neque. Mauris ultrices tempus nisi, et porttitor nulla varius a. Ut turpis magna, 
-			feugiat quis ultrices tristique, rhoncus eu leo. In eu quam lacus. Praesent
-			Vehicula augue. Sed et nisi sem, at semper dolor. Pellentesque habitant morbi tristique 
-			senectus et netus et malesuada fames ac turpis egestas. Mauris ut urna nibh, a semper 
-			anews sed ovref neque. Mauris ultrices tempus nisi, et porttitor nulla varius a. Ut turpis magna, 
-			feugiat quis ultrices tristique, rhoncus eu leo. In eu quam lacus. dear Praesent Donec in vehicula augue. 
-			Sed et nisi sem, at semper dolor. Pellentesque habitant morbi tristique 
-			senectus et netus et malesuada fames ac turpis egestas. Mauris ut urna nibh, a semper 
-			neque. Mauris ultrices tempus nisi, et porttitor nulla varius a. Ut turpis magna, 
-			feugiat quis ultrices tristique, rhoncus eu leo. In eu quam lacus. Praesent
-			Vehicula augue. Sed et nisi sem, at semper dolor. Pellentesque habitant morbi tristique 
-			senectus et netus et malesuada fames ac turpis egestas. Mauris ut urna nibh, a semper 
-			anews sed ovref neque. Mauris ultrices tempus nisi, et porttitor nulla varius a. Ut turpis magna, 
-			feugiat quis ultrices tristique, rhoncus eu leo. In eu quam lacus. dear Praesent</p>',
-			'<div class="one_fifth"><a href="#"><img src="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/04/c1.png').'" alt="HTML5" title="HTML5"></a></div>
-<div class="one_fifth"><a href="#"><img src="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/04/c2.png').'" alt="CSS3" title="CSS3"></a></div>
-<div class="one_fifth"><a href="#"><img src="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/04/c3.png').'" alt="Bootstra
-p" title="Bootstrap"></a></div>
-<div class="one_fifth"><a href="#"><img src="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/04/c4.png').'" alt="jQuery" title="jQuery"></a></div>
-<div class="one_fifth last_column"><a href="#"><img src="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/04/c5.png').'" alt="WordPress" title="WordPress"></a></div>'
+[ms_column style="1/3" class="" id=""]
+[ms_testimonial style="normal" name="ANNA CASS" avatar="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/222.jpg').'" byline="Conference" alignment="none" class="" id=""]Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat non ex quis consectetur. Aliquam iaculis dolor erat, ut ornare dui vulputate nec. Cras a sem mattis, tincidunt urna nec, iaculis nisl. Nam congue ultricies dui.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat non ex quis consectetur. Aliquam iaculis dolor erat, ut ornare dui vulputate nec. Cras a sem mattis, tincidunt urna nec, iaculis nisl. Nam congue ultricies dui.[/ms_testimonial]
+[/ms_column]
+[ms_column style="1/3" class="" id=""]
+[ms_testimonial style="normal" name="JEREMY THOMAS" avatar="'.esc_url('http://www.mageewp.com/onetone/wp-content/uploads/sites/17/2015/11/333.jpg').'" byline="CEO Conference" alignment="none" class="" id=""]Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat non ex quis consectetur. Aliquam iaculis dolor erat, ut ornare dui vulputate nec. Cras a sem mattis, tincidunt urna nec, iaculis nisl. Nam congue ultricies dui.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat non ex quis consectetur. Aliquam iaculis dolor erat, ut ornare dui vulputate nec. Cras a sem mattis, tincidunt urna nec, iaculis nisl. Nam congue ultricies dui.[/ms_testimonial]
+[/ms_column]
+[ms_row]',
+
+'<p style="text-align: center; color: #666666;">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere ced.<br>Etiam ut dui eu nisi lobortis rhoncus ac quis nunc.</p>
+<div class="contact-area"><form class="contact-form" action="" method="post"><input id="name" tabindex="1" name="name" size="22" type="text" value="" placeholder="Name" />
+<input id="email" tabindex="2" name="email" size="22" type="text" value="" placeholder="Email" />
+<textarea id="message" tabindex="4" cols="39" name="x-message" rows="7" placeholder="Message"></textarea>
+<input id="sendto" name="sendto" type="hidden" value="YOUR EMAIL HERE(Default Admin Email)" />
+<input id="submit" name="submit" type="button" value="Post" /></form></div>'
 	);
 	//$section_background_video = array("ab0TSkLe-E0","","","","","");
 
 	$options = array();
-   // HEADER
-	$options[] = array(
-		'icon' => 'fa-tachometer',
-		'name' => __('General Options', 'onetone'),
-		'type' => 'heading');
-
-
-		
-	$options[] = array(
-		'name' => __('Favicon', 'onetone'),
-		'desc' => sprintf(__('An icon associated with a URL that is variously displayed, as in a browser\'s address bar or next to the site name in a bookmark list. Learn more about <a href="%s" target="_blank">Favicon</a>', 'onetone'),esc_url("http://en.wikipedia.org/wiki/Favicon")),
-		'id' => 'favicon',
-		'type' => 'upload');
-
-
-	
-	$options[] = array(
-		'name' =>  __('Back to Top Button', 'onetone'),
-		'id' => 'back_to_top_btn',
-		'std' => 'show',
-		'class' => 'mini',
-		'type' => 'select',
-		'options'=>array("show"=> __('Show', 'onetone'),"hide"=>__('Hide', 'onetone'))
-		);
-		
-		
-	$options[] = array(
-		'name' => __('Custom CSS', 'onetone'),
-		'desc' => __('The following css code will add to the header before the closing &lt;/head&gt; tag.', 'onetone'),
-		'id' => 'custom_css',
-		'std' => 'body{margin:0px;}',
-		'type' => 'textarea');
-	
-	$options[] = array(
-        'id'          => 'tracking_titled',
-        'name'       => __( 'Tracking', 'onetone' ),
-        'desc'        => '',
-        'std'         => '',
-        'type'        => 'textblock-titled',
-        'section'     => 'general_tab_section',
-        
-        'class'       => 'sub_section_titled',
-        
-      );
-		
-	 $options[] =  array(
-        'id'          => 'tracking_code',
-        'name'       => __( 'Tracking Code', 'onetone' ),
-        'desc'        => __( 'Paste your Google Analytics (or other) tracking code here. This will be added into the header template of your theme. Please put code inside script tags.', 'onetone' ),
-        'std'         => '',
-        'type'        => 'textarea',
-        'section'     => 'general_tab_section',
-        'rows'        => '8',
-        
-        'class'       => '',
-        
-      );
-	 $options[] =  array(
-        'id'          => 'space_before_head',
-        'name'       => __( 'Space before &lt;/head&gt;', 'onetone' ),
-        'desc'        => __( 'Add code before the head tag.', 'onetone' ),
-        'std'         => '',
-        'type'        => 'textarea',
-        'section'     => 'general_tab_section',
-        'rows'        => '6',
-        
-        'class'       => '',
-        
-      );
-	 $options[] =  array(
-        'id'          => 'space_before_body',
-        'name'       => __( 'Space before &lt;/body&gt;', 'onetone' ),
-        'desc'        => __( 'Add code before the body tag.', 'onetone' ),
-        'std'         => '',
-        'type'        => 'textarea',
-        'section'     => 'general_tab_section',
-        'rows'        => '6',
-        
-        'class'       => '',
-        
-      );
+   
 	
 	////HOME PAGE
 		$options[] = array(
@@ -371,7 +361,7 @@ p" title="Bootstrap"></a></div>
 		'name' => __('Content Sections Num', 'onetone'),
 		'desc' => __('The number of home page sections.', 'onetone'),
 		'id' => 'section_num',
-		'std' => '7',
+		'std' => $section_num,
 		'type' => 'text');
 		
 		$options[] = array('name' => __('Section Background Video', 'onetone'),'std' => 'ab0TSkLe-E0','desc' => __('YouTube Video ID', 'onetone'),'id' => 'section_background_video_0',
@@ -423,11 +413,20 @@ p" title="Bootstrap"></a></div>
 		if(!isset($section_slug[$i])){ $section_slug[$i] = "";}
 		if(!isset($text_align[$i])){ $text_align[$i] = "";}
 		
+		$section_name = onetone_option('section_title_'.$i);
+		$section_name = $section_name?$section_name:onetone_option('menu_title_'.$i);
+        $section_name = $section_name?$section_name:sprintf(__('Section %s', 'onetone'),($i+1));
+		
+		if(!isset($section_title_typography_defaults[$i])){ $section_title_typography_defaults[$i] = $section_title_typography_defaults_1;}
+		if(!isset($section_content_typography_defaults[$i])){ $section_content_typography_defaults[$i] = $section_title_typography_defaults_1;}
+		
+		
+		
 		$options[] = array('name' => '','id' => 'section_group_start_'.$i.'','type' => 'start_group','class'=>'home-section group_close');
 		
 		$options[] =   	 array(
 						  'id'          => 'sections_titled_'.$i,
-						  'name'       => sprintf(__('Section %s', 'onetone'),($i+1)).' <span id="accordion-group-section-'.$i.'" class="fa fa-plus"></span>',
+						  'name'       => $section_name.' <span id="accordion-group-section-'.$i.'" class="fa fa-plus"></span>',
 						  'desc'        => '',
 						  'std'         => '',
 						  'type'        => 'textblock-titled',
@@ -510,9 +509,28 @@ p" title="Bootstrap"></a></div>
 						   'type' => 'editor',
 						   'class'=>'section-item accordion-group-item accordion-group-section-'.$i
 						   );
+		
+		$options[] = array(
+						  'name' => __('Section Title Typography', 'onetone'),
+						  'id'   => "section_title_typography_".$i,
+						  'std'  => $section_title_typography_defaults[$i],
+						  'type' => 'typography',
+						  'options' => $typography_options ,
+						  'class'=>'section-item accordion-group-item accordion-group-section-'.$i
+						  );
+		$options[] = array(
+						  'name' => __('Section Content Typography', 'onetone'),
+						  'id'   => "section_content_typography_".$i,
+						  'std'  => $section_content_typography_defaults[$i],
+						  'type' => 'typography',
+						  'options' => $typography_options ,
+						  'class'=>'section-item accordion-group-item accordion-group-section-'.$i
+						  );
+						  
+		
 		$options[] = array(
 						  'name' => '',
-						  'desc' => '<div style="overflow:hidden; background-color:#eee; padding:20px;"><a data-section="'.$i.'" class="delete-section button" style="float:right;" title="'.__('Delete this section', 'onetone').'">'.__('Delete this section', 'onetone').'</a></div>',
+						  'desc' => '<div style="overflow:hidden; background-color:#eee; padding:20px;"><a data-section="'.$i.'" class="delete-section button" title="'.__('Delete this section', 'onetone').'">'.__('Delete this section', 'onetone').'</a></div>',
 						  'id' => 'delete_section_'.$i,
 						  'std' => '',
 						  'type' => 'info',
@@ -525,6 +543,89 @@ p" title="Bootstrap"></a></div>
 		}
 
 		//END HOME PAGE SECTION
+		
+		// General
+	$options[] = array(
+		'icon' => 'fa-tachometer',
+		'name' => __('General Options', 'onetone'),
+		'type' => 'heading');
+
+
+		
+	$options[] = array(
+		'name' => __('Favicon', 'onetone'),
+		'desc' => sprintf(__('An icon associated with a URL that is variously displayed, as in a browser\'s address bar or next to the site name in a bookmark list. Learn more about <a href="%s" target="_blank">Favicon</a>', 'onetone'),esc_url("http://en.wikipedia.org/wiki/Favicon")),
+		'id' => 'favicon',
+		'type' => 'upload');
+
+
+	
+	$options[] = array(
+		'name' =>  __('Back to Top Button', 'onetone'),
+		'id' => 'back_to_top_btn',
+		'std' => 'show',
+		'class' => 'mini',
+		'type' => 'select',
+		'options'=>array("show"=> __('Show', 'onetone'),"hide"=>__('Hide', 'onetone'))
+		);
+		
+		
+	$options[] = array(
+		'name' => __('Custom CSS', 'onetone'),
+		'desc' => __('The following css code will add to the header before the closing &lt;/head&gt; tag.', 'onetone'),
+		'id' => 'custom_css',
+		'std' => 'body{margin:0px;}',
+		'type' => 'textarea');
+	
+	$options[] = array(
+        'id'          => 'tracking_titled',
+        'name'       => __( 'Tracking', 'onetone' ),
+        'desc'        => '',
+        'std'         => '',
+        'type'        => 'textblock-titled',
+        'section'     => 'general_tab_section',
+        
+        'class'       => 'sub_section_titled',
+        
+      );
+		
+	 $options[] =  array(
+        'id'          => 'tracking_code',
+        'name'       => __( 'Tracking Code', 'onetone' ),
+        'desc'        => __( 'Paste your Google Analytics (or other) tracking code here. This will be added into the header template of your theme. Please put code inside script tags.', 'onetone' ),
+        'std'         => '',
+        'type'        => 'textarea',
+        'section'     => 'general_tab_section',
+        'rows'        => '8',
+        
+        'class'       => '',
+        
+      );
+	 $options[] =  array(
+        'id'          => 'space_before_head',
+        'name'       => __( 'Space before &lt;/head&gt;', 'onetone' ),
+        'desc'        => __( 'Add code before the head tag.', 'onetone' ),
+        'std'         => '',
+        'type'        => 'textarea',
+        'section'     => 'general_tab_section',
+        'rows'        => '6',
+        
+        'class'       => '',
+        
+      );
+	 $options[] =  array(
+        'id'          => 'space_before_body',
+        'name'       => __( 'Space before &lt;/body&gt;', 'onetone' ),
+        'desc'        => __( 'Add code before the body tag.', 'onetone' ),
+        'std'         => '',
+        'type'        => 'textarea',
+        'section'     => 'general_tab_section',
+        'rows'        => '6',
+        
+        'class'       => '',
+        
+      );
+	 
 	 // header
 	 
 	   $options[] =  array(
@@ -546,19 +647,6 @@ p" title="Bootstrap"></a></div>
         'class'       => 'section-accordion close',
         
       );
-		
-		$options[] = array(
-        'id'          => 'header_overlay',
-        'name'       => __( 'Header Overlay', 'onetone' ),
-        'desc'        => '',
-        'std'         => 'no',
-        'type'        => 'select',
-        'section'     => 'header_tab_section',
-        
-        'class'       => 'accordion-group-item accordion-group-header_background',
-		'options'     => $choices_reverse
-      );
-		
 		
 		
 		

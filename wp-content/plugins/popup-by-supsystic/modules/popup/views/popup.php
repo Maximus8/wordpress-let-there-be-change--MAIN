@@ -17,7 +17,7 @@ class popupViewPps extends viewPps {
 		framePps::_()->getModule('templates')->loadJqueryUi();
 		framePps::_()->addStyle('admin.popup', $this->getModule()->getModPath(). 'css/admin.popup.css');
 		framePps::_()->addScript('admin.popup', $this->getModule()->getModPath(). 'js/admin.popup.js');
-		framePps::_()->addStyle('magic.min', PPS_CSS_PATH. 'magic.min.css');
+		framePps::_()->getModule('templates')->loadMagicAnims();
 		
 		$changeFor = (int) reqPps::getVar('change_for', 'get');
 		//framePps::_()->addJSVar('admin.popup', 'ppsChangeFor', array($changeFor));
@@ -30,7 +30,7 @@ class popupViewPps extends viewPps {
 			dispatcherPps::addFilter('mainBreadcrumbs', array($this, 'modifyBreadcrumbsForChangeTpl'));
 		}
 		$this->assign('types', $this->getModel()->getTypes());
-		$this->assign('list', $this->getModel()->getSimpleList(array('active' => 1, 'original_id' => 0)));
+		$this->assign('list', $this->getModel()->setOrderBy('sort_order')->setSortOrder('ASC')->getSimpleList(array('active' => 1, 'original_id' => 0)));
 		$this->assign('changeFor', $changeFor);
 		
 		return parent::getContent('popupAddNewAdmin');
@@ -55,6 +55,7 @@ class popupViewPps extends viewPps {
 		
 		$useCommonTabs = in_array($popup['type'], array(PPS_COMMON, PPS_VIDEO));
 		// !remove this!!!!
+		//$popup['params']['opts_attrs']['bg_number'] = 2;
 		/*$popup['params']['opts_attrs'] = array(
 			'bg_number' => 2,
 			'txt_block_number' => 2,
@@ -69,18 +70,8 @@ class popupViewPps extends viewPps {
 		
 		framePps::_()->getModule('templates')->loadJqueryUi();
 		framePps::_()->getModule('templates')->loadSortable();
-		
-		framePps::_()->addStyle('ppsCodemirror', PPS_CSS_PATH. 'codemirror.css');
-		framePps::_()->addStyle('codemirror-addon-hint', PPS_JS_PATH. 'codemirror/addon/hint/show-hint.css');
-		framePps::_()->addScript('ppsCodemirror', PPS_JS_PATH. 'codemirror/codemirror.js');
-		framePps::_()->addScript('codemirror-addon-show-hint', PPS_JS_PATH. 'codemirror/addon/hint/show-hint.js');
-		framePps::_()->addScript('codemirror-addon-xml-hint', PPS_JS_PATH. 'codemirror/addon/hint/xml-hint.js');
-		framePps::_()->addScript('codemirror-addon-html-hint', PPS_JS_PATH. 'codemirror/addon/hint/html-hint.js');
-		framePps::_()->addScript('codemirror-mode-xml', PPS_JS_PATH. 'codemirror/mode/xml/xml.js');
-		framePps::_()->addScript('codemirror-mode-javascript', PPS_JS_PATH. 'codemirror/mode/javascript/javascript.js');
-		framePps::_()->addScript('codemirror-mode-css', PPS_JS_PATH. 'codemirror/mode/css/css.js');
-		framePps::_()->addScript('codemirror-mode-htmlmixed', PPS_JS_PATH. 'codemirror/mode/htmlmixed/htmlmixed.js');
-		
+		framePps::_()->getModule('templates')->loadCodemirror();
+
 		$ppsAddNewUrl = framePps::_()->getModule('options')->getTabUrl('popup_add_new');
 		framePps::_()->addStyle('admin.popup', $this->getModule()->getModPath(). 'css/admin.popup.css');
 		framePps::_()->addScript('admin.popup', $this->getModule()->getModPath(). 'js/admin.popup.js');
@@ -212,10 +203,10 @@ class popupViewPps extends viewPps {
 				'sort_order' => 50),
 		);
 		if($useCommonTabs) {
-			$designTabs['ppsPopupSubscribe'] = array(
-				'title' => __('Subscribe', PPS_LANG_CODE), 
-				'content' => $this->getMainPopupSubTab(),
-				'fa_icon' => 'fa-users',
+			$designTabs['ppsPopupTexts'] = array(
+				'title' => __('Texts', PPS_LANG_CODE), 
+				'content' => $this->getMainPopupTextsTab(),
+				'fa_icon' => 'fa-pencil-square-o',
 				'sort_order' => 30);
 			$designTabs['ppsPopupSm'] = array(
 				'title' => __('Social', PPS_LANG_CODE), 
@@ -239,16 +230,16 @@ class popupViewPps extends viewPps {
 				'fa_icon' => 'fa-picture-o',
 				'sort_order' => 10),
 			'ppsPopupEditors' => array(
-				'title' => __('Code', PPS_LANG_CODE), 
+				'title' => __('CSS / HTML Code', PPS_LANG_CODE), 
 				'content' => $this->getMainPopupCodeTab(),
 				'fa_icon' => 'fa-code',
 				'sort_order' => 999),
 		);
 		if($useCommonTabs) {
-			$tabs['ppsPopupTexts'] = array(
-				'title' => __('Texts', PPS_LANG_CODE), 
-				'content' => $this->getMainPopupTextsTab(),
-				'fa_icon' => 'fa-pencil-square-o',
+			$tabs['ppsPopupSubscribe'] = array(
+				'title' => __('Subscribe', PPS_LANG_CODE), 
+				'content' => $this->getMainPopupSubTab(),
+				'fa_icon' => 'fa-users',
 				'sort_order' => 20);
 		}
 		$tabs = dispatcherPps::applyFilters('popupEditTabs', $tabs, $popup);
@@ -314,6 +305,7 @@ class popupViewPps extends viewPps {
 	}
 	public function getMainPopupSubTab() {
 		framePps::_()->getModule('subscribe')->loadAdminEditAssets();
+		/*MailPoet check*/
 		$mailPoetAvailable = class_exists('WYSIJA');
 		if($mailPoetAvailable) {
 			$mailPoetLists = WYSIJA::get('list', 'model')->get(array('name', 'list_id'), array('is_enabled' => 1));
@@ -325,8 +317,16 @@ class popupViewPps extends viewPps {
 			}
 			$this->assign('mailPoetListsSelect', $mailPoetListsSelect);
 		}
+		/*Newsletter plugin check*/
+		// Unavailable for now
+		$newsletterAvailable = false;
+		if($newsletterAvailable) {
+
+		}
 		$this->assign('availableUserRoles', framePps::_()->getModule('subscribe')->getAvailableUserRolesForSelect());
 		$this->assign('mailPoetAvailable', $mailPoetAvailable);
+		$this->assign('newsletterAvailable', $newsletterAvailable);
+		$this->assign('wpCsvExportUrl', uriPps::mod('subscribe', 'getWpCsvList', array('id' => $this->popup['id'])));
 		return parent::getContent('popupEditAdminSubOpts');
 	}
 	public function getMainPopupSmTab() {
@@ -365,7 +365,8 @@ class popupViewPps extends viewPps {
 		return parent::getContent('popupEditAdminCodeOpts');
 	}
 	public function getMainPopupAnimationTab() {
-		framePps::_()->addStyle('magic.min', PPS_CSS_PATH. 'magic.min.css');
+		//framePps::_()->getModule('templates')->loadMagicAnims();
+		framePps::_()->getModule('templates')->loadCssAnims();
 		$this->assign('animationList', $this->getAnimationList());
 		return parent::getContent('popupEditAdminAnimationOpts');
 	}
@@ -400,6 +401,46 @@ class popupViewPps extends viewPps {
 				'space_up' => array('label' => __('Space up', PPS_LANG_CODE), 'show_class' => 'spaceInUp', 'hide_class' => 'spaceOutUp'),
 				'space_down' => array('label' => __('Space down', PPS_LANG_CODE), 'show_class' => 'spaceInDown', 'hide_class' => 'spaceOutDown'),
 			);
+			foreach($this->_animationList as $k => $v) {
+				if($k == 'none') continue;
+				$this->_animationList[ $k ]['old'] = true;
+			}
+			$this->_animationList = array_merge($this->_animationList, array(
+				'bounce' => array('label' => __('Bounce', PPS_LANG_CODE), 'show_class' => 'bounceIn', 'hide_class' => 'bounceOut'),
+				'bounce_up' => array('label' => __('Bounce Up', PPS_LANG_CODE), 'show_class' => 'bounceInUp', 'hide_class' => 'bounceOutUp'),
+				'bounce_down' => array('label' => __('Bounce Down', PPS_LANG_CODE), 'show_class' => 'bounceInDown', 'hide_class' => 'bounceOutDown'),
+				'bounce_left' => array('label' => __('Bounce Left', PPS_LANG_CODE), 'show_class' => 'bounceInLeft', 'hide_class' => 'bounceOutLeft'),
+				'bounce_right' => array('label' => __('Bounce Right', PPS_LANG_CODE), 'show_class' => 'bounceInRight', 'hide_class' => 'bounceOutRight'),
+				
+				'fade' => array('label' => __('Fade', PPS_LANG_CODE), 'show_class' => 'fadeIn', 'hide_class' => 'fadeOut'),
+				'fade_up' => array('label' => __('Fade Up', PPS_LANG_CODE), 'show_class' => 'fadeInUp', 'hide_class' => 'fadeOutUp'),
+				'fade_down' => array('label' => __('Fade Down', PPS_LANG_CODE), 'show_class' => 'fadeInDown', 'hide_class' => 'fadeOutDown'),
+				'fade_left' => array('label' => __('Fade Left', PPS_LANG_CODE), 'show_class' => 'fadeInLeft', 'hide_class' => 'fadeOutLeft'),
+				'fade_right' => array('label' => __('Fade Right', PPS_LANG_CODE), 'show_class' => 'fadeInRight', 'hide_class' => 'fadeOutRight'),
+				
+				'flip_x' => array('label' => __('Flip X', PPS_LANG_CODE), 'show_class' => 'flipInX', 'hide_class' => 'flipOutX'),
+				'flip_y' => array('label' => __('Flip Y', PPS_LANG_CODE), 'show_class' => 'flipInY', 'hide_class' => 'flipOutY'),
+
+				'rotate' => array('label' => __('Rotate', PPS_LANG_CODE), 'show_class' => 'rotateIn', 'hide_class' => 'rotateOut'),
+				'rotate_up_left' => array('label' => __('Rotate Up Left', PPS_LANG_CODE), 'show_class' => 'rotateInUpLeft', 'hide_class' => 'rotateOutUpLeft'),
+				'rotate_up_right' => array('label' => __('Rotate Up Right', PPS_LANG_CODE), 'show_class' => 'rotateInUpRight', 'hide_class' => 'rotateOutUpRight'),
+				'rotate_down_left' => array('label' => __('Rotate Down Left', PPS_LANG_CODE), 'show_class' => 'rotateInDownLeft', 'hide_class' => 'rotateOutDownLeft'),
+				'rotate_down_right' => array('label' => __('Rotate Down Right', PPS_LANG_CODE), 'show_class' => 'rotateInDownRight', 'hide_class' => 'rotateOutDownRight'),
+				
+				'slide_up' => array('label' => __('Slide Up', PPS_LANG_CODE), 'show_class' => 'slideInUp', 'hide_class' => 'slideOutUp'),
+				'slide_down' => array('label' => __('Slide Down', PPS_LANG_CODE), 'show_class' => 'slideInDown', 'hide_class' => 'slideOutDown'),
+				'slide_left' => array('label' => __('Slide Left', PPS_LANG_CODE), 'show_class' => 'slideInLeft', 'hide_class' => 'slideOutLeft'),
+				'slide_right' => array('label' => __('Slide Right', PPS_LANG_CODE), 'show_class' => 'slideInRight', 'hide_class' => 'slideOutRight'),
+				
+				'zoom' => array('label' => __('Zoom', PPS_LANG_CODE), 'show_class' => 'zoomIn', 'hide_class' => 'zoomOut'),
+				'zoom_up' => array('label' => __('Zoom Up', PPS_LANG_CODE), 'show_class' => 'zoomInUp', 'hide_class' => 'zoomOutUp'),
+				'zoom_down' => array('label' => __('Zoom Down', PPS_LANG_CODE), 'show_class' => 'zoomInDown', 'hide_class' => 'zoomOutDown'),
+				'zoom_left' => array('label' => __('Zoom Left', PPS_LANG_CODE), 'show_class' => 'zoomInLeft', 'hide_class' => 'zoomOutLeft'),
+				'zoom_right' => array('label' => __('Zoom Right', PPS_LANG_CODE), 'show_class' => 'zoomInRight', 'hide_class' => 'zoomOutRight'),
+				
+				'light_speed' => array('label' => __('Light Speed', PPS_LANG_CODE), 'show_class' => 'lightSpeedIn', 'hide_class' => 'lightSpeedOut'),
+				'roll' => array('label' => __('Rolling!', PPS_LANG_CODE), 'show_class' => 'rollIn', 'hide_class' => 'rollOut'),
+			));
 		}
 		return $this->_animationList;
 	}
@@ -503,7 +544,8 @@ class popupViewPps extends viewPps {
 		}		
 		return $html;
 	}
-	public function generateHtml($popup) {
+	public function generateHtml($popup, $params = array()) {
+		$replaceStyleTag = isset($params['replace_style_tag']) ? $params['replace_style_tag'] : false;
 		if(is_numeric($popup)) {
 			$popup = $this->getModel()->getById($popup);
 		}
@@ -532,13 +574,31 @@ class popupViewPps extends viewPps {
 		$popup['css'] = $this->_replaceTagsWithTwig( $popup['css'], $popup );
 		$popup['html'] = $this->_replaceTagsWithTwig( $popup['html'], $popup );
 		
+		$popup['html'] .= $this->_generateImgsPreload( $popup );
+		
 		$popup['css'] = dispatcherPps::applyFilters('popupCss', $popup['css'], $popup);
 		$popup['html'] = dispatcherPps::applyFilters('popupHtml', $popup['html'], $popup);
-		
+		// $replaceStyleTag can be used for compability with other plugins minify functionality: 
+		// it will not recognize css in js data as style whye rendering on server side, 
+		// but will be replaced back to normal <style> tag in JS, @see js/frontend.popup.js
 		return $this->_twig->render(
-				'<style type="text/css">'. $popup['css']. '</style>'. $popup['html'],
+				($replaceStyleTag ? '<span style="display: none;" id="ppsPopupStylesHidden_'. $popup['view_id']. '">' : '<style type="text/css">')
+					. $popup['css']
+				. ($replaceStyleTag ? '</span>' : '</style>')
+				. $popup['html'],
 			array('popup' => $popup)
 		);
+	}
+	private function _generateImgsPreload( $popup ) {
+		$res = '';
+		if(isset($popup['params']['opts_attrs']['bg_number']) && !empty($popup['params']['opts_attrs']['bg_number'])) {
+			for($i = 0; $i < $popup['params']['opts_attrs']['bg_number']; $i++) {
+				if($popup['params']['tpl']['bg_type_'. $i] == 'img' && !empty($popup['params']['tpl']['bg_img_'. $i])) {
+					$res .= '<img class="ppsPopupPreloadImg ppsPopupPreloadImg_'. $popup['view_id']. '" src="'. $popup['params']['tpl']['bg_img_'. $i]. '" />';
+				}
+			}
+		}
+		return $res;
 	}
 	private function _generateFbLikeWidget($popup) {
 		$res = '';
@@ -649,13 +709,13 @@ class popupViewPps extends viewPps {
 		if(empty($this->_bullets)) {
 			$this->_bullets = array(
 				'none' => array('label' => __('None (standard)', PPS_LANG_CODE)),
-				'classy_blue' => array('img' => 'classy_blue.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'height' => '38px')),
-				'circle_green' => array('img' => 'circle_green.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'height' => '30px')),
-				'lists_green' => array('img' => 'lists_green.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'height' => '38px')),
-				'tick' => array('img' => 'tick.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'height' => '30px')),
-				'tick_blue' => array('img' => 'tick_blue.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'height' => '30px')),
-				'ticks' => array('img' => 'ticks.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'height' => '30px')),
-				'pop_icon' => array('img' => 'pop_icon.jpg', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'height' => '30px', 'background-position' => 'left center')),
+				'classy_blue' => array('img' => 'classy_blue.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'margin-bottom' => '15px')),
+				'circle_green' => array('img' => 'circle_green.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px')),
+				'lists_green' => array('img' => 'lists_green.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'margin-bottom' => '10px', 'min-height' => '25px')),
+				'tick' => array('img' => 'tick.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'margin-bottom' => '15px')),
+				'tick_blue' => array('img' => 'tick_blue.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'margin-bottom' => '15px')),
+				'ticks' => array('img' => 'ticks.png', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'margin-bottom' => '15px')),
+				'pop_icon' => array('img' => 'pop_icon.jpg', 'add_style' => array('list-style' => 'outside none none !important', 'background-repeat' => 'no-repeat', 'padding-left' => '30px', 'line-height' => '100%', 'background-position' => 'left center', 'margin-bottom' => '15px')),
 			);
 			foreach($this->_bullets as $key => $data) {
 				if(isset($data['img']) && !isset($data['img_url'])) {
@@ -671,7 +731,7 @@ class popupViewPps extends viewPps {
 				require_once(PPS_CLASSES_DIR. 'Twig'. DS. 'Autoloader.php');
 			}
 			Twig_Autoloader::register();
-			$this->_twig = new Twig_Environment(new Twig_Loader_String(), array('debug' => 1));
+			$this->_twig = new Twig_Environment(new Twig_Loader_String(), array('debug' => 0));
 			$this->_twig->addFunction(
 				new Twig_SimpleFunction('adjust_brightness', array(
 						$this,

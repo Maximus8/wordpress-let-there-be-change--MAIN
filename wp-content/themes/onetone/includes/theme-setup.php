@@ -39,8 +39,9 @@ function onetone_setup(){
 add_action( 'after_setup_theme', 'onetone_setup' );
 
 
+
  function onetone_custom_scripts(){
-	 global $page_meta,$post;
+	 global $page_meta,$post,$active_magee_shortcodes ;
 	 if($post){
 	$page_meta = get_post_meta( $post->ID ,'_onetone_post_meta');
 	}
@@ -51,15 +52,22 @@ add_action( 'after_setup_theme', 'onetone_setup' );
     $theme_info = wp_get_theme();
 	$detect = new Mobile_Detect;
 	
+	
 	wp_enqueue_style('Yanone-Kaffeesatz', esc_url('//fonts.googleapis.com/css?family=Open+Sans:300,400,700|Yanone+Kaffeesatz'), false, '', false );
     wp_enqueue_style('onetone-font-awesome',  get_template_directory_uri() .'/plugins/font-awesome/css/font-awesome.min.css', false, '4.3.0', false);
 	wp_enqueue_style('onetone-bootstrap',  get_template_directory_uri() .'/plugins/bootstrap/css/bootstrap.min.css', false, '3.3.4', false);
 	wp_enqueue_style('onetone-owl-carousel',  get_template_directory_uri() .'/css/owl.carousel.css', false, '1.3.3', false);
 	wp_enqueue_style('onetone-owl-theme',  get_template_directory_uri() .'/css/owl.theme.css', false, '1.3.3', false);
 	wp_enqueue_style('prettyPhoto',  get_template_directory_uri() .'/css/prettyPhoto.css', false, '3.1.5', false);
+	
+	if( !onetone_is_plugin_active('magee-shortcodes/Magee.php') ){
+     wp_enqueue_style('onetone-shortcodes',  get_template_directory_uri() .'/css/shortcode.css', false, $theme_info->get( 'Version' ), false);
+    }
+	
 	wp_enqueue_style( 'onetone-main', get_stylesheet_uri(), array(), $theme_info->get( 'Version' ) );
 	
 	wp_enqueue_style('onetone-onetone',  get_template_directory_uri() .'/css/onetone.css', false, $theme_info->get( 'Version' ), false);
+	wp_enqueue_style('onetone-ms',  get_template_directory_uri() .'/css/onetone-ms.css', false, $theme_info->get( 'Version' ), false);
 	wp_enqueue_style('onetone-scheme',  get_template_directory_uri() .'/css/scheme.less', false, $theme_info->get( 'Version' ), false);
 	
 	
@@ -72,7 +80,11 @@ add_action( 'after_setup_theme', 'onetone_setup' );
 	}
     if ( 'blank' != get_header_textcolor() && '' != get_header_textcolor() ){
      $header_color        =  ' color:#' . get_header_textcolor() . ';';
-	 $onetone_custom_css .=  '.home-header,.site-name,.site-description{'.$header_color.'}';
+	 $onetone_custom_css .=  'header .site-name,header .site-description,header .site-tagline{'.$header_color.'}';
+		}
+	else{
+	$onetone_custom_css .=  'header .site-name,header .site-description,header .site-tagline{display:none;}';	
+		
 		}
 	$custom_css           =  onetone_option("custom_css");
 	$onetone_custom_css  .=  '.site{'.$background.'}';
@@ -402,15 +414,18 @@ add_action( 'after_setup_theme', 'onetone_setup' );
 			'sticky_header' => $sticky_header,
 			'isMobile' =>$isMobile,
 			'primary_color' => $primary_color,
+			
 		)  );
 	
 	}
 	
 	function onetone_admin_scripts(){
-		global $pagenow ;
+		global $pagenow;
 		$theme_info = wp_get_theme();
+		wp_enqueue_script( 'onetone-admin', get_template_directory_uri().'/js/admin.js', array( 'jquery' ), $theme_info->get( 'Version' ), false );
+		wp_enqueue_style( 'onetone-admin', get_template_directory_uri().'/css/admin.css', false, $theme_info->get( 'Version' ), false);
 		if( $pagenow == "themes.php" && (isset($_GET['page']) && $_GET['page'] == "onetone-options")):
-		wp_enqueue_script( 'onetone-modernizr', get_template_directory_uri().'/js/admin.js', array( 'jquery' ), $theme_info->get( 'Version' ), false );
+		
 		wp_enqueue_style('onetone-font-awesome',  get_template_directory_uri() .'/plugins/font-awesome/css/font-awesome.min.css', false, '4.4.0', false);
 		wp_enqueue_style('onetone-options',  get_template_directory_uri() .'/css/options.css', false, $theme_info->get( 'Version' ), false);
 		endif;
@@ -425,6 +440,8 @@ add_action( 'after_setup_theme', 'onetone_setup' );
 
 function onetone_of_get_options($default = false) {
 	
+	global $options_saved;
+	$options_saved = false;
 	//$optionsframework_settings = get_option(ONETONE_OPTIONS_PREFIXED.'optionsframework');
 	
 	// Gets the unique option id
@@ -432,9 +449,9 @@ function onetone_of_get_options($default = false) {
 	
 	$option_name  = optionsframework_option_name();
 	
-	
 	if ( get_option($option_name) ) {
 		$options = get_option($option_name);
+		$options_saved = true;
 	}
 /*	else{
 		
@@ -515,7 +532,7 @@ function onetone_optionscheck_options_menu_params( $menu ) {
 
 add_filter( 'optionsframework_menu', 'onetone_optionscheck_options_menu_params' );
 
-function onetone_wp_title( $title, $sep ) {
+/*function onetone_wp_title( $title, $sep ) {
 	global $paged, $page;
 	if ( is_feed() )
 		return $title;
@@ -534,7 +551,7 @@ function onetone_wp_title( $title, $sep ) {
 
 	return $title;
 }
-add_filter( 'wp_title', 'onetone_wp_title', 10, 2 );
+add_filter( 'wp_title', 'onetone_wp_title', 10, 2 );*/
 
 
 function onetone_title( $title ) {

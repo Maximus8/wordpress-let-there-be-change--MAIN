@@ -14,6 +14,7 @@
         <tr>
             <th scope="col" class="id">ID</th>
             <th scope="col" class="title">{{ environment.translate('Project Title') }}</th>
+            <th scope="col" class="views">{{ environment.translate('Total Views') }}</th>
             <th scope="col" class="shares">{{ environment.translate('Total shares') }}</th>
             <th scope="col" class="date">{{ environment.translate('Create Date') }}</th>
             {#<th scope="col" class="likes">{{ environment.translate('Likes / Shares') }}</th>#}
@@ -30,6 +31,7 @@
                             <i class="fa fa-fw fa-pencil"></i>
                         </a>
                     </th>
+                    <th scope="row" class="views">{{ project.totalViews }}</th>
                     <th scope="row" class="shares">{{ project.totalShares }}</th>
                     <th scope="row" class="date">
                         {{ project.created_at | date('d/m/Y') }}

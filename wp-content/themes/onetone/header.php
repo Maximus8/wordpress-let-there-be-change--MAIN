@@ -48,10 +48,15 @@
  $body_class  = 'page blog';
  if( is_front_page() )
  $body_class  = 'page homepage';
+ 
+  $header_image = get_header_image();
 ?>
 <body <?php body_class($body_class); ?>>
 	<div class="wrapper">
 		<div class="top-wrap">
+        <?php if( $header_image ):?>
+        <img src="<?php echo $header_image; ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
+         <?php endif;?>
             <!--Header-->
             <header class="header-wrap logo-left <?php echo $overlay; ?>">
              <?php if( $display_top_bar == 'yes' ):?>

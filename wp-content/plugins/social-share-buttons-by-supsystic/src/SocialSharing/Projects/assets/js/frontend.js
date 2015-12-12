@@ -160,13 +160,21 @@
                 theme:     'tooltipster-shadow'
             });
 
-            if ($container.hasClass('supsystic-social-sharing-mobile')) {
+            if ($container.hasClass('supsystic-social-sharing-hide-on-mobile')) {
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                     $container.hide();
                 } else {
                     if (!$container.hasClass('supsystic-social-sharing-click')) {
                         $container.show();
                     }
+                }
+            } else if($container.hasClass('supsystic-social-sharing-show-only-on-mobile')) {
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    if (!$container.hasClass('supsystic-social-sharing-click')) {
+                        $container.show();
+                    }
+                } else {
+                    $container.hide();
                 }
             } else {
                 if (!$container.hasClass('supsystic-social-sharing-click')) {

@@ -20,6 +20,14 @@
         removeDuplicateSubmenu();
 
         //$('[data-toggle="tooltip"]').tooltip();
+
+        var activeMenuTitle = $($('.supsystic-navigation').find('li.active')[0]).data('menu-item-title');
+        $('#toplevel_page_supsystic-social-sharing .wp-submenu li').each(function (index, element){
+            var adminSubMenuText = $(element).text();
+            if(adminSubMenuText === activeMenuTitle) {
+                $(element).addClass('current');
+            }
+        });
     });
 
     function ppsInitCustomCheckRadio(selector) {

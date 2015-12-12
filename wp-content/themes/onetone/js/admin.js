@@ -36,8 +36,15 @@ $('.section-accordion').click(function(){
 			$('#section_num').val(i);
 	   });
   });
-	
+ if( $('.onetone-step-2-text').length ){
+ $('#menu-appearance > a').append($('#onetone-step-1-text').html());
+ $('.onetone-step-2-text').closest('li').addClass('onetone-step-2');
+ }
 
 /////
+
+$('.onetone-import-demos .button-import-demo').click(function(){
+			$('.importer-notice').show();															  
+         });
  
  });
